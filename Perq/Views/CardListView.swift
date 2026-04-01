@@ -18,10 +18,9 @@ struct CardListView: View {
                         EmptyStateView()
                     } else {
                         ForEach(dataManager.cards) { card in
-                            NavigationLink(destination: CardDetailView(card: card)) {
-                                CardRowView(card: card)
+                            SwipeableCardRow(card: card) {
+                                dataManager.deleteCard(card)
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
@@ -53,6 +52,93 @@ struct CardListView: View {
     }
 }
 
+// MARK: - Swipeable wrapper
+
+struct SwipeableCardRow: View {
+    let card: CreditCard
+    let onDelete: () -> Void
+
+    @State private var offset: CGFloat = 0
+    @State private var showDeleteConfirm = false
+    @State private var navigateToDetail = false
+
+    private let deleteWidth: CGFloat = 80
+
+    var body: some View {
+        ZStack(alignment: .trailing) {
+            // Hidden programmatic navigation link
+            NavigationLink(destination: CardDetailView(card: card), isActive: $navigateToDetail) {
+                EmptyView()
+            }
+
+            // Delete button revealed behind the card
+            Button {
+                showDeleteConfirm = true
+            } label: {
+                VStack(spacing: 5) {
+                    Image(systemName: "trash.fill")
+                        .font(.title3)
+                    Text("Delete")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                }
+                .foregroundColor(.white)
+                .frame(width: deleteWidth)
+                .frame(maxHeight: .infinity)
+                .background(Color.perqRose)
+                .cornerRadius(16)
+            }
+            .opacity(offset < -8 ? 1 : 0)
+            .scaleEffect(offset < -8 ? 1 : 0.8)
+
+            // Card row — slides left on swipe
+            CardRowView(card: card)
+                .offset(x: offset)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if abs(offset) < 5 {
+                        navigateToDetail = true
+                    } else {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                            offset = 0
+                        }
+                    }
+                }
+                .gesture(
+                    DragGesture(minimumDistance: 20, coordinateSpace: .local)
+                        .onChanged { value in
+                            let drag = value.translation.width
+                            guard drag < 0 || offset < 0 else { return }
+                            offset = drag < 0
+                                ? max(-deleteWidth, drag)
+                                : min(0, offset + drag)
+                        }
+                        .onEnded { value in
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                offset = value.translation.width < -40 ? -deleteWidth : 0
+                            }
+                        }
+                )
+        }
+        .alert("Delete \(card.name)?", isPresented: $showDeleteConfirm) {
+            Button("Delete", role: .destructive) {
+                withAnimation(.easeOut(duration: 0.25)) {
+                    onDelete()
+                }
+            }
+            Button("Cancel", role: .cancel) {
+                withAnimation(.spring(response: 0.3)) {
+                    offset = 0
+                }
+            }
+        } message: {
+            Text("This will permanently remove the card and all its benefits. This cannot be undone.")
+        }
+    }
+}
+
+// MARK: - Empty state
+
 struct EmptyStateView: View {
     var body: some View {
         VStack(spacing: 20) {
@@ -67,7 +153,7 @@ struct EmptyStateView: View {
 
             Text("Add your first credit card to start tracking benefits and rewards")
                 .font(.body)
-                .foregroundColor(.secondary)
+                .foregroundColor(.white.opacity(0.55))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         }
@@ -75,6 +161,8 @@ struct EmptyStateView: View {
         .padding(.top, 100)
     }
 }
+
+// MARK: - Card row
 
 struct CardRowView: View {
     let card: CreditCard
@@ -98,7 +186,7 @@ struct CardRowView: View {
 
                     Text(card.issuer)
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white.opacity(0.55))
                 }
 
                 Spacer()
@@ -111,7 +199,7 @@ struct CardRowView: View {
 
                     Text("\(card.benefits.count) benefits")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white.opacity(0.55))
                 }
             }
 
@@ -120,7 +208,7 @@ struct CardRowView: View {
                     HStack {
                         Text("Benefit Value")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white.opacity(0.55))
                         Spacer()
                         Text("$\(Int(card.totalBenefitValue)) / $\(Int(card.totalPotentialValue))")
                             .font(.caption)
