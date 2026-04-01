@@ -4,11 +4,6 @@ import SwiftData
 struct CardDetailView: View {
     let card: CreditCard
     @State private var selectedTab: Tab = .benefits
-    @State private var showingUsageSheet = false
-    @State private var selectedBenefit: Benefit?
-    @State private var usageAmount = ""
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
 
     enum Tab: String, CaseIterable {
         case benefits = "Benefits"
@@ -18,7 +13,7 @@ struct CardDetailView: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "080810").ignoresSafeArea()
+            Color.perqInk.ignoresSafeArea()
 
             ScrollView {
                 VStack(spacing: 16) {
@@ -26,18 +21,13 @@ struct CardDetailView: View {
 
                     TabSelectorView(selectedTab: $selectedTab)
 
-                    TabContentView(
-                        selectedTab: selectedTab,
-                        card: card,
-                        selectedBenefit: $selectedBenefit,
-                        showingUsageSheet: $showingUsageSheet
-                    )
+                    TabContentView(selectedTab: selectedTab, card: card)
                 }
                 .padding()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color(hex: "080810") ?? .black, for: .navigationBar)
+        .toolbarBackground(Color.perqInk, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -46,95 +36,6 @@ struct CardDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingUsageSheet) {
-            if let benefit = selectedBenefit {
-                NavigationView {
-                    VStack(spacing: 24) {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Track Usage")
-                                .font(.title2)
-                                .fontWeight(.bold)
-
-                            Text(benefit.name)
-                                .font(.headline)
-                                .foregroundColor(.primary)
-
-                            Text("Current usage: $\(Int(benefit.usedAmount)) of $\(Int(benefit.totalAmount ?? 0))")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                        VStack(alignment: .leading, spacing: 20) {
-                            Text("Usage Amount")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(.primary)
-
-                            TextField("Enter amount", text: $usageAmount)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.decimalPad)
-
-                            Text("Enter the amount you want to add to your usage for this benefit.")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-
-                        Spacer()
-
-                        Button(action: addUsage) {
-                            Text("Add Usage")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(12)
-                        }
-                        .disabled(usageAmount.isEmpty || Double(usageAmount) == nil)
-                    }
-                    .padding()
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button("Cancel") {
-                                showingUsageSheet = false
-                                usageAmount = ""
-                                selectedBenefit = nil
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        .alert("Usage Update", isPresented: $showingAlert) {
-            Text(alertMessage)
-        } message: {
-            Text("OK")
-        }
-    }
-
-    private func addUsage() {
-        guard let amount = Double(usageAmount), amount > 0 else {
-            alertMessage = "Please enter a valid amount"
-            showingAlert = true
-            return
-        }
-
-        guard let benefit = selectedBenefit else { return }
-
-        let newTotal = benefit.usedAmount + amount
-
-        if let totalAmount = benefit.totalAmount, newTotal > totalAmount {
-            alertMessage = "This would exceed your total benefit amount. Maximum remaining: $\(Int(benefit.remainingAmount))"
-            showingAlert = true
-            return
-        }
-
-        benefit.useAmount(amount)
-        usageAmount = ""
-        showingUsageSheet = false
-        selectedBenefit = nil
     }
 }
 
@@ -232,7 +133,7 @@ struct CardHeaderView: View {
                 }
             }
             .padding()
-            .background(RoundedRectangle(cornerRadius: 16).fill(Color(hex: "12121E") ?? Color(.systemBackground)))
+            .background(RoundedRectangle(cornerRadius: 16).fill(Color.perqElevated))
 
             if let annualFeeNote = card.annualFeeNote, !annualFeeNote.isEmpty {
                 Text(annualFeeNote)
@@ -254,7 +155,7 @@ struct CardHeaderView: View {
                         Text("$\(Int(card.totalBenefitValue)) / $\(Int(card.totalPotentialValue))")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.perqLavender)
                     }
 
                     GeometryReader { geo in
@@ -262,11 +163,7 @@ struct CardHeaderView: View {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.white.opacity(0.1))
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(LinearGradient(
-                                    colors: [.green, .blue],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                ))
+                                .fill(LinearGradient.perqMintProgress)
                                 .frame(width: geo.size.width * min(card.benefitUsagePercentage, 1.0))
                         }
                     }
@@ -277,7 +174,7 @@ struct CardHeaderView: View {
                         .foregroundColor(.secondary)
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 16).fill(Color(hex: "12121E") ?? Color(.systemBackground)))
+                .background(RoundedRectangle(cornerRadius: 16).fill(Color.perqElevated))
             }
         }
     }
@@ -298,14 +195,14 @@ struct TabSelectorView: View {
                         .padding(.vertical, 8)
                         .background(
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(selectedTab == tab ? Color.blue : Color.clear)
+                                .fill(selectedTab == tab ? Color.perqViolet : Color.clear)
                         )
                 }
                 .buttonStyle(PlainButtonStyle())
             }
         }
         .padding(4)
-        .background(RoundedRectangle(cornerRadius: 24).fill(Color(hex: "12121E") ?? Color(.systemBackground)))
+        .background(RoundedRectangle(cornerRadius: 24).fill(Color.perqElevated))
         .animation(.spring(), value: selectedTab)
     }
 }
@@ -313,18 +210,12 @@ struct TabSelectorView: View {
 struct TabContentView: View {
     let selectedTab: CardDetailView.Tab
     let card: CreditCard
-    @Binding var selectedBenefit: Benefit?
-    @Binding var showingUsageSheet: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             switch selectedTab {
             case .benefits:
-                BenefitsView(
-                    benefits: card.benefits,
-                    selectedBenefit: $selectedBenefit,
-                    showingUsageSheet: $showingUsageSheet
-                )
+                BenefitsView(benefits: card.benefits)
             case .cashback:
                 CashbackView(categories: card.cashbackCategories)
             case .details:
@@ -336,33 +227,104 @@ struct TabContentView: View {
 
 struct BenefitsView: View {
     let benefits: [Benefit]
-    @Binding var selectedBenefit: Benefit?
-    @Binding var showingUsageSheet: Bool
+    @State private var selectedFilter: BenefitType? = nil
+    @State private var completedExpanded: Bool = true
+
+    private var filtered: [Benefit] {
+        guard let filter = selectedFilter else { return benefits }
+        return benefits.filter { $0.type == filter }
+    }
+
+    private var active: [Benefit] { filtered.filter { !$0.isCompleted } }
+    private var completed: [Benefit] { filtered.filter { $0.isCompleted } }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if benefits.isEmpty {
-                Text("No benefits available for this card")
+            // Filter chips
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    filterChip(label: "All", filter: nil)
+                    filterChip(label: "Credits", filter: .credit)
+                    filterChip(label: "Memberships", filter: .membership)
+                    filterChip(label: "Status", filter: .status)
+                }
+            }
+
+            if filtered.isEmpty {
+                Text("No benefits for this filter")
                     .font(.body)
                     .foregroundColor(.secondary)
-                    .padding(.top, 20)
+                    .padding(.top, 8)
             } else {
-                ForEach(benefits, id: \.id) { benefit in
-                    BenefitRowView(
-                        benefit: benefit,
-                        selectedBenefit: $selectedBenefit,
-                        showingUsageSheet: $showingUsageSheet
-                    )
+                // Active benefits
+                if active.isEmpty && completed.isEmpty {
+                    Text("No benefits available for this card")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .padding(.top, 8)
+                } else {
+                    ForEach(active, id: \.id) { benefit in
+                        BenefitRowView(benefit: benefit)
+                    }
+
+                    // Completed section
+                    if !completed.isEmpty {
+                        Button {
+                            withAnimation(.spring(response: 0.3)) {
+                                completedExpanded.toggle()
+                            }
+                        } label: {
+                            HStack {
+                                Text("Completed")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.secondary)
+                                Text("\(completed.count)")
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 7)
+                                    .padding(.vertical, 2)
+                                    .background(Capsule().fill(Color.green.opacity(0.7)))
+                                Spacer()
+                                Image(systemName: completedExpanded ? "chevron.up" : "chevron.down")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
+                        if completedExpanded {
+                            ForEach(completed, id: \.id) { benefit in
+                                BenefitRowView(benefit: benefit)
+                                    .opacity(0.6)
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private func filterChip(label: String, filter: BenefitType?) -> some View {
+        let isSelected = selectedFilter == filter
+        return Button { selectedFilter = filter } label: {
+            Text(label)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(isSelected ? .white : .secondary)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
+                .background(
+                    Capsule().fill(isSelected ? Color.perqViolet : Color.perqRaised)
+                )
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
 struct BenefitRowView: View {
     let benefit: Benefit
-    @Binding var selectedBenefit: Benefit?
-    @Binding var showingUsageSheet: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -413,12 +375,12 @@ struct BenefitRowView: View {
                 .foregroundColor(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            if benefit.totalAmount != nil && benefit.totalAmount! > 0 {
-                VStack(alignment: .leading, spacing: 10) {
+            if let total = benefit.totalAmount, total > 0 {
+                VStack(alignment: .leading, spacing: 6) {
                     GeometryReader { geo in
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.white.opacity(0.1))
+                                .fill(Color.perqRaised)
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(LinearGradient(
                                     colors: [categoryColor.opacity(0.8), categoryColor],
@@ -441,60 +403,131 @@ struct BenefitRowView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-
-                    HStack {
-                        Button("Add Usage") {
-                            selectedBenefit = benefit
-                            showingUsageSheet = true
-                        }
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .foregroundColor(categoryColor)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Capsule().fill(categoryColor.opacity(0.2)))
-
-                        Spacer()
-
-                        if benefit.resetPeriod != nil {
-                            Button("Reset") {
-                                benefit.resetUsage()
-                            }
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(Capsule().fill(Color.secondary.opacity(0.15)))
-                        }
-                    }
                 }
             }
+
+            PeriodButtonsView(benefit: benefit, categoryColor: categoryColor)
         }
         .padding()
-        .background(Color(hex: "12121E") ?? Color(.systemBackground))
+        .background(Color.perqElevated)
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
 
     private var typeColor: Color {
         switch benefit.type {
-        case .credit: return .green
-        case .membership: return .blue
-        case .status: return .purple
+        case .credit: return .perqMint
+        case .membership: return .perqSky
+        case .status: return .perqLavender
         }
     }
 
     private var categoryColor: Color {
-        switch benefit.categoryTag {
-        case "travel": return .blue
-        case "dining": return .orange
-        case "shopping": return .purple
-        case "wellness": return .green
-        case "entertainment": return .pink
-        case "other": return .gray
-        default: return .primary
+        Color.perqCategory(benefit.categoryTag)
+    }
+}
+
+struct PeriodButtonsView: View {
+    let benefit: Benefit
+    let categoryColor: Color
+
+    private var yearString: String {
+        String(Calendar.current.component(.year, from: Date()))
+    }
+
+    var body: some View {
+        switch benefit.resetPeriod {
+        case .monthly:
+            monthlyButtons
+        case .quarterly:
+            quarterlyButtons
+        case .semiAnnual:
+            semiAnnualButtons
+        default:
+            singleButton
         }
+    }
+
+    private var monthlyButtons: some View {
+        let monthLabels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        return VStack(spacing: 4) {
+            HStack(spacing: 4) {
+                ForEach(1...6, id: \.self) { month in
+                    periodButton(
+                        label: monthLabels[month - 1],
+                        periodId: "\(yearString)-M\(String(format: "%02d", month))"
+                    )
+                }
+            }
+            HStack(spacing: 4) {
+                ForEach(7...12, id: \.self) { month in
+                    periodButton(
+                        label: monthLabels[month - 1],
+                        periodId: "\(yearString)-M\(String(format: "%02d", month))"
+                    )
+                }
+            }
+        }
+    }
+
+    private var quarterlyButtons: some View {
+        HStack(spacing: 8) {
+            ForEach(1...4, id: \.self) { quarter in
+                periodButton(
+                    label: "Q\(quarter)",
+                    periodId: "\(yearString)-Q\(quarter)"
+                )
+            }
+        }
+    }
+
+    private var semiAnnualButtons: some View {
+        HStack(spacing: 8) {
+            ForEach(["H1", "H2"], id: \.self) { half in
+                periodButton(
+                    label: half,
+                    periodId: "\(yearString)-\(half)"
+                )
+            }
+        }
+    }
+
+    private var singleButton: some View {
+        let periodId = "\(yearString)-A"
+        let isClaimed = benefit.claimedPeriods.contains(periodId)
+        return Button {
+            benefit.togglePeriod(periodId)
+        } label: {
+            Text(isClaimed ? "Claimed" : "Mark as Claimed")
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundColor(isClaimed ? .white : .secondary)
+                .frame(maxWidth: .infinity)
+                .frame(height: 34)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(isClaimed ? Color.perqMint : Color.perqRaised)
+                )
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    private func periodButton(label: String, periodId: String) -> some View {
+        let isClaimed = benefit.claimedPeriods.contains(periodId)
+        return Button {
+            benefit.togglePeriod(periodId)
+        } label: {
+            Text(label)
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundColor(isClaimed ? Color.perqInk : .secondary)
+                .frame(maxWidth: .infinity)
+                .frame(height: 30)
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(isClaimed ? Color.perqMint : Color.perqRaised)
+                )
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -539,10 +572,10 @@ struct CashbackRowView: View {
             Text("\(category.rate, specifier: "%.1f")\(category.unit == .percentCashback ? "%" : "")")
                 .font(.title3)
                 .fontWeight(.bold)
-                .foregroundColor(.blue)
+                .foregroundColor(.perqSky)
         }
         .padding()
-        .background(Color(hex: "12121E") ?? Color(.systemBackground))
+        .background(Color.perqElevated)
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
@@ -566,7 +599,7 @@ struct DetailsView: View {
             DetailRow(title: "Status", value: card.isActive ? "Active" : "Inactive")
         }
         .padding(.horizontal)
-        .background(RoundedRectangle(cornerRadius: 16).fill(Color(hex: "12121E") ?? Color(.systemBackground)))
+        .background(RoundedRectangle(cornerRadius: 16).fill(Color.perqElevated))
     }
 }
 

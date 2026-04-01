@@ -19,8 +19,8 @@
               "name": "Uber Cash",
               "type": "credit",
               "total_amount": 200,
-              "reset_period": "annual",
-              "description": "$15/month Uber Cash, $35 in December. Valid for Uber rides and Uber Eats.",
+              "reset_period": "monthly",
+              "description": "$15/month Uber Cash ($35 in December). Valid for Uber rides and Uber Eats.",
               "category_tag": "travel"
             },
             {
@@ -63,18 +63,18 @@
               "id": "amex_plat_walmart_plus",
               "name": "Walmart+ credit",
               "type": "credit",
-              "total_amount": 155,
-              "reset_period": "annual",
-              "description": "Covers cost of Walmart+ monthly membership ($12.95/mo). Must pay with Platinum card.",
+              "total_amount": 155.4,
+              "reset_period": "monthly",
+              "description": "$12.95/month covering the cost of a Walmart+ membership. Must pay with Platinum card.",
               "category_tag": "shopping"
             },
             {
               "id": "amex_plat_digital_entertainment",
               "name": "Digital entertainment credit",
               "type": "credit",
-              "total_amount": 240,
-              "reset_period": "annual",
-              "description": "$20/month. Valid for Disney+, Hulu, ESPN+, Peacock, The New York Times, and SiriusXM.",
+              "total_amount": 300,
+              "reset_period": "monthly",
+              "description": "$25/month. Valid for Disney+, Hulu, ESPN+, Peacock, The New York Times, and SiriusXM.",
               "category_tag": "entertainment"
             },
             {
@@ -83,7 +83,7 @@
               "type": "membership",
               "total_amount": null,
               "reset_period": null,
-              "description": "Unlimited access to Amex Centurion Lounges globally. Up to 2 guests included.",
+              "description": "Unlimited access to Amex Centurion Lounges globally.",
               "category_tag": "travel"
             },
             {
@@ -123,6 +123,15 @@
               "category_tag": "travel"
             },
             {
+              "id": "amex_plat_lululemon",
+              "name": "lululemon credit",
+              "type": "credit",
+              "total_amount": 100,
+              "reset_period": "quarterly",
+              "description": "$25/quarter at lululemon. Valid in-store and online.",
+              "category_tag": "shopping"
+            },
+            {
               "id": "amex_plat_clear_plus",
               "name": "CLEAR Plus credit",
               "type": "credit",
@@ -151,7 +160,7 @@
               "name": "Dining credit",
               "type": "credit",
               "total_amount": 120,
-              "reset_period": "annual",
+              "reset_period": "monthly",
               "description": "$10/month at Grubhub, The Cheesecake Factory, Goldbelly, Wine.com, and Five Guys.",
               "category_tag": "dining"
             },
@@ -160,7 +169,7 @@
               "name": "Uber Cash",
               "type": "credit",
               "total_amount": 120,
-              "reset_period": "annual",
+              "reset_period": "monthly",
               "description": "$10/month Uber Cash for Uber rides and Uber Eats. Enrollment required.",
               "category_tag": "dining"
             },
@@ -169,7 +178,7 @@
               "name": "Dunkin' credit",
               "type": "credit",
               "total_amount": 84,
-              "reset_period": "annual",
+              "reset_period": "monthly",
               "description": "$7/month at Dunkin' locations. Enrollment required.",
               "category_tag": "dining"
             },
@@ -178,7 +187,7 @@
               "name": "Resy credit",
               "type": "credit",
               "total_amount": 100,
-              "reset_period": "annual",
+              "reset_period": "semi_annual",
               "description": "$50 Jan–Jun, $50 Jul–Dec on eligible purchases with US Resy restaurants.",
               "category_tag": "dining"
             }
