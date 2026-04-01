@@ -5,11 +5,11 @@ struct CardListView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var dataManager: CardDataManager
     @State private var showingAddCard = false
-    
+
     init(modelContext: ModelContext) {
         self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
     }
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -27,6 +27,9 @@ struct CardListView: View {
                 }
                 .padding()
             }
+            .background(Color(hex: "080810") ?? .black)
+            .toolbarBackground(Color(hex: "080810") ?? .black, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .navigationTitle("My Cards")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -42,7 +45,6 @@ struct CardListView: View {
                 AddCardView(dataManager: dataManager)
             }
             .onAppear {
-                // Only clear cards on first launch
                 dataManager.clearCardsOnFirstLaunch()
             }
         }
@@ -55,12 +57,12 @@ struct EmptyStateView: View {
             Image(systemName: "creditcard")
                 .font(.system(size: 60))
                 .foregroundColor(.gray)
-            
+
             Text("No Cards Yet")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
-            
+
             Text("Add your first credit card to start tracking benefits and rewards")
                 .font(.body)
                 .foregroundColor(.secondary)
@@ -74,7 +76,7 @@ struct EmptyStateView: View {
 
 struct CardRowView: View {
     let card: CreditCard
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -85,69 +87,68 @@ struct CardRowView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white.opacity(0.3), lineWidth: 1)
                     )
-                
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text(card.name)
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
-                    
+
                     Text(card.issuer)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                
+
                 Spacer()
-                
+
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(card.annualFee == 0 ? .green : .primary)
-                    
+
                     Text("\(card.benefits.count) benefits")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             }
-            
+
             if !card.benefits.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(card.benefits.prefix(3)) { benefit in
                             BenefitTagView(benefit: benefit)
                         }
-                        
+
                         if card.benefits.count > 3 {
                             Text("+\(card.benefits.count - 3) more")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(12)
+                                .background(Capsule().fill(Color.gray.opacity(0.2)))
                         }
                     }
                 }
             }
         }
         .padding()
-        .background(Color(.systemBackground))
+        .background(Color(hex: "12121E") ?? Color(.systemBackground))
         .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+        .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
     }
 }
 
 struct BenefitTagView: View {
     let benefit: Benefit
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(benefit.name)
                 .font(.caption)
                 .fontWeight(.medium)
                 .lineLimit(1)
-            
+
             if let totalAmount = benefit.totalAmount {
                 Text("$\(Int(totalAmount))")
                     .font(.caption2)
@@ -156,11 +157,10 @@ struct BenefitTagView: View {
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .background(categoryColor.opacity(0.1))
+        .background(Capsule().fill(categoryColor.opacity(0.2)))
         .foregroundColor(categoryColor)
-        .cornerRadius(12)
     }
-    
+
     private var categoryColor: Color {
         switch benefit.categoryTag {
         case "travel": return .blue
@@ -186,7 +186,7 @@ extension Color {
         case 8: (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default: return nil
         }
-        
+
         self.init(
             .sRGB,
             red: Double(r) / 255,
