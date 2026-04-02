@@ -1,116 +1,126 @@
 import Foundation
 import SwiftData
-import UserNotifications
 import SwiftUI
 import Combine
 
 class BenefitTracker: ObservableObject {
     @Published var upcomingExpirations: [BenefitExpiration] = []
-    
+
     private let modelContext: ModelContext
-    private let notificationManager = NotificationManager()
-    
+
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         checkForExpiredBenefits()
-        schedulePeriodicChecks()
     }
-    
+
     func checkForExpiredBenefits() {
         let calendar = Calendar.current
         let now = Date()
-        
-        let descriptor = FetchDescriptor<Benefit>(
-            sortBy: [SortDescriptor(\.lastResetDate, order: .forward)]
-        )
-        
+        let year = calendar.component(.year, from: now)
+        let month = calendar.component(.month, from: now)
+
+        let descriptor = FetchDescriptor<Benefit>()
+
         do {
             let benefits = try modelContext.fetch(descriptor)
             var expirations: [BenefitExpiration] = []
-            
+
             for benefit in benefits {
-                if benefit.isActive && 
-                   benefit.totalAmount != nil && 
-                   benefit.totalAmount! > 0 &&
-                   benefit.resetPeriod != nil {
-                    
-                    if let lastResetDate = benefit.lastResetDate,
-                       let resetPeriod = benefit.resetPeriod,
-                       let nextResetDate = calculateNextResetDate(from: lastResetDate, period: resetPeriod) {
-                        
-                        let daysUntilReset = calendar.dateComponents([.day], from: now, to: nextResetDate).day ?? 0
-                        
-                        if daysUntilReset <= 7 {
-                            let expiration = BenefitExpiration(
-                                benefit: benefit,
-                                daysUntilReset: daysUntilReset,
-                                resetDate: nextResetDate
-                            )
-                            expirations.append(expiration)
-                            
-                            if daysUntilReset <= 3 {
-                                scheduleNotification(for: benefit, daysUntilReset: daysUntilReset)
-                            }
-                        }
-                    }
-                }
+                guard benefit.isActive,
+                      benefit.totalAmount != nil,
+                      let resetPeriod = benefit.resetPeriod,
+                      resetPeriod != .oneTime,
+                      resetPeriod != .quadrennial else { continue }
+
+                let (periodId, periodLabel, periodEndDate) = currentPeriodInfo(
+                    for: resetPeriod, year: year, month: month,
+                    calendar: calendar, now: now
+                )
+
+                // Only show if this period hasn't been claimed yet
+                guard !benefit.claimedPeriods.contains(periodId) else { continue }
+
+                // Only show if the period ends within the current calendar month
+                let periodEndMonth = calendar.component(.month, from: periodEndDate)
+                let periodEndYear = calendar.component(.year, from: periodEndDate)
+                guard periodEndMonth == month && periodEndYear == year else { continue }
+
+                let daysUntilEnd = calendar.dateComponents([.day], from: now, to: periodEndDate).day ?? 0
+
+                expirations.append(BenefitExpiration(
+                    benefit: benefit,
+                    periodId: periodId,
+                    periodLabel: periodLabel,
+                    daysUntilReset: daysUntilEnd,
+                    resetDate: periodEndDate
+                ))
             }
-            
+
             upcomingExpirations = expirations.sorted { $0.daysUntilReset < $1.daysUntilReset }
         } catch {
             print("Failed to fetch benefits: \(error)")
         }
     }
-    
-    func resetBenefit(_ benefit: Benefit) {
-        benefit.resetUsage()
+
+    func claimPeriod(benefit: Benefit, periodId: String) {
+        benefit.togglePeriod(periodId)
         saveContext()
         checkForExpiredBenefits()
     }
-    
-    func useBenefit(_ benefit: Benefit, amount: Double) {
-        benefit.useAmount(amount)
-        saveContext()
-        checkForExpiredBenefits()
-    }
-    
-    private func calculateNextResetDate(from date: Date, period: ResetPeriod) -> Date? {
-        let calendar = Calendar.current
-        
+
+    // MARK: - Period helpers
+
+    private func currentPeriodInfo(
+        for period: ResetPeriod, year: Int, month: Int,
+        calendar: Calendar, now: Date
+    ) -> (id: String, label: String, endDate: Date) {
+        let yearStr = String(year)
+
         switch period {
         case .monthly:
-            return calendar.date(byAdding: .month, value: 1, to: date)
+            let id = "\(yearStr)-M\(String(format: "%02d", month))"
+            let label = monthName(month) + " \(year)"
+            let endDate = endOfMonth(year: year, month: month, calendar: calendar)
+            return (id, label, endDate)
+
         case .quarterly:
-            return calendar.date(byAdding: .month, value: 3, to: date)
+            let quarter = (month - 1) / 3 + 1
+            let id = "\(yearStr)-Q\(quarter)"
+            let label = "Q\(quarter) \(year)"
+            let endMonth = quarter * 3
+            let endDate = endOfMonth(year: year, month: endMonth, calendar: calendar)
+            return (id, label, endDate)
+
         case .semiAnnual:
-            return calendar.date(byAdding: .month, value: 6, to: date)
+            let isFirstHalf = month <= 6
+            let id = "\(yearStr)-\(isFirstHalf ? "H1" : "H2")"
+            let label = (isFirstHalf ? "First Half" : "Second Half") + " \(year)"
+            let endDate = endOfMonth(year: year, month: isFirstHalf ? 6 : 12, calendar: calendar)
+            return (id, label, endDate)
+
         case .annual:
-            return calendar.date(byAdding: .year, value: 1, to: date)
-        case .quadrennial:
-            return calendar.date(byAdding: .year, value: 4, to: date)
-        case .oneTime:
-            return nil
+            let id = "\(yearStr)-A"
+            let label = "Annual \(year)"
+            let endDate = endOfMonth(year: year, month: 12, calendar: calendar)
+            return (id, label, endDate)
+
+        default:
+            return ("", "", now)
         }
     }
-    
-    private func scheduleNotification(for benefit: Benefit, daysUntilReset: Int) {
-        let title = "Benefit Reset Soon"
-        let body = "\(benefit.name) will reset in \(daysUntilReset) day\(daysUntilReset == 1 ? "" : "s"). $\(Int(benefit.remainingAmount)) remaining."
-        
-        notificationManager.scheduleNotification(
-            identifier: "benefit_\(benefit.id)",
-            title: title,
-            body: body,
-            scheduledDate: Date().addingTimeInterval(TimeInterval(daysUntilReset * 24 * 60 * 60))
-        )
+
+    private func endOfMonth(year: Int, month: Int, calendar: Calendar) -> Date {
+        var components = DateComponents(year: year, month: month + 1, day: 1)
+        if month == 12 { components = DateComponents(year: year + 1, month: 1, day: 1) }
+        return calendar.date(from: components)!.addingTimeInterval(-1)
     }
-    
-    private func schedulePeriodicChecks() {
-        Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { _ in
-            self.checkForExpiredBenefits()
-        }
+
+    private func monthName(_ month: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter.string(from: Calendar.current.date(from: DateComponents(month: month))!)
     }
-    
+
     private func saveContext() {
         do {
             try modelContext.save()
@@ -120,75 +130,44 @@ class BenefitTracker: ObservableObject {
     }
 }
 
+// MARK: - Model
+
 struct BenefitExpiration: Identifiable {
     let id = UUID()
     let benefit: Benefit
+    let periodId: String
+    let periodLabel: String
     let daysUntilReset: Int
     let resetDate: Date
-    
+
     var urgencyLevel: UrgencyLevel {
         switch daysUntilReset {
-        case 0...1: return .critical
-        case 2...3: return .high
-        case 4...7: return .medium
-        default: return .low
+        case 0...3:  return .critical
+        case 4...7:  return .high
+        case 8...14: return .medium
+        default:     return .low
         }
     }
 }
 
 enum UrgencyLevel {
     case critical, high, medium, low
-    
+
     var color: Color {
         switch self {
-        case .critical: return .red
-        case .high: return .orange
-        case .medium: return .yellow
-        case .low: return .green
+        case .critical: return .perqRose
+        case .high: return .perqAmber
+        case .medium: return .perqLavender
+        case .low: return .perqMint
         }
     }
-    
-    var description: String {
-        switch self {
-        case .critical: return "Expires today!"
-        case .high: return "Expires soon"
-        case .medium: return "Expires this week"
-        case .low: return "Expires later"
-        }
-    }
-}
 
-class NotificationManager {
-    func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            if granted {
-                print("Notification permission granted")
-            } else {
-                print("Notification permission denied")
-            }
+    var label: String {
+        switch self {
+        case .critical: return "Last few days"
+        case .high: return "This week"
+        case .medium: return "2 weeks left"
+        case .low: return "This period"
         }
-    }
-    
-    func scheduleNotification(identifier: String, title: String, body: String, scheduledDate: Date) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = .default
-        
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: scheduledDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error)")
-            }
-        }
-    }
-    
-    func cancelNotification(identifier: String) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 }

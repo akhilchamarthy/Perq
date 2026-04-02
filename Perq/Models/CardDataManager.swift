@@ -50,9 +50,23 @@ class CardDataManager: ObservableObject {
     }
     
     func deleteCard(_ card: CreditCard) {
+        cards.removeAll { $0.persistentModelID == card.persistentModelID }
         modelContext.delete(card)
         save()
+    }
+
+    func replaceCard(_ newCard: CreditCard) {
+        if let existing = cards.first(where: { $0.id == newCard.id }) {
+            cards.removeAll { $0.persistentModelID == existing.persistentModelID }
+            modelContext.delete(existing)
+        }
+        modelContext.insert(newCard)
+        save()
         loadCards()
+    }
+
+    func cardExists(id: String) -> Bool {
+        cards.contains(where: { $0.id == id })
     }
     
     func updateCard(_ card: CreditCard) {

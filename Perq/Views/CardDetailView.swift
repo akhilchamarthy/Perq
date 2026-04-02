@@ -44,6 +44,16 @@ struct CardHeaderView: View {
 
     private var cardColor: Color { Color(hex: card.cardColor) ?? .blue }
 
+    private var topRewardLabel: String {
+        guard let top = card.cashbackCategories.max(by: { $0.rate < $1.rate }) else { return "—" }
+        let whole = Int(top.rate)
+        switch top.unit {
+        case .percentCashback: return "\(whole)%"
+        case .pointsPerDollar: return "\(whole)X"
+        case .milesPerDollar:  return "\(whole)X"
+        }
+    }
+
     var body: some View {
         VStack(spacing: 16) {
             // Gradient card art
@@ -123,13 +133,13 @@ struct CardHeaderView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("Rewards")
+                    Text("Top Reward")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.55))
-                    Text("\(card.cashbackCategories.count) cats")
+                    Text(topRewardLabel)
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.perqSky)
                 }
             }
             .padding()
@@ -149,13 +159,14 @@ struct CardHeaderView: View {
                         Text("Benefit Value")
                             .font(.subheadline)
                             .fontWeight(.semibold)
+                            .foregroundColor(.white.opacity(0.55))
 
                         Spacer()
 
                         Text("$\(Int(card.totalBenefitValue)) / $\(Int(card.totalPotentialValue))")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                            .foregroundColor(.perqLavender)
+                            .foregroundColor(.white)
                     }
 
                     GeometryReader { geo in
@@ -615,7 +626,7 @@ struct CashbackView: View {
                     .foregroundColor(.white.opacity(0.55))
                     .padding(.top, 20)
             } else {
-                ForEach(categories, id: \.id) { category in
+                ForEach(categories.sorted { $0.rate > $1.rate }, id: \.id) { category in
                     CashbackRowView(category: category)
                 }
             }
@@ -626,23 +637,26 @@ struct CashbackView: View {
 struct CashbackRowView: View {
     let category: CashbackCategory
 
+    private var rateLabel: String {
+        let whole = Int(category.rate)
+        switch category.unit {
+        case .percentCashback:  return "\(whole)% cashback"
+        case .pointsPerDollar:  return "\(whole)X points"
+        case .milesPerDollar:   return "\(whole)X miles"
+        }
+    }
+
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(category.category)
-                    .font(.body)
-                    .fontWeight(.medium)
-                    .foregroundColor(.white)
-                    .lineLimit(2)
-
-                Text(category.unit.displayName)
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.55))
-            }
+            Text(category.category)
+                .font(.body)
+                .fontWeight(.medium)
+                .foregroundColor(.white)
+                .lineLimit(2)
 
             Spacer()
 
-            Text("\(category.rate, specifier: "%.1f")\(category.unit == .percentCashback ? "%" : "")")
+            Text(rateLabel)
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.perqSky)

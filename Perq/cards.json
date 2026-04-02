@@ -10,7 +10,7 @@
           "id": "amex_platinum",
           "name": "Platinum Card",
           "network": "amex",
-          "annual_fee": 695,
+          "annual_fee": 895,
           "annual_fee_note": "Additional cards $195/yr each",
           "card_color": "#A8A9AD",
           "benefits": [
@@ -36,8 +36,8 @@
               "id": "amex_plat_hotel_credit",
               "name": "Hotel credit",
               "type": "credit",
-              "total_amount": 200,
-              "reset_period": "annual",
+              "total_amount": 600,
+              "reset_period": "semi_annual",
               "description": "Valid at Fine Hotels + Resorts or The Hotel Collection (minimum 2-night stay).",
               "category_tag": "travel"
             },
@@ -75,6 +75,15 @@
               "total_amount": 300,
               "reset_period": "monthly",
               "description": "$25/month. Valid for Disney+, Hulu, ESPN+, Peacock, The New York Times, and SiriusXM.",
+              "category_tag": "entertainment"
+            },
+            {
+              "id": "amex_plat_resy_credit",
+              "name": "Resy statement credit",
+              "type": "credit",
+              "total_amount": 400,
+              "reset_period": "quarterly",
+              "description": "Get up to $100 in statement credits each quarter to make eligible purchases with Resy.",
               "category_tag": "entertainment"
             },
             {
@@ -124,18 +133,18 @@
             },
             {
               "id": "amex_plat_lululemon",
-              "name": "lululemon credit",
+              "name": "Lululemon credit",
               "type": "credit",
-              "total_amount": 100,
+              "total_amount": 300,
               "reset_period": "quarterly",
-              "description": "$25/quarter at lululemon. Valid in-store and online.",
+              "description": "$75/quarter at Lululemon. Valid in-store and online.",
               "category_tag": "shopping"
             },
             {
               "id": "amex_plat_clear_plus",
               "name": "CLEAR Plus credit",
               "type": "credit",
-              "total_amount": 189,
+              "total_amount": 209,
               "reset_period": "annual",
               "description": "Covers cost of CLEAR Plus annual membership for expedited airport security.",
               "category_tag": "travel"

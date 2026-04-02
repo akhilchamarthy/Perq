@@ -66,7 +66,7 @@ struct TabBarItem: View {
                 Text(label)
                     .font(.caption2)
             }
-            .foregroundColor(isSelected ? .blue : .white.opacity(0.4))
+            .foregroundColor(isSelected ? .perqLavender : .white.opacity(0.4))
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(PlainButtonStyle())

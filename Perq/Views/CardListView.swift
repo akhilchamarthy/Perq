@@ -63,6 +63,7 @@ struct SwipeableCardRow: View {
     @State private var navigateToDetail = false
 
     private let deleteWidth: CGFloat = 80
+    private var isOpen: Bool { offset < -8 }
 
     var body: some View {
         ZStack(alignment: .trailing) {
@@ -71,10 +72,8 @@ struct SwipeableCardRow: View {
                 EmptyView()
             }
 
-            // Delete button revealed behind the card
-            Button {
-                showDeleteConfirm = true
-            } label: {
+            // Delete button — only receives hits when revealed
+            Button { showDeleteConfirm = true } label: {
                 VStack(spacing: 5) {
                     Image(systemName: "trash.fill")
                         .font(.title3)
@@ -88,48 +87,43 @@ struct SwipeableCardRow: View {
                 .background(Color.perqRose)
                 .cornerRadius(16)
             }
-            .opacity(offset < -8 ? 1 : 0)
-            .scaleEffect(offset < -8 ? 1 : 0.8)
+            .opacity(isOpen ? 1 : 0)
+            .scaleEffect(isOpen ? 1 : 0.85)
+            .allowsHitTesting(isOpen)  // ← disabled when hidden so it never blocks taps
 
-            // Card row — slides left on swipe
+            // Card — purely visual, all gestures handled by the ZStack below
             CardRowView(card: card)
                 .offset(x: offset)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    if abs(offset) < 5 {
-                        navigateToDetail = true
-                    } else {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                            offset = 0
-                        }
+                .allowsHitTesting(false) // ← prevents the offset view from blocking the delete button
+        }
+        // All interaction lives on the container so hit-testing areas are consistent
+        .contentShape(Rectangle())
+        .onTapGesture {
+            if isOpen {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { offset = 0 }
+            } else {
+                navigateToDetail = true
+            }
+        }
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 20, coordinateSpace: .local)
+                .onChanged { value in
+                    let drag = value.translation.width
+                    guard drag < 0 || offset < 0 else { return }
+                    offset = drag < 0 ? max(-deleteWidth, drag) : min(0, offset + drag)
+                }
+                .onEnded { value in
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        offset = value.translation.width < -40 ? -deleteWidth : 0
                     }
                 }
-                .gesture(
-                    DragGesture(minimumDistance: 20, coordinateSpace: .local)
-                        .onChanged { value in
-                            let drag = value.translation.width
-                            guard drag < 0 || offset < 0 else { return }
-                            offset = drag < 0
-                                ? max(-deleteWidth, drag)
-                                : min(0, offset + drag)
-                        }
-                        .onEnded { value in
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                offset = value.translation.width < -40 ? -deleteWidth : 0
-                            }
-                        }
-                )
-        }
+        )
         .alert("Delete \(card.name)?", isPresented: $showDeleteConfirm) {
             Button("Delete", role: .destructive) {
-                withAnimation(.easeOut(duration: 0.25)) {
-                    onDelete()
-                }
+                onDelete()
             }
             Button("Cancel", role: .cancel) {
-                withAnimation(.spring(response: 0.3)) {
-                    offset = 0
-                }
+                withAnimation(.spring(response: 0.3)) { offset = 0 }
             }
         } message: {
             Text("This will permanently remove the card and all its benefits. This cannot be undone.")
