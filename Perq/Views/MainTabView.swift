@@ -15,9 +15,7 @@ struct MainTabView: View {
                 case 1:
                     RemindersView(modelContext: modelContext)
                 case 2:
-                    Text("Analytics")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    AnalyticsView(modelContext: modelContext)
                 default:
                     Text("Settings")
                         .foregroundColor(.white)

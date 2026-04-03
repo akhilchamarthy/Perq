@@ -148,7 +148,8 @@ struct AddCardView: View {
                 network: cardInfo.network,
                 annualFee: cardInfo.annualFee,
                 annualFeeNote: cardInfo.annualFeeNote,
-                cardColor: cardInfo.cardColor
+                cardColor: cardInfo.cardColor,
+                cardImage: cardInfo.cardImage
             )
             for benefitInfo in cardInfo.benefits {
                 let benefit = Benefit(
@@ -306,7 +307,7 @@ struct CardPickerView: View {
                     .foregroundColor(.white.opacity(0.5))
             }
 
-            LazyVStack(spacing: 14) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
                 ForEach(issuer.cards, id: \.id) { card in
                     MiniCardPreview(
                         card: card,
@@ -333,86 +334,49 @@ struct MiniCardPreview: View {
 
     var body: some View {
         Button(action: onTap) {
-            ZStack(alignment: .topLeading) {
-                // Background gradient
-                LinearGradient(
-                    colors: [cardColor, cardColor.opacity(0.55)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+            VStack(alignment: .leading, spacing: 8) {
+                // Card image
+                ZStack(alignment: .topTrailing) {
+                    CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 0)
+                        // Standard credit card ratio: 85.6 × 53.98 mm
+                        .aspectRatio(85.6 / 53.98, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .strokeBorder(
+                                    isSelected ? Color.white : Color.white.opacity(0.08),
+                                    lineWidth: isSelected ? 2 : 1
+                                )
+                        )
+                        .shadow(
+                            color: cardColor.opacity(isSelected ? 0.55 : 0.2),
+                            radius: isSelected ? 14 : 6,
+                            x: 0, y: 4
+                        )
 
-                // Decorative circles
-                GeometryReader { geo in
-                    Circle()
-                        .fill(Color.white.opacity(0.10))
-                        .frame(width: 110, height: 110)
-                        .position(x: geo.size.width * 0.88, y: -10)
-                    Circle()
-                        .fill(Color.white.opacity(0.06))
-                        .frame(width: 70, height: 70)
-                        .position(x: geo.size.width * 0.78, y: geo.size.height * 0.85)
-                }
-
-                // Card content
-                VStack(alignment: .leading) {
-                    // Top row
-                    HStack {
-                        Text(card.network.uppercased())
-                            .font(.caption2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white.opacity(0.9))
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(Capsule().fill(Color.white.opacity(0.2)))
-
-                        Spacer()
-
-                        if isSelected {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .transition(.scale.combined(with: .opacity))
-                        }
-                    }
-
-                    Spacer()
-
-                    // Bottom row
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(card.name)
-                            .font(.headline)
-                            .fontWeight(.bold)
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.white)
-
-                        HStack {
-                            Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.8))
-
-                            Spacer()
-
-                            Text("\(card.benefits.count) benefits")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.75))
-                        }
+                            .font(.subheadline)
+                            .shadow(color: .black.opacity(0.5), radius: 3)
+                            .padding(6)
+                            .transition(.scale.combined(with: .opacity))
                     }
                 }
-                .padding(14)
+
+                // Card info below the image
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(card.name)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.perqGhost)
+                        .lineLimit(1)
+
+                    Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.55))
+                }
             }
-            .frame(height: 140)
-            .clipShape(RoundedRectangle(cornerRadius: 18))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18)
-                    .strokeBorder(
-                        isSelected ? Color.white : Color.white.opacity(0.08),
-                        lineWidth: isSelected ? 2 : 1
-                    )
-            )
-            .shadow(
-                color: cardColor.opacity(isSelected ? 0.55 : 0.2),
-                radius: isSelected ? 14 : 6,
-                x: 0, y: 4
-            )
         }
         .buttonStyle(PlainButtonStyle())
     }

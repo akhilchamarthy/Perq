@@ -101,12 +101,11 @@ struct ReminderCardView: View {
 
                         if let card = expiration.benefit.creditCard {
                             HStack(spacing: 6) {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(cardColor)
-                                    .frame(width: 24, height: 15)
+                                CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 4)
+                                    .frame(width: 32, height: 20)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 4)
-                                            .stroke(Color.white.opacity(0.2), lineWidth: 0.5)
+                                            .stroke(Color.white.opacity(0.15), lineWidth: 0.5)
                                     )
                                 Text(card.name)
                                     .font(.caption)
@@ -142,8 +141,11 @@ struct ReminderCardView: View {
 
                     Spacer()
 
-                    if let amount = expiration.benefit.totalAmount, amount > 0 {
-                        Text("$\(Int(amount))")
+                    if let total = expiration.benefit.totalAmount,
+                       let period = expiration.benefit.resetPeriod,
+                       total > 0 {
+                        let perPeriod = total / Double(period.numberOfPeriods)
+                        Text("$\(Int(perPeriod))")
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .foregroundColor(.perqMint)

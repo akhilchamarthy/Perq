@@ -10,6 +10,7 @@ final class CreditCard: Identifiable {
     var annualFee: Double
     var annualFeeNote: String?
     var cardColor: String
+    var cardImage: String?
     var dateAdded: Date
     var isActive: Bool
     
@@ -19,7 +20,7 @@ final class CreditCard: Identifiable {
     @Relationship(deleteRule: .cascade, inverse: \CashbackCategory.creditCard)
     var cashbackCategories: [CashbackCategory] = []
     
-    init(id: String, name: String, issuer: String, network: String, annualFee: Double, annualFeeNote: String? = nil, cardColor: String) {
+    init(id: String, name: String, issuer: String, network: String, annualFee: Double, annualFeeNote: String? = nil, cardColor: String, cardImage: String? = nil) {
         self.id = id
         self.name = name
         self.issuer = issuer
@@ -27,6 +28,7 @@ final class CreditCard: Identifiable {
         self.annualFee = annualFee
         self.annualFeeNote = annualFeeNote
         self.cardColor = cardColor
+        self.cardImage = cardImage
         self.dateAdded = Date()
         self.isActive = true
     }

@@ -13,6 +13,7 @@
           "annual_fee": 895,
           "annual_fee_note": "Additional cards $195/yr each",
           "card_color": "#A8A9AD",
+          "card_image": "card_amex_platinum",
           "benefits": [
             {
               "id": "amex_plat_uber_cash",
@@ -163,6 +164,7 @@
           "annual_fee": 250,
           "annual_fee_note": null,
           "card_color": "#C8963E",
+          "card_image": "card_amex_gold",
           "benefits": [
             {
               "id": "amex_gold_dining",
@@ -215,6 +217,7 @@
           "annual_fee": 95,
           "annual_fee_note": "$0 intro fee first year",
           "card_color": "#1A5E9E",
+          "card_image": "card_amex_blue_cash_preferred",
           "benefits": [
             {
               "id": "amex_bcp_disney_bundle",
@@ -255,6 +258,7 @@
           "annual_fee": 550,
           "annual_fee_note": null,
           "card_color": "#2D2D2D",
+          "card_image": "card_chase_sapphire_reserve",
           "benefits": [
             {
               "id": "csr_travel_credit",
@@ -327,6 +331,7 @@
           "annual_fee": 95,
           "annual_fee_note": null,
           "card_color": "#4A90D9",
+          "card_image": "card_chase_sapphire_preferred",
           "benefits": [
             {
               "id": "csp_hotel_credit",
@@ -335,6 +340,15 @@
               "total_amount": 50,
               "reset_period": "annual",
               "description": "$50 annual credit for hotel stays purchased through Chase Travel.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "csp_doordash_grocery_credit",
+              "name": "Grocery credit",
+              "type": "credit",
+              "total_amount": 120,
+              "reset_period": "monthly",
+              "description": "$10 monthly credit for grocery purchases through Doordash.",
               "category_tag": "travel"
             },
             {
@@ -348,12 +362,12 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel via Chase Travel portal", "rate": 5, "unit": "points_per_dollar" },
+            { "category": "Travel via Travel portal", "rate": 5, "unit": "points_per_dollar" },
             { "category": "Lyft rides", "rate": 5, "unit": "points_per_dollar" },
-            { "category": "Dining worldwide", "rate": 3, "unit": "points_per_dollar" },
-            { "category": "Online grocery (excl. Walmart, Target, wholesale)", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Dining", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Grocery", "rate": 3, "unit": "points_per_dollar" },
             { "category": "Streaming subscriptions", "rate": 3, "unit": "points_per_dollar" },
-            { "category": "All other travel", "rate": 2, "unit": "points_per_dollar" },
+            { "category": "Travel", "rate": 2, "unit": "points_per_dollar" },
             { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar" }
           ]
         },
@@ -364,11 +378,13 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#1A1A2E",
+          "card_image": "card_chase_freedom_unlimited",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Chase Travel purchases", "rate": 5, "unit": "percent_cashback" },
+            { "category": "Travel via Travel portal", "rate": 5, "unit": "percent_cashback" },
             { "category": "Lyft rides", "rate": 5, "unit": "percent_cashback" },
-            { "category": "Dining and drugstores", "rate": 3, "unit": "percent_cashback" },
+            { "category": "Dining", "rate": 3, "unit": "percent_cashback" },
+            { "category": "Drugstores", "rate": 3, "unit": "percent_cashback" },
             { "category": "All other purchases", "rate": 1.5, "unit": "percent_cashback" }
           ]
         }
@@ -385,6 +401,7 @@
           "annual_fee": 95,
           "annual_fee_note": null,
           "card_color": "#003087",
+          "card_image": "card_citi_strata_premier",
           "benefits": [
             {
               "id": "citi_strata_hotel_credit",
@@ -397,8 +414,11 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hotels, car rentals, and attractions via Citi Travel", "rate": 10, "unit": "points_per_dollar" },
-            { "category": "Air, hotels, restaurants, supermarkets, and gas", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Travel via Travel portal", "rate": 10, "unit": "points_per_dollar" },
+            { "category": "Dining", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Grocery", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Gas", "rate": 3, "unit": "points_per_dollar" },
+            { "category": "Travel", "rate": 3, "unit": "points_per_dollar" },
             { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar" }
           ]
         },
@@ -409,9 +429,10 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#636363",
+          "card_image": "card_citi_double_cash",
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases (1% when you buy + 1% when you pay)", "rate": 2, "unit": "percent_cashback" }
+            { "category": "All other purchases", "rate": 2, "unit": "percent_cashback" }
           ]
         },
         {
@@ -421,6 +442,7 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#8B0000",
+          "card_image": "card_citi_custom_cash",
           "benefits": [],
           "cashback_categories": [
             { "category": "Top eligible spend category each billing cycle (up to $500/mo)", "rate": 5, "unit": "percent_cashback" },
@@ -440,6 +462,7 @@
           "annual_fee": 395,
           "annual_fee_note": null,
           "card_color": "#C41230",
+          "card_image": "card_cap1_venture_x",
           "benefits": [
             {
               "id": "cap1_vx_travel_credit",
@@ -450,15 +473,15 @@
               "description": "$300 annual credit for bookings through Capital One Travel portal.",
               "category_tag": "travel"
             },
-            {
-              "id": "cap1_vx_anniversary_miles",
-              "name": "Anniversary bonus miles",
-              "type": "credit",
-              "total_amount": 10000,
-              "reset_period": "annual",
-              "description": "10,000 bonus miles each anniversary year (worth ~$100 in travel).",
-              "category_tag": "travel"
-            },
+//            {
+//              "id": "cap1_vx_anniversary_miles",
+//              "name": "Anniversary bonus miles",
+//              "type": "credit",
+//              "total_amount": 10000,
+//              "reset_period": "annual",
+//              "description": "10,000 bonus miles each anniversary year (worth ~$100 in travel).",
+//              "category_tag": "travel"
+//            },
             {
               "id": "cap1_vx_lounge",
               "name": "Capital One Lounge access",
@@ -491,6 +514,7 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#1B1B1B",
+          "card_image": "card_cap1_savor_one",
           "benefits": [],
           "cashback_categories": [
             { "category": "Dining and entertainment", "rate": 3, "unit": "percent_cashback" },
@@ -512,6 +536,7 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#CC0000",
+          "card_image": "card_wf_autograph",
           "benefits": [],
           "cashback_categories": [
             { "category": "Restaurants, travel, gas, transit, streaming, and phone plans", "rate": 3, "unit": "points_per_dollar" },
@@ -525,9 +550,10 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#B8860B",
+          "card_image": "card_wf_active_cash",
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 2, "unit": "percent_cashback" }
+            { "category": "All other purchases", "rate": 2, "unit": "percent_cashback" }
           ]
         }
       ]
@@ -543,6 +569,7 @@
           "annual_fee": 550,
           "annual_fee_note": null,
           "card_color": "#DC143C",
+          "card_image": "card_boa_premium_rewards_elite",
           "benefits": [
             {
               "id": "boa_pre_travel_credit",
@@ -584,10 +611,11 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#8B0000",
+          "card_image": "card_boa_customized_cash",
           "benefits": [],
           "cashback_categories": [
             { "category": "Choice category (gas, online shopping, dining, travel, drugstores, home improvement) up to $2,500/quarter", "rate": 3, "unit": "percent_cashback" },
-            { "category": "Grocery stores and wholesale clubs up to $2,500/quarter", "rate": 2, "unit": "percent_cashback" },
+            { "category": "Grocery", "rate": 2, "unit": "percent_cashback" },
             { "category": "All other purchases", "rate": 1, "unit": "percent_cashback" }
           ]
         }
@@ -604,6 +632,7 @@
           "annual_fee": 0,
           "annual_fee_note": null,
           "card_color": "#F4793B",
+          "card_image": "card_discover_it_cash",
           "benefits": [
             {
               "id": "discover_it_cashback_match",

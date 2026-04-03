@@ -56,55 +56,10 @@ struct CardHeaderView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            // Gradient card art
-            ZStack {
-                LinearGradient(
-                    colors: [cardColor, cardColor.opacity(0.5)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-
-                GeometryReader { geo in
-                    Circle()
-                        .fill(Color.white.opacity(0.12))
-                        .frame(width: 150, height: 150)
-                        .position(x: geo.size.width * 0.88, y: geo.size.height * 0.2)
-
-                    Circle()
-                        .fill(Color.white.opacity(0.08))
-                        .frame(width: 90, height: 90)
-                        .position(x: geo.size.width * 0.78, y: geo.size.height * 0.72)
-                }
-
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Text(card.network.uppercased())
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white.opacity(0.85))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 3)
-                            .background(Capsule().fill(Color.white.opacity(0.2)))
-                        Spacer()
-                    }
-
-                    Spacer()
-
-                    Text(card.name)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-
-                    Text(card.issuer)
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.8))
-                }
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: 160)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            // Card art
+            CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 20)
+                .frame(maxWidth: .infinity)
+                .frame(height: 180)
 
             // Stats row
             HStack {

@@ -164,12 +164,11 @@ struct CardRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(hex: card.cardColor) ?? .gray)
-                    .frame(width: 40, height: 25)
+                CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 8)
+                    .frame(width: 54, height: 34)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                            .stroke(Color.white.opacity(0.15), lineWidth: 0.5)
                     )
 
                 VStack(alignment: .leading, spacing: 2) {

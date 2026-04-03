@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "card_amex_blue_cash_preferred.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

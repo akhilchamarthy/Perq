@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "UK_AXP_Platinum.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
