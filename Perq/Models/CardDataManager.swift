@@ -50,9 +50,23 @@ class CardDataManager: ObservableObject {
     }
     
     func deleteCard(_ card: CreditCard) {
+        cards.removeAll { $0.persistentModelID == card.persistentModelID }
         modelContext.delete(card)
         save()
+    }
+
+    func replaceCard(_ newCard: CreditCard) {
+        if let existing = cards.first(where: { $0.id == newCard.id }) {
+            cards.removeAll { $0.persistentModelID == existing.persistentModelID }
+            modelContext.delete(existing)
+        }
+        modelContext.insert(newCard)
+        save()
         loadCards()
+    }
+
+    func cardExists(id: String) -> Bool {
+        cards.contains(where: { $0.id == id })
     }
     
     func updateCard(_ card: CreditCard) {
@@ -87,7 +101,8 @@ class CardDataManager: ObservableObject {
                         network: cardInfo.network,
                         annualFee: cardInfo.annualFee,
                         annualFeeNote: cardInfo.annualFeeNote,
-                        cardColor: cardInfo.cardColor
+                        cardColor: cardInfo.cardColor,
+                        cardImage: cardInfo.cardImage
                     )
                     
                     for benefitInfo in cardInfo.benefits {
@@ -149,14 +164,16 @@ struct CardInfo: Codable {
     let annualFee: Double
     let annualFeeNote: String?
     let cardColor: String
+    let cardImage: String?
     let benefits: [BenefitInfo]
     let cashbackCategories: [CashbackInfo]
-    
+
     enum CodingKeys: String, CodingKey {
         case id, name, network
         case annualFee = "annual_fee"
         case annualFeeNote = "annual_fee_note"
         case cardColor = "card_color"
+        case cardImage = "card_image"
         case benefits
         case cashbackCategories = "cashback_categories"
     }

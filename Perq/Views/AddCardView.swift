@@ -1,75 +1,138 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - Issuer branding
+
+private struct IssuerStyle {
+    let color: Color
+    let initials: String
+}
+
+private func issuerStyle(for id: String) -> IssuerStyle {
+    switch id {
+    case "amex":            return IssuerStyle(color: Color(hex: "#006FCF")!, initials: "AMEX")
+    case "chase":           return IssuerStyle(color: Color(hex: "#117ACA")!, initials: "CHASE")
+    case "citi":            return IssuerStyle(color: Color(hex: "#003D99")!, initials: "CITI")
+    case "capital_one":     return IssuerStyle(color: Color(hex: "#C41230")!, initials: "CAP ONE")
+    case "wells_fargo":     return IssuerStyle(color: Color(hex: "#CC0000")!, initials: "WELLS")
+    case "bank_of_america": return IssuerStyle(color: Color(hex: "#E31837")!, initials: "BOFA")
+    case "discover":        return IssuerStyle(color: Color(hex: "#F4793B")!, initials: "DISC")
+    default:                return IssuerStyle(color: .perqSurface, initials: String(id.prefix(5).uppercased()))
+    }
+}
+
+// MARK: - Main view
+
 struct AddCardView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    
+
     let dataManager: CardDataManager
-    
+
     @State private var selectedIssuer: Issuer?
     @State private var selectedCard: CardInfo?
     @State private var customCardName = ""
     @State private var customAnnualFee = ""
     @State private var isCustomCard = false
-    
+    @State private var pendingCard: CreditCard?
+    @State private var showingReplaceAlert = false
+
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 24) {
-                    if !isCustomCard {
-                        IssuerSelectionView(
-                            selectedIssuer: $selectedIssuer,
-                            selectedCard: $selectedCard
-                        )
-                    } else {
-                        CustomCardForm(
-                            cardName: $customCardName,
-                            annualFee: $customAnnualFee
-                        )
-                    }
-                    
-                    if selectedCard != nil || (isCustomCard && !customCardName.isEmpty) {
-                        Button(action: addCard) {
-                            Text("Add Card")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(12)
+            ZStack {
+                Color.perqInk.ignoresSafeArea()
+
+                ScrollView {
+                    VStack(spacing: 28) {
+                        if !isCustomCard {
+                            IssuerGridView(
+                                selectedIssuer: $selectedIssuer,
+                                selectedCard: $selectedCard
+                            )
+                        } else {
+                            CustomCardForm(
+                                cardName: $customCardName,
+                                annualFee: $customAnnualFee
+                            )
                         }
-                        .padding(.horizontal)
+
+                        if selectedCard != nil || (isCustomCard && !customCardName.isEmpty) {
+                            addButton
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
-            .navigationTitle("Add Card")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color.perqInk, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
+                ToolbarItem(placement: .principal) {
+                    Text("Add Card")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.perqGhost)
                 }
-                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") { dismiss() }
+                        .foregroundColor(.perqLavender)
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(isCustomCard ? "Browse Cards" : "Custom Card") {
+                    Button(isCustomCard ? "Browse" : "Custom") {
                         isCustomCard.toggle()
                         selectedIssuer = nil
                         selectedCard = nil
                     }
-                    .font(.caption)
+                    .font(.subheadline)
+                    .foregroundColor(.perqLavender)
                 }
+            }
+            .alert("Card Already in Wallet", isPresented: $showingReplaceAlert) {
+                Button("Replace", role: .destructive) {
+                    if let card = pendingCard {
+                        dataManager.replaceCard(card)
+                        dismiss()
+                    }
+                }
+                Button("Cancel", role: .cancel) {
+                    pendingCard = nil
+                }
+            } message: {
+                Text("This card is already in your wallet. Replacing it will reset all tracked benefits and claimed periods.")
             }
         }
     }
-    
+
+    private var addButton: some View {
+        Button(action: addCard) {
+            Text("Add Card")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(LinearGradient.perqPrimary)
+                .cornerRadius(14)
+        }
+        .transition(.move(edge: .bottom).combined(with: .opacity))
+    }
+
     private func addCard() {
-        let card: CreditCard
-        
+        let card = buildCard()
+        guard let card else { return }
+
+        if dataManager.cardExists(id: card.id) {
+            pendingCard = card
+            showingReplaceAlert = true
+        } else {
+            dataManager.addCard(card)
+            dismiss()
+        }
+    }
+
+    private func buildCard() -> CreditCard? {
         if isCustomCard {
-            card = CreditCard(
+            return CreditCard(
                 id: UUID().uuidString,
                 name: customCardName,
                 issuer: "Custom",
@@ -78,16 +141,16 @@ struct AddCardView: View {
                 cardColor: "#808080"
             )
         } else if let cardInfo = selectedCard, let issuer = selectedIssuer {
-            card = CreditCard(
+            let card = CreditCard(
                 id: cardInfo.id,
                 name: cardInfo.name,
                 issuer: issuer.name,
                 network: cardInfo.network,
                 annualFee: cardInfo.annualFee,
                 annualFeeNote: cardInfo.annualFeeNote,
-                cardColor: cardInfo.cardColor
+                cardColor: cardInfo.cardColor,
+                cardImage: cardInfo.cardImage
             )
-            
             for benefitInfo in cardInfo.benefits {
                 let benefit = Benefit(
                     id: benefitInfo.id,
@@ -101,7 +164,6 @@ struct AddCardView: View {
                 benefit.creditCard = card
                 card.benefits.append(benefit)
             }
-            
             for cashbackInfo in cardInfo.cashbackCategories {
                 let cashback = CashbackCategory(
                     id: "\(cardInfo.id)_\(cashbackInfo.category.replacingOccurrences(of: " ", with: "_").lowercased())",
@@ -112,189 +174,261 @@ struct AddCardView: View {
                 cashback.creditCard = card
                 card.cashbackCategories.append(cashback)
             }
-        } else {
-            return
+            return card
         }
-        
-        dataManager.addCard(card)
-        dismiss()
+        return nil
     }
 }
 
-struct IssuerSelectionView: View {
+// MARK: - Issuer grid
+
+struct IssuerGridView: View {
     @Binding var selectedIssuer: Issuer?
     @Binding var selectedCard: CardInfo?
     @State private var issuers: [Issuer] = []
-    
+
+    private let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Select Issuer")
-                .font(.headline)
-                .fontWeight(.semibold)
-            
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 12) {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Select Bank")
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.perqGhost)
+
+            LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(issuers, id: \.id) { issuer in
-                    Button(action: { 
-                        selectedIssuer = issuer
-                        selectedCard = nil
-                    }) {
-                        VStack(spacing: 8) {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.blue.opacity(0.1))
-                                .frame(width: 60, height: 40)
-                                .overlay(
-                                    Text(issuer.name.prefix(3))
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.blue)
-                                )
-                            
-                            Text(issuer.name)
-                                .font(.caption)
-                                .foregroundColor(.primary)
-                                .lineLimit(1)
+                    IssuerTile(
+                        issuer: issuer,
+                        isSelected: selectedIssuer?.id == issuer.id
+                    ) {
+                        withAnimation(.spring(response: 0.3)) {
+                            selectedIssuer = issuer
+                            selectedCard = nil
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(selectedIssuer?.id == issuer.id ? Color.blue.opacity(0.1) : Color.clear)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedIssuer?.id == issuer.id ? Color.blue : Color.clear, lineWidth: 2)
-                            )
-                    )
                 }
             }
-            
+
             if let issuer = selectedIssuer {
-                CardSelectionView(
+                CardPickerView(
                     issuer: issuer,
                     selectedCard: $selectedCard
                 )
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
-        .onAppear {
-            issuers = loadIssuers()
-        }
+        .onAppear { issuers = loadIssuers() }
     }
-    
+
     private func loadIssuers() -> [Issuer] {
-        guard let url = Bundle.main.url(forResource: "cards", withExtension: "json") else {
-            print("Could not find cards.json file")
-            return []
+        guard let url = Bundle.main.url(forResource: "cards", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode(CardDataResponse.self, from: data) else { return [] }
+        return decoded.issuers
+    }
+}
+
+// MARK: - Issuer tile
+
+struct IssuerTile: View {
+    let issuer: Issuer
+    let isSelected: Bool
+    let onTap: () -> Void
+
+    private var style: IssuerStyle { issuerStyle(for: issuer.id) }
+
+    var body: some View {
+        Button(action: onTap) {
+            VStack(spacing: 10) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(LinearGradient(
+                            colors: [style.color, style.color.opacity(0.65)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(height: 52)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                        )
+
+                    Text(style.initials)
+                        .font(.system(size: 12, weight: .black))
+                        .foregroundColor(.white)
+                        .tracking(0.8)
+                }
+
+                Text(issuer.name)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(isSelected ? .white : .white.opacity(0.6))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(isSelected ? style.color.opacity(0.18) : Color.perqElevated)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(
+                                isSelected ? style.color : Color.white.opacity(0.07),
+                                lineWidth: isSelected ? 1.5 : 1
+                            )
+                    )
+            )
+            .shadow(color: isSelected ? style.color.opacity(0.35) : .clear, radius: 8, x: 0, y: 3)
         }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let cardData = try JSONDecoder().decode(CardDataResponse.self, from: data)
-            print("Successfully loaded \(cardData.issuers.count) issuers")
-            return cardData.issuers
-        } catch {
-            print("Failed to load or decode cards.json: \(error)")
-            return []
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+// MARK: - Card picker
+
+struct CardPickerView: View {
+    let issuer: Issuer
+    @Binding var selectedCard: CardInfo?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Text("Select Card")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.perqGhost)
+
+                Spacer()
+
+                Text(issuer.name)
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.5))
+            }
+
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
+                ForEach(issuer.cards, id: \.id) { card in
+                    MiniCardPreview(
+                        card: card,
+                        isSelected: selectedCard?.id == card.id
+                    ) {
+                        withAnimation(.spring(response: 0.25)) {
+                            selectedCard = card
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
-struct CardSelectionView: View {
-    let issuer: Issuer
-    @Binding var selectedCard: CardInfo?
-    
+// MARK: - Mini card visual
+
+struct MiniCardPreview: View {
+    let card: CardInfo
+    let isSelected: Bool
+    let onTap: () -> Void
+
+    private var cardColor: Color { Color(hex: card.cardColor) ?? .gray }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Select Card")
-                .font(.headline)
-                .fontWeight(.semibold)
-            
-            LazyVStack(spacing: 12) {
-                ForEach(issuer.cards, id: \.id) { card in
-                    Button(action: { selectedCard = card }) {
-                        HStack(spacing: 12) {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color(hex: card.cardColor) ?? .gray)
-                                .frame(width: 50, height: 32)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                                )
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(card.name)
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.primary)
-                                
-                                Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
-                                    .font(.caption)
-                                    .foregroundColor(card.annualFee == 0 ? .green : .secondary)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .trailing, spacing: 2) {
-                                Text("\(card.benefits.count)")
-                                    .font(.caption)
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.blue)
-                                
-                                Text("benefits")
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(selectedCard?.id == card.id ? Color.blue.opacity(0.1) : Color(.systemBackground))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(selectedCard?.id == card.id ? Color.blue : Color(.separator), lineWidth: selectedCard?.id == card.id ? 2 : 1)
+        Button(action: onTap) {
+            VStack(alignment: .leading, spacing: 8) {
+                // Card image
+                ZStack(alignment: .topTrailing) {
+                    CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 0)
+                        // Standard credit card ratio: 85.6 × 53.98 mm
+                        .aspectRatio(85.6 / 53.98, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .strokeBorder(
+                                    isSelected ? Color.white : Color.white.opacity(0.08),
+                                    lineWidth: isSelected ? 2 : 1
                                 )
                         )
+                        .shadow(
+                            color: cardColor.opacity(isSelected ? 0.55 : 0.2),
+                            radius: isSelected ? 14 : 6,
+                            x: 0, y: 4
+                        )
+
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.white)
+                            .font(.subheadline)
+                            .shadow(color: .black.opacity(0.5), radius: 3)
+                            .padding(6)
+                            .transition(.scale.combined(with: .opacity))
                     }
-                    .buttonStyle(PlainButtonStyle())
+                }
+
+                // Card info below the image
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(card.name)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.perqGhost)
+                        .lineLimit(1)
+
+                    Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.55))
                 }
             }
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }
+
+// MARK: - Custom card form
 
 struct CustomCardForm: View {
     @Binding var cardName: String
     @Binding var annualFee: String
-    
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Custom Card Details")
-                .font(.headline)
-                .fontWeight(.semibold)
-            
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Custom Card")
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.perqGhost)
+
             VStack(alignment: .leading, spacing: 8) {
                 Text("Card Name")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.primary)
-                
-                TextField("Enter card name", text: $cardName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .foregroundColor(.white.opacity(0.7))
+
+                TextField("e.g. My Visa Signature", text: $cardName)
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.perqElevated))
+                    .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.perqBorderSubtle, lineWidth: 1))
             }
-            
+
             VStack(alignment: .leading, spacing: 8) {
                 Text("Annual Fee")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.primary)
-                
-                TextField("0", text: $annualFee)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
+                    .foregroundColor(.white.opacity(0.7))
+
+                HStack {
+                    Text("$")
+                        .foregroundColor(.white.opacity(0.5))
+                    TextField("0", text: $annualFee)
+                        .foregroundColor(.white)
+                        .keyboardType(.decimalPad)
+                }
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color.perqElevated))
+                .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.perqBorderSubtle, lineWidth: 1))
             }
-            
-            Text("You can add benefits and cashback categories after creating the card.")
+
+            Text("Benefits and cashback categories can be added after creating the card.")
                 .font(.caption)
-                .foregroundColor(.secondary)
-                .padding(.top, 8)
+                .foregroundColor(.white.opacity(0.4))
         }
     }
 }
