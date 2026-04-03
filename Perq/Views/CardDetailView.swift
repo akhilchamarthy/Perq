@@ -66,11 +66,11 @@ struct CardHeaderView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Annual Fee")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                     Text(card.annualFee == 0 ? "No Fee" : "$\(Int(card.annualFee))/yr")
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundColor(card.annualFee == 0 ? .perqMint : .white)
+                        .foregroundColor(card.annualFee == 0 ? .perqMint : .perqPrimaryText)
                 }
 
                 Spacer()
@@ -78,11 +78,11 @@ struct CardHeaderView: View {
                 VStack(alignment: .center, spacing: 4) {
                     Text("Benefits")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                     Text("\(card.benefits.count)")
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.perqPrimaryText)
                 }
 
                 Spacer()
@@ -90,7 +90,7 @@ struct CardHeaderView: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("Top Reward")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                     Text(topRewardLabel)
                         .font(.headline)
                         .fontWeight(.semibold)
@@ -103,7 +103,7 @@ struct CardHeaderView: View {
             if let annualFeeNote = card.annualFeeNote, !annualFeeNote.isEmpty {
                 Text(annualFeeNote)
                     .font(.caption)
-                    .foregroundColor(.white.opacity(0.55))
+                    .foregroundColor(.perqSecondaryText)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
 
@@ -114,14 +114,14 @@ struct CardHeaderView: View {
                         Text("Benefit Value")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .foregroundColor(.white.opacity(0.55))
+                            .foregroundColor(.perqSecondaryText)
 
                         Spacer()
 
                         Text("$\(Int(card.totalBenefitValue)) / $\(Int(card.totalPotentialValue))")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                            .foregroundColor(.white)
+                            .foregroundColor(.perqPrimaryText)
                     }
 
                     GeometryReader { geo in
@@ -137,7 +137,7 @@ struct CardHeaderView: View {
 
                     Text("You've extracted $\(Int(card.totalBenefitValue)) in value from this card's benefits")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                 }
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 16).fill(Color.perqElevated))
@@ -156,7 +156,7 @@ struct TabSelectorView: View {
                     Text(tab.rawValue)
                         .font(.subheadline)
                         .fontWeight(.medium)
-                        .foregroundColor(selectedTab == tab ? .white : .white.opacity(0.55))
+                        .foregroundColor(selectedTab == tab ? .perqPrimaryText : .perqSecondaryText)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 8)
                         .background(
@@ -219,14 +219,14 @@ struct BenefitsView: View {
             if filtered.isEmpty {
                 Text("No benefits for this filter")
                     .font(.body)
-                    .foregroundColor(.white.opacity(0.55))
+                    .foregroundColor(.perqSecondaryText)
                     .padding(.top, 8)
             } else {
                 // Active benefits
                 if active.isEmpty && completed.isEmpty {
                     Text("No benefits available for this card")
                         .font(.body)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                         .padding(.top, 8)
                 } else {
                     ForEach(active, id: \.id) { benefit in
@@ -244,18 +244,18 @@ struct BenefitsView: View {
                                 Text("Completed")
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(.white.opacity(0.55))
+                                    .foregroundColor(.perqSecondaryText)
                                 Text("\(completed.count)")
                                     .font(.caption)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.perqPrimaryText)
                                     .padding(.horizontal, 7)
                                     .padding(.vertical, 2)
                                     .background(Capsule().fill(Color.perqMint.opacity(0.7)))
                                 Spacer()
                                 Image(systemName: completedExpanded ? "chevron.up" : "chevron.down")
                                     .font(.caption)
-                                    .foregroundColor(.white.opacity(0.55))
+                                    .foregroundColor(.perqSecondaryText)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -278,7 +278,7 @@ struct BenefitsView: View {
             Text(label)
                 .font(.subheadline)
                 .fontWeight(.medium)
-                .foregroundColor(isSelected ? .white : .white.opacity(0.55))
+                .foregroundColor(isSelected ? .perqPrimaryText : .perqSecondaryText)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 7)
                 .background(
@@ -325,7 +325,7 @@ struct BenefitRowView: View {
                             if let resetPeriod = benefit.resetPeriod {
                                 Text(resetPeriod.displayName)
                                     .font(.caption2)
-                                    .foregroundColor(.white.opacity(0.55))
+                                    .foregroundColor(.perqSecondaryText)
                             }
                         }
                     }
@@ -341,17 +341,17 @@ struct BenefitRowView: View {
                                 .foregroundColor(benefit.isCompleted ? .perqMint : .perqGhost)
                             Text("left")
                                 .font(.caption2)
-                                .foregroundColor(.white.opacity(0.55))
+                                .foregroundColor(.perqSecondaryText)
                         }
                     } else {
                         Image(systemName: benefit.isCompleted ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(benefit.isCompleted ? .perqMint : .white.opacity(0.55))
+                            .foregroundColor(benefit.isCompleted ? .perqMint : .perqSecondaryText)
                             .font(.title3)
                     }
 
                     Image(systemName: "chevron.down")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                         .rotationEffect(.degrees(isExpanded ? 180 : 0))
                 }
                 .padding(.horizontal, 14)
@@ -382,7 +382,7 @@ struct BenefitRowView: View {
                     // Description
                     Text(benefit.benefitDescription)
                         .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                         .fixedSize(horizontal: false, vertical: true)
 
                     // Used / remaining breakdown
@@ -390,7 +390,7 @@ struct BenefitRowView: View {
                         HStack {
                             Label("Used: $\(Int(benefit.usedAmount))", systemImage: "minus.circle")
                                 .font(.caption)
-                                .foregroundColor(.white.opacity(0.55))
+                                .foregroundColor(.perqSecondaryText)
                             Spacer()
                             Label("Remaining: $\(Int(benefit.remainingAmount))", systemImage: "plus.circle")
                                 .font(.caption)
@@ -525,7 +525,7 @@ struct PeriodButtonsView: View {
             Text(label)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(isClaimed ? .white : .white.opacity(0.7))
+                .foregroundColor(isClaimed ? .perqPrimaryText : .perqPrimaryText.opacity(0.7))
                 .frame(maxWidth: .infinity)
                 .frame(height: 34)
                 .background(RoundedRectangle(cornerRadius: 8)
@@ -549,10 +549,10 @@ struct PeriodButtonsView: View {
         }()
 
         let fg: Color = {
-            if isFuture  { return .white.opacity(0.2) }
+            if isFuture  { return .perqSecondaryText.opacity(0.6) }
             if isClaimed { return Color.perqInk }
             if isMissed  { return Color.perqRose }
-            return .white.opacity(0.7)
+            return .perqPrimaryText.opacity(0.7)
         }()
 
         return Button {
@@ -578,7 +578,7 @@ struct CashbackView: View {
             if categories.isEmpty {
                 Text("No cashback categories available for this card")
                     .font(.body)
-                    .foregroundColor(.white.opacity(0.55))
+                    .foregroundColor(.perqSecondaryText)
                     .padding(.top, 20)
             } else {
                 ForEach(categories.sorted { $0.rate > $1.rate }, id: \.id) { category in
@@ -606,7 +606,7 @@ struct CashbackRowView: View {
             Text(category.category)
                 .font(.body)
                 .fontWeight(.medium)
-                .foregroundColor(.white)
+                .foregroundColor(.perqPrimaryText)
                 .lineLimit(2)
 
             Spacer()
@@ -625,6 +625,9 @@ struct CashbackRowView: View {
 
 struct DetailsView: View {
     let card: CreditCard
+    @Environment(\.modelContext) private var modelContext
+    @State private var showingRenewalPicker = false
+    @State private var pickerDate = Date()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -639,9 +642,114 @@ struct DetailsView: View {
             DetailRow(title: "Date Added", value: dateFormatter.string(from: card.dateAdded))
             Divider().background(Color.white.opacity(0.08))
             DetailRow(title: "Status", value: card.isActive ? "Active" : "Inactive")
+            Divider().background(Color.white.opacity(0.08))
+
+            // Tappable renewal date row
+            Button {
+                pickerDate = card.renewalDate ?? Calendar.current.date(byAdding: .year, value: 1, to: Date()) ?? Date()
+                showingRenewalPicker = true
+            } label: {
+                HStack {
+                    Text("Renewal Date")
+                        .font(.body)
+                        .foregroundColor(.perqSecondaryText)
+
+                    Spacer()
+
+                    if let renewal = card.renewalDate {
+                        Text(dateFormatter.string(from: renewal))
+                            .font(.body)
+                            .fontWeight(.medium)
+                            .foregroundColor(.perqPrimaryText)
+                    } else {
+                        Text("Set date")
+                            .font(.body)
+                            .foregroundColor(.perqSecondaryText.opacity(0.6))
+                    }
+
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(.perqSecondaryText.opacity(0.5))
+                }
+                .padding(.vertical, 12)
+            }
+            .buttonStyle(PlainButtonStyle())
         }
         .padding(.horizontal)
         .background(RoundedRectangle(cornerRadius: 16).fill(Color.perqElevated))
+        .sheet(isPresented: $showingRenewalPicker) {
+            RenewalDatePickerSheet(
+                selectedDate: $pickerDate,
+                existingDate: card.renewalDate,
+                onSave: { date in
+                    card.renewalDate = date
+                    try? modelContext.save()
+                },
+                onClear: {
+                    card.renewalDate = nil
+                    try? modelContext.save()
+                }
+            )
+            .presentationDetents([.height(380)])
+            .presentationDragIndicator(.visible)
+        }
+    }
+}
+
+struct RenewalDatePickerSheet: View {
+    @Binding var selectedDate: Date
+    let existingDate: Date?
+    let onSave: (Date) -> Void
+    let onClear: () -> Void
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("Annual Fee Renewal")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.perqGhost)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            DatePicker(
+                "Renewal Date",
+                selection: $selectedDate,
+                displayedComponents: .date
+            )
+            .datePickerStyle(.graphical)
+            .tint(.perqLavender)
+            .colorScheme(.dark)
+
+            HStack(spacing: 12) {
+                if existingDate != nil {
+                    Button("Clear") {
+                        onClear()
+                        dismiss()
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.perqRose)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color.perqRose.opacity(0.12))
+                    .cornerRadius(12)
+                }
+
+                Button("Save") {
+                    onSave(selectedDate)
+                    dismiss()
+                }
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundColor(.perqPrimaryText)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(LinearGradient.perqPrimary)
+                .cornerRadius(12)
+            }
+        }
+        .padding()
+        .background(Color.perqInk)
     }
 }
 
@@ -653,14 +761,14 @@ struct DetailRow: View {
         HStack {
             Text(title)
                 .font(.body)
-                .foregroundColor(.white.opacity(0.55))
+                .foregroundColor(.perqSecondaryText)
 
             Spacer()
 
             Text(value)
                 .font(.body)
                 .fontWeight(.medium)
-                .foregroundColor(.white)
+                .foregroundColor(.perqPrimaryText)
         }
         .padding(.vertical, 12)
     }

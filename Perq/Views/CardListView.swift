@@ -81,7 +81,7 @@ struct SwipeableCardRow: View {
                         .font(.caption)
                         .fontWeight(.semibold)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.perqPrimaryText)
                 .frame(width: deleteWidth)
                 .frame(maxHeight: .infinity)
                 .background(Color.perqRose)
@@ -147,7 +147,7 @@ struct EmptyStateView: View {
 
             Text("Add your first credit card to start tracking benefits and rewards")
                 .font(.body)
-                .foregroundColor(.white.opacity(0.55))
+                .foregroundColor(.perqSecondaryText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         }
@@ -179,7 +179,7 @@ struct CardRowView: View {
 
                     Text(card.issuer)
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                 }
 
                 Spacer()
@@ -192,7 +192,7 @@ struct CardRowView: View {
 
                     Text("\(card.benefits.count) benefits")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                 }
             }
 
@@ -201,7 +201,7 @@ struct CardRowView: View {
                     HStack {
                         Text("Benefit Value")
                             .font(.caption)
-                            .foregroundColor(.white.opacity(0.55))
+                            .foregroundColor(.perqSecondaryText)
                         Spacer()
                         Text("$\(Int(card.totalBenefitValue)) / $\(Int(card.totalPotentialValue))")
                             .font(.caption)

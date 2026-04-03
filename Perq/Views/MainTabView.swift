@@ -3,12 +3,13 @@ import SwiftData
 
 struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
+    @AppStorage("isDarkMode") private var isDarkMode = true
     @State private var selectedTab = 0
 
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                Color(hex: "080810").ignoresSafeArea()
+                Color.perqInk.ignoresSafeArea()
                 switch selectedTab {
                 case 0:
                     CardListView(modelContext: modelContext)
@@ -17,9 +18,7 @@ struct MainTabView: View {
                 case 2:
                     AnalyticsView(modelContext: modelContext)
                 default:
-                    Text("Settings")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    SettingsView()
                 }
             }
 
@@ -33,16 +32,17 @@ struct MainTabView: View {
             .padding(.top, 10)
             .padding(.bottom, 28)
             .background {
-                Color(hex: "0D0D1A")
+                Color.perqSurface
                     .ignoresSafeArea()
                     .overlay(alignment: .top) {
                         Rectangle()
-                            .fill(Color.white.opacity(0.08))
+                            .fill(Color.perqBorderSubtle)
                             .frame(height: 1)
                     }
             }
         }
         .ignoresSafeArea(edges: .bottom)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
@@ -64,7 +64,7 @@ struct TabBarItem: View {
                 Text(label)
                     .font(.caption2)
             }
-            .foregroundColor(isSelected ? .perqLavender : .white.opacity(0.4))
+            .foregroundColor(isSelected ? .perqLavender : .perqSecondaryText)
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(PlainButtonStyle())

@@ -79,7 +79,7 @@ struct AnalyticsView: View {
                 .foregroundColor(.perqGhost)
             Text("Add cards to see your best cashback rates")
                 .font(.body)
-                .foregroundColor(.white.opacity(0.55))
+                .foregroundColor(.perqSecondaryText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         }

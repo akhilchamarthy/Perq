@@ -63,7 +63,7 @@ struct EmptyRemindersView: View {
 
             Text("No benefits are expiring soon.\nYou'll see unclaimed perks here as they approach their reset date.")
                 .font(.body)
-                .foregroundColor(.white.opacity(0.55))
+                .foregroundColor(.perqSecondaryText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         }
@@ -109,7 +109,7 @@ struct ReminderCardView: View {
                                     )
                                 Text(card.name)
                                     .font(.caption)
-                                    .foregroundColor(.white.opacity(0.55))
+                                    .foregroundColor(.perqSecondaryText)
                             }
                         }
                     }
@@ -129,7 +129,7 @@ struct ReminderCardView: View {
 
                         Text(daysLabel)
                             .font(.caption)
-                            .foregroundColor(.white.opacity(0.55))
+                            .foregroundColor(.perqSecondaryText)
                     }
                 }
 
@@ -137,7 +137,7 @@ struct ReminderCardView: View {
                 HStack {
                     Label(expiration.periodLabel, systemImage: "calendar")
                         .font(.caption)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
 
                     Spacer()
 
@@ -151,7 +151,7 @@ struct ReminderCardView: View {
                             .foregroundColor(.perqMint)
                         Text("unclaimed")
                             .font(.caption)
-                            .foregroundColor(.white.opacity(0.45))
+                            .foregroundColor(.perqSecondaryText)
                     }
                 }
 
@@ -160,7 +160,7 @@ struct ReminderCardView: View {
                     Text(expiration.benefit.type == .membership || expiration.benefit.type == .status ? "Mark as Enrolled" : "Mark as Claimed")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.perqPrimaryText)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .background(LinearGradient.perqPrimary)

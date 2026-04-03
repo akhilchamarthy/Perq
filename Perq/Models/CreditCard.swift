@@ -11,6 +11,7 @@ final class CreditCard: Identifiable {
     var annualFeeNote: String?
     var cardColor: String
     var cardImage: String?
+    var renewalDate: Date?
     var dateAdded: Date
     var isActive: Bool
     

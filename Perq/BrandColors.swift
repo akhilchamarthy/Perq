@@ -1,65 +1,114 @@
 import SwiftUI
+import UIKit
+
+// MARK: - Adaptive color helper
+
+private func adaptive(dark darkHex: String, light lightHex: String) -> Color {
+    Color(UIColor { traits in
+        traits.userInterfaceStyle == .dark
+            ? uiColor(hex: darkHex)
+            : uiColor(hex: lightHex)
+    })
+}
+
+private func uiColor(hex: String) -> UIColor {
+    let h = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+    var int: UInt64 = 0
+    Scanner(string: h).scanHexInt64(&int)
+    let r = Double(int >> 16 & 0xFF) / 255
+    let g = Double(int >> 8  & 0xFF) / 255
+    let b = Double(int        & 0xFF) / 255
+    return UIColor(red: r, green: g, blue: b, alpha: 1)
+}
 
 // MARK: - Perq Brand Colors
 
 extension Color {
 
-    // MARK: Core Brand
-    static let perqViolet      = Color(hex: "#7C3AED")!   // Primary — gradient start
-    static let perqCyan        = Color(hex: "#06B6D4")!   // Primary — gradient end
-    static let perqLavender    = Color(hex: "#A78BFA")!   // Tinted text, active states
-    static let perqSky         = Color(hex: "#22D3EE")!   // Light cyan accent
+    // MARK: Core Brand (same in both modes)
+    static let perqViolet   = Color(hex: "#7C3AED")!
+    static let perqCyan     = Color(hex: "#06B6D4")!
+    static let perqLavender = Color(hex: "#A78BFA")!
+    static let perqSky      = Color(hex: "#22D3EE")!
 
-    // MARK: Backgrounds
-    static let perqInk         = Color(hex: "#06040F")!   // Deepest bg (root screens)
-    static let perqSurface     = Color(hex: "#0D0C20")!   // Card surfaces
-    static let perqElevated    = Color(hex: "#12112A")!   // Elevated cards, stat chips
-    static let perqRaised      = Color(hex: "#1A1840")!   // Highest elevation, modals
+    // MARK: Semantic Accent (same in both modes)
+    static let perqMint  = Color(hex: "#4ADE80")!
+    static let perqAmber = Color(hex: "#FBBF24")!
+    static let perqRose  = Color(hex: "#F87171")!
 
-    // MARK: Semantic
-    static let perqMint        = Color(hex: "#4ADE80")!   // Success / remaining value
-    static let perqAmber       = Color(hex: "#FBBF24")!   // Warning / expiring soon
-    static let perqRose        = Color(hex: "#F87171")!   // Danger / exceeded
-    static let perqGhost       = Color(hex: "#E0E7FF")!   // Primary text on dark
+    // MARK: Backgrounds — adaptive
+    static var perqInk: Color      { adaptive(dark: "#06040F", light: "#F2F2F7") }
+    static var perqSurface: Color  { adaptive(dark: "#0D0C20", light: "#E5E5EA") }
+    static var perqElevated: Color { adaptive(dark: "#12112A", light: "#FFFFFF") }
+    static var perqRaised: Color   { adaptive(dark: "#1A1840", light: "#F0F0F5") }
 
-    // MARK: Border / Separator
-    static let perqBorderSubtle  = Color(hex: "#7C3AED")!.opacity(0.12)
-    static let perqBorderAccent  = Color(hex: "#7C3AED")!.opacity(0.35)
+    // MARK: Text — adaptive
+    /// Primary text: white on dark, near-black on light
+    static var perqGhost: Color {
+        adaptive(dark: "#E0E7FF", light: "#1C1C2E")
+    }
+    /// Strong primary text (e.g. values, headlines)
+    static var perqPrimaryText: Color {
+        Color(UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(white: 1.0, alpha: 1.0)
+                : UIColor(red: 0.11, green: 0.11, blue: 0.18, alpha: 1.0)
+        })
+    }
+    /// Muted secondary text
+    static var perqSecondaryText: Color {
+        Color(UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(white: 1.0, alpha: 0.55)
+                : UIColor(white: 0.0, alpha: 0.45)
+        })
+    }
+
+    // MARK: Borders — adaptive
+    static var perqBorderSubtle: Color {
+        Color(UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 0.486, green: 0.227, blue: 0.929, alpha: 0.12)
+                : UIColor(white: 0.0, alpha: 0.08)
+        })
+    }
+    static var perqBorderAccent: Color {
+        Color(UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 0.486, green: 0.227, blue: 0.929, alpha: 0.35)
+                : UIColor(red: 0.486, green: 0.227, blue: 0.929, alpha: 0.45)
+        })
+    }
 }
 
 // MARK: - Brand Gradients
 
 extension LinearGradient {
 
-    /// Violet → Cyan — used on the app icon, card art, and CTAs
     static let perqPrimary = LinearGradient(
         colors: [.perqViolet, .perqCyan],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
-    /// Softer lavender → sky — used on subtle fills and pill backgrounds
     static let perqSoft = LinearGradient(
         colors: [.perqLavender.opacity(0.25), .perqSky.opacity(0.15)],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
-    /// Progress bar fill
     static let perqProgress = LinearGradient(
         colors: [Color(hex: "#6366F1")!, .perqLavender],
         startPoint: .leading,
         endPoint: .trailing
     )
 
-    /// Mint gradient for high-remaining-value bars
     static let perqMintProgress = LinearGradient(
         colors: [Color(hex: "#059669")!, .perqMint],
         startPoint: .leading,
         endPoint: .trailing
     )
 
-    /// Amber gradient for expiring-soon bars
     static let perqAmberProgress = LinearGradient(
         colors: [Color(hex: "#D97706")!, .perqAmber],
         startPoint: .leading,
@@ -67,7 +116,7 @@ extension LinearGradient {
     )
 }
 
-// MARK: - Hex Init (already in your codebase, kept for completeness)
+// MARK: - Hex Init
 
 extension Color {
     init?(hex: String) {
@@ -89,17 +138,17 @@ extension Color {
     }
 }
 
-// MARK: - Category Colors (benefit tags)
+// MARK: - Category Colors
 
 extension Color {
     static func perqCategory(_ tag: String) -> Color {
         switch tag {
         case "travel":        return .perqSky
-        case "dining":        return Color(hex: "#FB923C")!   // Orange
+        case "dining":        return Color(hex: "#FB923C")!
         case "shopping":      return .perqLavender
         case "wellness":      return .perqMint
-        case "entertainment": return Color(hex: "#F472B6")!   // Pink
-        default:              return Color(hex: "#94A3B8")!   // Slate
+        case "entertainment": return Color(hex: "#F472B6")!
+        default:              return Color(hex: "#94A3B8")!
         }
     }
 

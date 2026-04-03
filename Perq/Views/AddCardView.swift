@@ -17,6 +17,7 @@ private func issuerStyle(for id: String) -> IssuerStyle {
     case "wells_fargo":     return IssuerStyle(color: Color(hex: "#CC0000")!, initials: "WELLS")
     case "bank_of_america": return IssuerStyle(color: Color(hex: "#E31837")!, initials: "BOFA")
     case "discover":        return IssuerStyle(color: Color(hex: "#F4793B")!, initials: "DISC")
+    case "bilt":            return IssuerStyle(color: Color(hex: "#1E3A5F")!, initials: "BILT")
     default:                return IssuerStyle(color: .perqSurface, initials: String(id.prefix(5).uppercased()))
     }
 }
@@ -108,7 +109,7 @@ struct AddCardView: View {
             Text("Add Card")
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundColor(.white)
+                .foregroundColor(.perqPrimaryText)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(LinearGradient.perqPrimary)
@@ -256,14 +257,14 @@ struct IssuerTile: View {
 
                     Text(style.initials)
                         .font(.system(size: 12, weight: .black))
-                        .foregroundColor(.white)
+                        .foregroundColor(.perqPrimaryText)
                         .tracking(0.8)
                 }
 
                 Text(issuer.name)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundColor(isSelected ? .white : .white.opacity(0.6))
+                    .foregroundColor(isSelected ? .perqPrimaryText : .perqPrimaryText.opacity(0.6))
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
@@ -304,7 +305,7 @@ struct CardPickerView: View {
 
                 Text(issuer.name)
                     .font(.caption)
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.perqSecondaryText)
             }
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
@@ -374,7 +375,7 @@ struct MiniCardPreview: View {
 
                     Text(card.annualFee == 0 ? "No Annual Fee" : "$\(Int(card.annualFee))/yr")
                         .font(.caption2)
-                        .foregroundColor(.white.opacity(0.55))
+                        .foregroundColor(.perqSecondaryText)
                 }
             }
         }
@@ -399,10 +400,10 @@ struct CustomCardForm: View {
                 Text("Card Name")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.white.opacity(0.7))
+                    .foregroundColor(.perqPrimaryText.opacity(0.7))
 
                 TextField("e.g. My Visa Signature", text: $cardName)
-                    .foregroundColor(.white)
+                    .foregroundColor(.perqPrimaryText)
                     .padding(12)
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.perqElevated))
                     .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.perqBorderSubtle, lineWidth: 1))
@@ -412,13 +413,13 @@ struct CustomCardForm: View {
                 Text("Annual Fee")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(.white.opacity(0.7))
+                    .foregroundColor(.perqPrimaryText.opacity(0.7))
 
                 HStack {
                     Text("$")
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.perqSecondaryText)
                     TextField("0", text: $annualFee)
-                        .foregroundColor(.white)
+                        .foregroundColor(.perqPrimaryText)
                         .keyboardType(.decimalPad)
                 }
                 .padding(12)
@@ -428,7 +429,7 @@ struct CustomCardForm: View {
 
             Text("Benefits and cashback categories can be added after creating the card.")
                 .font(.caption)
-                .foregroundColor(.white.opacity(0.4))
+                .foregroundColor(.perqSecondaryText)
         }
     }
 }

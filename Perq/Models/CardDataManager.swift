@@ -50,9 +50,17 @@ class CardDataManager: ObservableObject {
     }
     
     func deleteCard(_ card: CreditCard) {
+        // Remove from the published array first so SwiftUI stops rendering the row.
         cards.removeAll { $0.persistentModelID == card.persistentModelID }
-        modelContext.delete(card)
-        save()
+        // Detach from the context on the next run loop tick, after SwiftUI has
+        // fully processed the array update and torn down the row's view tree.
+        // Deleting synchronously while an outgoing animation still holds a
+        // reference to the model object causes the "detached backing data" crash.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self else { return }
+            self.modelContext.delete(card)
+            self.save()
+        }
     }
 
     func replaceCard(_ newCard: CreditCard) {
