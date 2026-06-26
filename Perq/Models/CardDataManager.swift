@@ -10,6 +10,7 @@ class CardDataManager: ObservableObject {
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         loadCards()
+        migrateCategoryKeys()
     }
     
     func clearAllCards() {
@@ -50,9 +51,31 @@ class CardDataManager: ObservableObject {
     }
     
     func deleteCard(_ card: CreditCard) {
-        modelContext.delete(card)
+        // Remove from the published array first so SwiftUI stops rendering the row.
+        cards.removeAll { $0.persistentModelID == card.persistentModelID }
+        // Detach from the context on the next run loop tick, after SwiftUI has
+        // fully processed the array update and torn down the row's view tree.
+        // Deleting synchronously while an outgoing animation still holds a
+        // reference to the model object causes the "detached backing data" crash.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self else { return }
+            self.modelContext.delete(card)
+            self.save()
+        }
+    }
+
+    func replaceCard(_ newCard: CreditCard) {
+        if let existing = cards.first(where: { $0.id == newCard.id }) {
+            cards.removeAll { $0.persistentModelID == existing.persistentModelID }
+            modelContext.delete(existing)
+        }
+        modelContext.insert(newCard)
         save()
         loadCards()
+    }
+
+    func cardExists(id: String) -> Bool {
+        cards.contains(where: { $0.id == id })
     }
     
     func updateCard(_ card: CreditCard) {
@@ -68,6 +91,43 @@ class CardDataManager: ObservableObject {
         }
     }
     
+    /// Backfills categoryKey on any CashbackCategory that was saved before the field existed.
+    private func migrateCategoryKeys() {
+        guard let url = Bundle.main.url(forResource: "cards", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let cardData = try? JSONDecoder().decode(CardDataResponse.self, from: data) else { return }
+
+        // Build a lookup: [cardId: [categoryName: categoryKey]]
+        var lookup: [String: [String: String]] = [:]
+        for issuer in cardData.issuers {
+            for cardInfo in issuer.cards {
+                var categoryMap: [String: String] = [:]
+                for cashbackInfo in cardInfo.cashbackCategories {
+                    if let key = cashbackInfo.categoryKey {
+                        categoryMap[cashbackInfo.category] = key
+                    }
+                }
+                lookup[cardInfo.id] = categoryMap
+            }
+        }
+
+        var didChange = false
+        for card in cards {
+            guard let categoryMap = lookup[card.id] else { continue }
+            for cashback in card.cashbackCategories where cashback.categoryKey == nil {
+                if let key = categoryMap[cashback.category] {
+                    cashback.categoryKey = key
+                    didChange = true
+                }
+            }
+        }
+
+        if didChange {
+            save()
+            loadCards()
+        }
+    }
+
     func loadCardsFromJSON() {
         guard let url = Bundle.main.url(forResource: "cards", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
@@ -87,7 +147,8 @@ class CardDataManager: ObservableObject {
                         network: cardInfo.network,
                         annualFee: cardInfo.annualFee,
                         annualFeeNote: cardInfo.annualFeeNote,
-                        cardColor: cardInfo.cardColor
+                        cardColor: cardInfo.cardColor,
+                        cardImage: cardInfo.cardImage
                     )
                     
                     for benefitInfo in cardInfo.benefits {
@@ -108,6 +169,7 @@ class CardDataManager: ObservableObject {
                         let cashback = CashbackCategory(
                             id: "\(cardInfo.id)_\(cashbackInfo.category.replacingOccurrences(of: " ", with: "_").lowercased())",
                             category: cashbackInfo.category,
+                            categoryKey: cashbackInfo.categoryKey,
                             rate: cashbackInfo.rate,
                             unit: CashbackUnit(rawValue: cashbackInfo.unit) ?? .percentCashback
                         )
@@ -149,14 +211,16 @@ struct CardInfo: Codable {
     let annualFee: Double
     let annualFeeNote: String?
     let cardColor: String
+    let cardImage: String?
     let benefits: [BenefitInfo]
     let cashbackCategories: [CashbackInfo]
-    
+
     enum CodingKeys: String, CodingKey {
         case id, name, network
         case annualFee = "annual_fee"
         case annualFeeNote = "annual_fee_note"
         case cardColor = "card_color"
+        case cardImage = "card_image"
         case benefits
         case cashbackCategories = "cashback_categories"
     }
@@ -183,4 +247,10 @@ struct CashbackInfo: Codable {
     let category: String
     let rate: Double
     let unit: String
+    let categoryKey: String?
+
+    enum CodingKeys: String, CodingKey {
+        case category, rate, unit
+        case categoryKey = "category_key"
+    }
 }

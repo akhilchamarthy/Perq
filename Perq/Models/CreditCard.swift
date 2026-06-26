@@ -10,6 +10,8 @@ final class CreditCard: Identifiable {
     var annualFee: Double
     var annualFeeNote: String?
     var cardColor: String
+    var cardImage: String?
+    var renewalDate: Date?
     var dateAdded: Date
     var isActive: Bool
     
@@ -19,7 +21,7 @@ final class CreditCard: Identifiable {
     @Relationship(deleteRule: .cascade, inverse: \CashbackCategory.creditCard)
     var cashbackCategories: [CashbackCategory] = []
     
-    init(id: String, name: String, issuer: String, network: String, annualFee: Double, annualFeeNote: String? = nil, cardColor: String) {
+    init(id: String, name: String, issuer: String, network: String, annualFee: Double, annualFeeNote: String? = nil, cardColor: String, cardImage: String? = nil) {
         self.id = id
         self.name = name
         self.issuer = issuer
@@ -27,6 +29,7 @@ final class CreditCard: Identifiable {
         self.annualFee = annualFee
         self.annualFeeNote = annualFeeNote
         self.cardColor = cardColor
+        self.cardImage = cardImage
         self.dateAdded = Date()
         self.isActive = true
     }
@@ -60,6 +63,7 @@ final class Benefit: Identifiable {
     var categoryTag: String
     var usedAmount: Double
     var lastResetDate: Date?
+    var claimedPeriods: [String] = []
     var isActive: Bool
     
     var creditCard: CreditCard?
@@ -96,21 +100,50 @@ final class Benefit: Identifiable {
         guard let totalAmount = totalAmount else { return }
         usedAmount = min(totalAmount, usedAmount + amount)
     }
+
+    var isCompleted: Bool {
+        let year = String(Calendar.current.component(.year, from: Date()))
+        switch resetPeriod {
+        case .monthly:
+            return (1...12).allSatisfy { claimedPeriods.contains("\(year)-M\(String(format: "%02d", $0))") }
+        case .quarterly:
+            return (1...4).allSatisfy { claimedPeriods.contains("\(year)-Q\($0)") }
+        case .semiAnnual:
+            return ["H1", "H2"].allSatisfy { claimedPeriods.contains("\(year)-\($0)") }
+        default:
+            return claimedPeriods.contains("\(year)-A")
+        }
+    }
+
+    func togglePeriod(_ periodId: String) {
+        if claimedPeriods.contains(periodId) {
+            claimedPeriods.removeAll { $0 == periodId }
+        } else {
+            claimedPeriods.append(periodId)
+        }
+        guard let total = totalAmount, let period = resetPeriod else { return }
+        let perPeriodAmount = total / Double(period.numberOfPeriods)
+        let currentYear = String(Calendar.current.component(.year, from: Date()))
+        let currentYearClaimed = claimedPeriods.filter { $0.hasPrefix(currentYear) }.count
+        usedAmount = Double(currentYearClaimed) * perPeriodAmount
+    }
 }
 
 @Model
 final class CashbackCategory: Identifiable {
     var id: String
     var category: String
+    var categoryKey: String?
     var rate: Double
     var unit: CashbackUnit
     var isActive: Bool
-    
+
     var creditCard: CreditCard?
-    
-    init(id: String, category: String, rate: Double, unit: CashbackUnit) {
+
+    init(id: String, category: String, categoryKey: String? = nil, rate: Double, unit: CashbackUnit) {
         self.id = id
         self.category = category
+        self.categoryKey = categoryKey
         self.rate = rate
         self.unit = unit
         self.isActive = true
@@ -147,6 +180,15 @@ enum ResetPeriod: String, CaseIterable, Codable {
         case .annual: return "Annual"
         case .quadrennial: return "Every 4 Years"
         case .oneTime: return "One Time"
+        }
+    }
+
+    var numberOfPeriods: Int {
+        switch self {
+        case .monthly: return 12
+        case .quarterly: return 4
+        case .semiAnnual: return 2
+        case .annual, .quadrennial, .oneTime: return 1
         }
     }
     
