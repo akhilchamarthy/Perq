@@ -18,6 +18,8 @@ struct PlaceRecommendation: Equatable {
 
 class PlaceRecommendationManager: ObservableObject {
     @Published var activeRecommendation: PlaceRecommendation?
+    /// Persists after banner dismissal — used by the Cards tab location header.
+    @Published var currentPlace: PlaceRecommendation?
 
     // Must be within this distance of the POI to qualify (roughly inside the building)
     private let maxPoiDistance: CLLocationDistance = 30
@@ -121,6 +123,7 @@ class PlaceRecommendationManager: ObservableObject {
         lastRecommendationLocation = location
 
         let isForegrounded = UIApplication.shared.applicationState == .active
+        currentPlace = recommendation
 
         if isForegrounded {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.75)) {

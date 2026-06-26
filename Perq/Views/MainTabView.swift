@@ -23,13 +23,13 @@ struct MainTabView: View {
 
                 switch selectedTab {
                 case 0:
-                    CardListView(modelContext: modelContext)
+                    CardListView(modelContext: modelContext, currentPlace: recommendationManager.currentPlace)
                 case 1:
                     RemindersView(modelContext: modelContext)
                 case 2:
                     AnalyticsView(modelContext: modelContext)
                 default:
-                    SettingsView()
+                    SettingsView(modelContext: modelContext, locationManager: locationManager)
                 }
 
                 // Recommendation banner — slides in from the top

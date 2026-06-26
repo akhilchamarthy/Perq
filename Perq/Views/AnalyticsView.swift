@@ -9,7 +9,6 @@ struct AnalyticsView: View {
         self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
     }
 
-    // For each unique category_key, keep only the card offering the highest rate
     private var topPerCategory: [(categoryKey: String, displayName: String, rate: Double, unit: CashbackUnit, card: CreditCard)] {
         var best: [String: (rate: Double, unit: CashbackUnit, card: CreditCard)] = [:]
 
@@ -51,7 +50,6 @@ struct AnalyticsView: View {
                     if topPerCategory.isEmpty {
                         emptyState
                     } else {
-                        // Section title
                         Text("Best Rate Per Category")
                             .font(.title3)
                             .fontWeight(.bold)
@@ -60,6 +58,7 @@ struct AnalyticsView: View {
 
                         ForEach(topPerCategory, id: \.categoryKey) { entry in
                             CategoryBestRow(
+                                categoryKey: entry.categoryKey,
                                 category: entry.displayName,
                                 rate: entry.rate,
                                 unit: entry.unit,
@@ -105,17 +104,50 @@ struct AnalyticsView: View {
 // MARK: - Row
 
 struct CategoryBestRow: View {
+    let categoryKey: String
     let category: String
     let rate: Double
     let unit: CashbackUnit
     let card: CreditCard
 
-    private var rateLabel: String {
-        let rateStr = rate == Double(Int(rate)) ? "\(Int(rate))" : String(format: "%.1f", rate)
+    private var icon: String {
+        switch categoryKey {
+        case "travel":      return "airplane"
+        case "dining":      return "fork.knife"
+        case "groceries":   return "cart.fill"
+        case "streaming":   return "play.tv.fill"
+        case "gas":         return "fuelpump.fill"
+        case "ride_share":  return "car.fill"
+        default:            return "creditcard.fill"
+        }
+    }
+
+    private var iconColor: Color {
+        switch categoryKey {
+        case "travel":      return .perqLavender
+        case "dining":      return Color(hex: "#FB923C")!
+        case "groceries":   return .perqMint
+        case "streaming":   return Color(hex: "#F472B6")!
+        case "gas":         return .perqAmber
+        case "ride_share":  return .perqSky
+        default:            return .perqSecondaryText
+        }
+    }
+
+    private var rateNumber: String {
+        let s = rate == Double(Int(rate)) ? "\(Int(rate))" : String(format: "%.1f", rate)
         switch unit {
-        case .percentCashback: return "\(rateStr)%"
-        case .pointsPerDollar: return "\(rateStr)X pts"
-        case .milesPerDollar:  return "\(rateStr)X mi"
+        case .percentCashback: return "\(s)%"
+        case .pointsPerDollar: return "\(s)×"
+        case .milesPerDollar:  return "\(s)×"
+        }
+    }
+
+    private var rateUnit: String {
+        switch unit {
+        case .percentCashback: return "back"
+        case .pointsPerDollar: return "points"
+        case .milesPerDollar:  return "miles"
         }
     }
 
@@ -128,33 +160,41 @@ struct CategoryBestRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Rate badge
-            Text(rateLabel)
-                .font(.subheadline)
-                .fontWeight(.bold)
-                .foregroundColor(rateColor)
-                .frame(width: 60, alignment: .center)
-                .padding(.vertical, 6)
-                .background(rateColor.opacity(0.12))
-                .clipShape(Capsule())
+        HStack(spacing: 14) {
+            // Category icon
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 48, height: 48)
+                Image(systemName: icon)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(iconColor)
+            }
 
-            // Category name
-            Text(category)
-                .font(.subheadline)
-                .foregroundColor(.perqGhost)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+            // Title + card name
+            VStack(alignment: .leading, spacing: 3) {
+                Text(category)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.perqGhost)
+                Text(card.name)
+                    .font(.caption)
+                    .foregroundColor(.perqSecondaryText)
+            }
 
             Spacer()
 
-            // Card chip
-            CardArtView(imageName: card.cardImage, cardColor: card.cardColor, cornerRadius: 4)
-                .frame(width: 38, height: 24)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
-                )
+            // Rate
+            VStack(alignment: .trailing, spacing: 1) {
+                Text(rateNumber)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(rateColor)
+                Text(rateUnit)
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(rateColor.opacity(0.7))
+            }
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
