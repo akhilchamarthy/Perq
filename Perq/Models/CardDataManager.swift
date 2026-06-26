@@ -10,6 +10,7 @@ class CardDataManager: ObservableObject {
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         loadCards()
+        migrateCategoryKeys()
     }
     
     func clearAllCards() {
@@ -90,6 +91,43 @@ class CardDataManager: ObservableObject {
         }
     }
     
+    /// Backfills categoryKey on any CashbackCategory that was saved before the field existed.
+    private func migrateCategoryKeys() {
+        guard let url = Bundle.main.url(forResource: "cards", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let cardData = try? JSONDecoder().decode(CardDataResponse.self, from: data) else { return }
+
+        // Build a lookup: [cardId: [categoryName: categoryKey]]
+        var lookup: [String: [String: String]] = [:]
+        for issuer in cardData.issuers {
+            for cardInfo in issuer.cards {
+                var categoryMap: [String: String] = [:]
+                for cashbackInfo in cardInfo.cashbackCategories {
+                    if let key = cashbackInfo.categoryKey {
+                        categoryMap[cashbackInfo.category] = key
+                    }
+                }
+                lookup[cardInfo.id] = categoryMap
+            }
+        }
+
+        var didChange = false
+        for card in cards {
+            guard let categoryMap = lookup[card.id] else { continue }
+            for cashback in card.cashbackCategories where cashback.categoryKey == nil {
+                if let key = categoryMap[cashback.category] {
+                    cashback.categoryKey = key
+                    didChange = true
+                }
+            }
+        }
+
+        if didChange {
+            save()
+            loadCards()
+        }
+    }
+
     func loadCardsFromJSON() {
         guard let url = Bundle.main.url(forResource: "cards", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
@@ -131,6 +169,7 @@ class CardDataManager: ObservableObject {
                         let cashback = CashbackCategory(
                             id: "\(cardInfo.id)_\(cashbackInfo.category.replacingOccurrences(of: " ", with: "_").lowercased())",
                             category: cashbackInfo.category,
+                            categoryKey: cashbackInfo.categoryKey,
                             rate: cashbackInfo.rate,
                             unit: CashbackUnit(rawValue: cashbackInfo.unit) ?? .percentCashback
                         )
@@ -208,4 +247,10 @@ struct CashbackInfo: Codable {
     let category: String
     let rate: Double
     let unit: String
+    let categoryKey: String?
+
+    enum CodingKeys: String, CodingKey {
+        case category, rate, unit
+        case categoryKey = "category_key"
+    }
 }

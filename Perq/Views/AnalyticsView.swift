@@ -9,25 +9,39 @@ struct AnalyticsView: View {
         self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
     }
 
-    // For each unique category name, keep only the card offering the highest rate
-    private var topPerCategory: [(category: String, rate: Double, unit: CashbackUnit, card: CreditCard)] {
+    // For each unique category_key, keep only the card offering the highest rate
+    private var topPerCategory: [(categoryKey: String, displayName: String, rate: Double, unit: CashbackUnit, card: CreditCard)] {
         var best: [String: (rate: Double, unit: CashbackUnit, card: CreditCard)] = [:]
 
         for card in dataManager.cards {
             for cat in card.cashbackCategories {
-                if let existing = best[cat.category] {
+                let key = cat.categoryKey ?? "other"
+                if let existing = best[key] {
                     if cat.rate > existing.rate {
-                        best[cat.category] = (cat.rate, cat.unit, card)
+                        best[key] = (cat.rate, cat.unit, card)
                     }
                 } else {
-                    best[cat.category] = (cat.rate, cat.unit, card)
+                    best[key] = (cat.rate, cat.unit, card)
                 }
             }
         }
 
         return best
-            .map { (category: $0.key, rate: $0.value.rate, unit: $0.value.unit, card: $0.value.card) }
+            .map { (categoryKey: $0.key, displayName: categoryDisplayName(for: $0.key), rate: $0.value.rate, unit: $0.value.unit, card: $0.value.card) }
             .sorted { $0.rate > $1.rate }
+    }
+
+    private func categoryDisplayName(for key: String) -> String {
+        switch key {
+        case "travel":      return "Travel"
+        case "dining":      return "Dining"
+        case "groceries":   return "Groceries"
+        case "streaming":   return "Streaming"
+        case "gas":         return "Gas & Transit"
+        case "ride_share":  return "Ride Share"
+        case "other":       return "All Other Purchases"
+        default:            return key.replacingOccurrences(of: "_", with: " ").capitalized
+        }
     }
 
     var body: some View {
@@ -44,9 +58,9 @@ struct AnalyticsView: View {
                             .foregroundColor(.perqGhost)
                             .padding(.bottom, 2)
 
-                        ForEach(topPerCategory, id: \.category) { entry in
+                        ForEach(topPerCategory, id: \.categoryKey) { entry in
                             CategoryBestRow(
-                                category: entry.category,
+                                category: entry.displayName,
                                 rate: entry.rate,
                                 unit: entry.unit,
                                 card: entry.card

@@ -133,15 +133,17 @@ final class Benefit: Identifiable {
 final class CashbackCategory: Identifiable {
     var id: String
     var category: String
+    var categoryKey: String?
     var rate: Double
     var unit: CashbackUnit
     var isActive: Bool
-    
+
     var creditCard: CreditCard?
-    
-    init(id: String, category: String, rate: Double, unit: CashbackUnit) {
+
+    init(id: String, category: String, categoryKey: String? = nil, rate: Double, unit: CashbackUnit) {
         self.id = id
         self.category = category
+        self.categoryKey = categoryKey
         self.rate = rate
         self.unit = unit
         self.isActive = true

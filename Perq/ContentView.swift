@@ -14,7 +14,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainTabView()
+            MainTabView(modelContext: modelContext)
                 .opacity(isLoading ? 0 : 1)
 
             if isLoading {

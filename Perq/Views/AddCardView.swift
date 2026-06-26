@@ -18,6 +18,10 @@ private func issuerStyle(for id: String) -> IssuerStyle {
     case "bank_of_america": return IssuerStyle(color: Color(hex: "#E31837")!, initials: "BOFA")
     case "discover":        return IssuerStyle(color: Color(hex: "#F4793B")!, initials: "DISC")
     case "bilt":            return IssuerStyle(color: Color(hex: "#1E3A5F")!, initials: "BILT")
+    case "us_bank":         return IssuerStyle(color: Color(hex: "#002A5C")!, initials: "USB")
+    case "apple":           return IssuerStyle(color: Color(hex: "#1C1C1E")!, initials: "APPLE")
+    case "barclays":        return IssuerStyle(color: Color(hex: "#00AEEF")!, initials: "BARC")
+    case "synchrony":       return IssuerStyle(color: Color(hex: "#0033A0")!, initials: "SYNC")
     default:                return IssuerStyle(color: .perqSurface, initials: String(id.prefix(5).uppercased()))
     }
 }
@@ -169,6 +173,7 @@ struct AddCardView: View {
                 let cashback = CashbackCategory(
                     id: "\(cardInfo.id)_\(cashbackInfo.category.replacingOccurrences(of: " ", with: "_").lowercased())",
                     category: cashbackInfo.category,
+                    categoryKey: cashbackInfo.categoryKey,
                     rate: cashbackInfo.rate,
                     unit: CashbackUnit(rawValue: cashbackInfo.unit) ?? .percentCashback
                 )
