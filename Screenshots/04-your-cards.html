@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1284">
+<title>Perq — All Your Cards</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1284px;
+    min-height: 2778px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  .caption {
+    width: 1284px;
+    height: 300px;
+    background: #090B13;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    border-bottom: 2px solid rgba(46,204,143,0.28);
+  }
+  .caption .emoji { font-size: 80px; line-height: 1; }
+  .caption .feature-title { font-size: 76px; font-weight: 800; color: #FFFFFF; letter-spacing: -1px; }
+  .caption .subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 34px; color: #2ECC8F; letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  .nav-bar {
+    height: 130px; background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .nav-logo { font-size: 56px; font-weight: 800; color: #2ECC8F; letter-spacing: 12px; }
+  .nav-plus { position: absolute; right: 56px; font-size: 58px; color: #C8D0E7; font-weight: 300; }
+
+  .content { padding: 44px; }
+
+  .card-row {
+    background: #131726;
+    border-radius: 46px;
+    padding: 48px 52px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+  .cr-top { display: flex; align-items: center; gap: 38px; margin-bottom: 42px; }
+  .cr-art { width: 162px; height: 102px; border-radius: 22px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.12); }
+  .cr-meta { flex: 1; }
+  .cr-name { font-size: 46px; font-weight: 700; color: #D8DEEF; margin-bottom: 10px; line-height: 1.1; }
+  .cr-issuer { font-size: 34px; color: #7A86A2; }
+  .cr-right { text-align: right; flex-shrink: 0; }
+  .cr-fee { font-size: 40px; font-weight: 600; margin-bottom: 8px; }
+  .cr-bene { font-size: 32px; color: #7A86A2; }
+
+  .bar-labels {
+    display: flex; justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 28px; color: #7A86A2; margin-bottom: 16px;
+  }
+  .bar-track { height: 18px; background: #1A2035; border-radius: 9px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 9px; background: linear-gradient(90deg, #2ECC8F, #10B981); }
+
+  /* Stats strip at bottom */
+  .stats-strip {
+    margin-top: 44px;
+    background: #131726;
+    border-radius: 46px;
+    padding: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(46,204,143,0.15);
+  }
+  .stat-block { text-align: center; }
+  .stat-num { font-size: 72px; font-weight: 800; color: #2ECC8F; line-height: 1; margin-bottom: 10px; }
+  .stat-lbl { font-family: 'Courier New', monospace; font-size: 26px; color: #7A86A2; letter-spacing: 2px; text-transform: uppercase; }
+  .stat-divider { width: 1px; height: 120px; background: rgba(255,255,255,0.07); }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">💳</div>
+  <div class="feature-title">All Your Cards</div>
+  <div class="subtitle">Organized and always ready</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+  <div class="nav-plus">+</div>
+</div>
+
+<div class="content">
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#1a1a2e,#2d2d50)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Sapphire Reserve</div>
+        <div class="cr-issuer">Chase</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#D8DEEF">$550/yr</div>
+        <div class="cr-bene">12 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$240 / $1,500</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:16%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#3a2800,#8B6914)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Gold Card</div>
+        <div class="cr-issuer">American Express</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#D8DEEF">$250/yr</div>
+        <div class="cr-bene">8 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$120 / $480</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#0d2b44,#1a5278)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Blue Cash Preferred</div>
+        <div class="cr-issuer">American Express</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+        <div class="cr-bene">3 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$0 / $120</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#14291a,#1a6b2e)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Citi Double Cash</div>
+        <div class="cr-issuer">Citi</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+        <div class="cr-bene">1 benefit</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$0 / $0</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#1a1030,#3d2874)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Venture X</div>
+        <div class="cr-issuer">Capital One</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#D8DEEF">$395/yr</div>
+        <div class="cr-bene">6 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$300 / $700</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:43%"></div></div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-block">
+      <div class="stat-num">5</div>
+      <div class="stat-lbl">Cards</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">$1,195</div>
+      <div class="stat-lbl">Annual Fees</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">$2,800</div>
+      <div class="stat-lbl">Benefits</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

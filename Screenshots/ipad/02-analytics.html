@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2048">
+<title>Perq — Know Your Best Rate</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 2048px;
+    min-height: 2732px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  .caption {
+    width: 2048px;
+    height: 480px;
+    background: #090B13;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    border-bottom: 3px solid rgba(167,139,250,0.28);
+  }
+  .caption .emoji { font-size: 128px; line-height: 1; }
+  .caption .feature-title { font-size: 120px; font-weight: 800; color: #FFFFFF; letter-spacing: -2px; }
+  .caption .subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 54px; color: #A78BFA; letter-spacing: 6px; text-transform: uppercase;
+  }
+
+  .nav-bar {
+    height: 210px; background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo { font-size: 90px; font-weight: 800; color: #2ECC8F; letter-spacing: 18px; }
+
+  .content { padding: 70px; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 48px; font-weight: 700; color: #7A86A2;
+    letter-spacing: 5px; text-transform: uppercase;
+    margin-bottom: 56px;
+  }
+
+  /* 2-column grid for iPad */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .cat-card {
+    background: #131726;
+    border-radius: 64px;
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .cat-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .icon-bub {
+    width: 160px; height: 160px; border-radius: 40px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 68px; flex-shrink: 0;
+  }
+
+  .rate-block { text-align: right; }
+  .rate-num { font-size: 96px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .rate-lbl {
+    font-family: 'Courier New', monospace;
+    font-size: 38px; font-weight: 700; letter-spacing: 2px; opacity: 0.75;
+  }
+
+  .cat-divider { height: 1px; background: rgba(255,255,255,0.07); }
+
+  .cat-name { font-size: 64px; font-weight: 700; color: #D8DEEF; line-height: 1; }
+  .cat-card-name { font-size: 46px; color: #7A86A2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">📊</div>
+  <div class="feature-title">Know Your Best Rate</div>
+  <div class="subtitle">Maximized for every purchase</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+</div>
+
+<div class="content">
+  <div class="section-label">Best Rate Per Category</div>
+
+  <div class="cat-grid">
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(56,189,248,0.14)">🌐</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#38BDF8">10×</div>
+          <div class="rate-lbl" style="color:#38BDF8">points</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Travel via Portal</div>
+      <div class="cat-card-name">Chase Sapphire Reserve</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(251,146,60,0.14)">🍴</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#38BDF8">4×</div>
+          <div class="rate-lbl" style="color:#38BDF8">points</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Dining</div>
+      <div class="cat-card-name">Amex Gold, Chase Sapphire Reserve</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(46,204,143,0.14)">🛒</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#2ECC8F">6%</div>
+          <div class="rate-lbl" style="color:#2ECC8F">back</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Groceries</div>
+      <div class="cat-card-name">Blue Cash Preferred</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(167,139,250,0.14)">✈️</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#A78BFA">3×</div>
+          <div class="rate-lbl" style="color:#A78BFA">points</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Travel</div>
+      <div class="cat-card-name">Chase Sapphire Reserve</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(244,114,182,0.14)">📺</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#F472B6">6×</div>
+          <div class="rate-lbl" style="color:#F472B6">points</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Streaming</div>
+      <div class="cat-card-name">Amex Gold</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(251,191,36,0.14)">⛽</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#FBBF24">3%</div>
+          <div class="rate-lbl" style="color:#FBBF24">back</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Gas &amp; Transit</div>
+      <div class="cat-card-name">Blue Cash Preferred</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(251,146,60,0.14)">🚗</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#38BDF8">10×</div>
+          <div class="rate-lbl" style="color:#38BDF8">points</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">Ride Share</div>
+      <div class="cat-card-name">Chase Sapphire Reserve</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-top">
+        <div class="icon-bub" style="background:rgba(122,134,162,0.14)">💳</div>
+        <div class="rate-block">
+          <div class="rate-num" style="color:#2ECC8F">2%</div>
+          <div class="rate-lbl" style="color:#2ECC8F">back</div>
+        </div>
+      </div>
+      <div class="cat-divider"></div>
+      <div class="cat-name">All Other Purchases</div>
+      <div class="cat-card-name">Citi Double Cash</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

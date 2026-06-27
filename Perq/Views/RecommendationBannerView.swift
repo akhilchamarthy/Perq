@@ -24,13 +24,14 @@ struct RecommendationBannerView: View {
 
     private var categoryIcon: String {
         switch recommendation.categoryKey {
-        case "dining":      return "fork.knife"
-        case "groceries":   return "cart.fill"
-        case "gas":         return "fuelpump.fill"
-        case "travel":      return "airplane"
-        case "ride_share":  return "car.fill"
-        case "streaming":   return "play.tv.fill"
-        default:            return "creditcard.fill"
+        case "dining":         return "fork.knife"
+        case "groceries":      return "cart.fill"
+        case "gas":            return "fuelpump.fill"
+        case "travel":         return "airplane"
+        case "travel_portal":  return "globe.americas.fill"
+        case "ride_share":     return "car.fill"
+        case "streaming":      return "play.tv.fill"
+        default:               return "creditcard.fill"
         }
     }
 

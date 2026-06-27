@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perq — Know Which Card to Swipe</title>
+<meta name="description" content="Perq tracks your credit card rewards, benefits, and annual fees — and tells you the best card to use wherever you are.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #0C0E1A;
+    color: #D8DEEF;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { font-size: 22px; font-weight: 800; color: #2ECC8F; letter-spacing: 4px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { font-size: 15px; color: #7A86A2; text-decoration: none; }
+  .nav-links a:hover { color: #D8DEEF; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 100px 24px 80px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2ECC8F;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding: 6px 18px;
+    border: 1px solid rgba(46,204,143,0.3);
+    border-radius: 100px;
+  }
+  h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+  }
+  h1 span { color: #2ECC8F; }
+  .hero-sub {
+    font-size: 19px;
+    color: #7A86A2;
+    max-width: 520px;
+    margin: 0 auto 48px;
+    line-height: 1.65;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: #2ECC8F;
+    color: #0C0E1A;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+  .hero-cta:hover { background: #26b37a; }
+
+  /* FEATURES */
+  .features {
+    max-width: 1000px;
+    margin: 100px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: #131726;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 36px;
+  }
+  .feature-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .feature-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .feature-card p { font-size: 15px; color: #7A86A2; line-height: 1.65; }
+
+  /* STATS STRIP */
+  .stats {
+    max-width: 1000px;
+    margin: 0 auto 100px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .stat {
+    background: #131726;
+    text-align: center;
+    padding: 44px 24px;
+  }
+  .stat-num {
+    font-size: 48px;
+    font-weight: 800;
+    color: #2ECC8F;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .stat-lbl { font-size: 14px; color: #7A86A2; letter-spacing: 1px; }
+
+  /* HOW IT WORKS */
+  .how {
+    max-width: 680px;
+    margin: 0 auto 100px;
+    padding: 0 24px;
+  }
+  .how h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 56px;
+    letter-spacing: -0.5px;
+  }
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 28px; position: relative; padding-bottom: 44px; }
+  .step:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #2ECC8F; color: #0C0E1A;
+    font-size: 17px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-line {
+    width: 2px; flex: 1; background: rgba(46,204,143,0.2); margin-top: 8px;
+  }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-top: 8px; }
+  .step-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .step-desc { font-size: 15px; color: #7A86A2; line-height: 1.65; }
+
+  /* PRIVACY CALLOUT */
+  .privacy-strip {
+    background: #131726;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 52px 24px;
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  .privacy-strip h2 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .privacy-strip p { font-size: 16px; color: #7A86A2; max-width: 520px; margin: 0 auto; }
+  .privacy-badges {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(46,204,143,0.1);
+    border: 1px solid rgba(46,204,143,0.25);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #2ECC8F;
+    font-weight: 600;
+  }
+  .badge-dot { width: 8px; height: 8px; background: #2ECC8F; border-radius: 50%; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo { font-size: 18px; font-weight: 800; color: #2ECC8F; letter-spacing: 4px; margin-bottom: 16px; }
+  .footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 24px; }
+  .footer-links a { font-size: 14px; color: #7A86A2; text-decoration: none; }
+  .footer-links a:hover { color: #D8DEEF; }
+  .footer-copy { font-size: 13px; color: #38405E; }
+
+  @media (max-width: 600px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">PERQ</div>
+  <div class="nav-links">
+    <a href="support.html">Support</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Available on iPhone</div>
+  <h1>Know which card<br>to swipe — <span>every time</span></h1>
+  <p class="hero-sub">Perq tracks your credit card rewards, benefits, and annual fees, then tells you the best card to use based on where you are and what you're buying.</p>
+  <a href="#" class="hero-cta">Download on the App Store</a>
+</section>
+
+<div class="features">
+  <div class="feature-card">
+    <span class="feature-icon">📍</span>
+    <h3>Smart location tips</h3>
+    <p>Walk into a store and Perq tells you which card earns the most there — automatically, without opening the app.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">📊</span>
+    <h3>Best rate, every category</h3>
+    <p>Dining, groceries, gas, travel, streaming, ride share — see your highest cashback rate across every spending category at a glance.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">🔔</span>
+    <h3>Benefit tracker</h3>
+    <p>Track every credit, perk, and annual benefit across all your cards. See what's left and when it resets so nothing goes unused.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">💳</span>
+    <h3>Your full wallet</h3>
+    <p>See total annual fees versus total benefits available across every card you own. Know instantly if your cards are earning their keep.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">✈️</span>
+    <h3>Travel vs. portal rates</h3>
+    <p>Perq separates direct booking rates from portal-only bonuses — so you always know which rate applies to your actual purchase.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">🌙</span>
+    <h3>Dark mode &amp; alerts</h3>
+    <p>Clean dark interface built for quick glances. Smart alerts notify you only when it matters — when you're near somewhere you earn more.</p>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">100+</div>
+    <div class="stat-lbl">Cards supported</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">8</div>
+    <div class="stat-lbl">Spending categories</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">$0</div>
+    <div class="stat-lbl">Cost to use</div>
+  </div>
+</div>
+
+<section class="how">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Add your cards</div>
+        <div class="step-desc">Search from 100+ supported credit cards. Tap to add — cashback rates and benefits load automatically.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Go about your day</div>
+        <div class="step-desc">Perq runs quietly in the background. When you arrive at a restaurant, grocery store, or gas station, it has a recommendation ready.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Swipe the right card</div>
+        <div class="step-desc">See the best card and rate at a glance. No guessing, no mental math — just tap and earn more on every purchase.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Track your benefits</div>
+        <div class="step-desc">Log benefit usage as you go. Perq shows exactly how much you've used and what's still available before it resets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="privacy-strip">
+  <h2>Your data never leaves your device</h2>
+  <p>Perq has no servers, no accounts, and no analytics. Everything is stored locally on your iPhone.</p>
+  <div class="privacy-badges">
+    <div class="badge"><div class="badge-dot"></div>No account required</div>
+    <div class="badge"><div class="badge-dot"></div>On-device storage only</div>
+    <div class="badge"><div class="badge-dot"></div>Location never transmitted</div>
+    <div class="badge"><div class="badge-dot"></div>Zero data collection</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">PERQ</div>
+  <div class="footer-links">
+    <a href="support.html">Support</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </div>
+  <div class="footer-copy">© 2026 Perq. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2048">
+<title>Perq — Never Miss a Benefit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 2048px;
+    min-height: 2732px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+  .caption {
+    width: 2048px; height: 480px; background: #090B13;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    border-bottom: 3px solid rgba(251,191,36,0.28);
+  }
+  .caption .emoji { font-size: 128px; line-height: 1; }
+  .caption .feature-title { font-size: 120px; font-weight: 800; color: #FFFFFF; letter-spacing: -2px; }
+  .caption .subtitle { font-family: 'Courier New', monospace; font-size: 54px; color: #FBBF24; letter-spacing: 6px; text-transform: uppercase; }
+
+  .nav-bar {
+    height: 210px; background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo { font-size: 90px; font-weight: 800; color: #2ECC8F; letter-spacing: 18px; }
+
+  .content { padding: 70px; }
+
+  .summary-card {
+    background: #131726; border-radius: 84px; padding: 90px;
+    margin-bottom: 64px; border: 1px solid rgba(255,255,255,0.07);
+  }
+  .summary-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 84px; }
+  .summary-label { font-family: 'Courier New', monospace; font-size: 48px; color: #7A86A2; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; }
+  .summary-amount { font-size: 176px; font-weight: 800; color: #D8DEEF; letter-spacing: -5px; line-height: 1; }
+  .summary-across { font-family: 'Courier New', monospace; font-size: 48px; color: #7A86A2; letter-spacing: 2px; text-align: right; margin-top: 12px; }
+  .summary-divider { height: 2px; background: rgba(255,255,255,0.07); margin-bottom: 70px; }
+  .summary-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .summary-benefits-val { font-size: 70px; font-weight: 700; color: #D8DEEF; }
+  .summary-benefits-lbl { font-family: 'Courier New', monospace; font-size: 42px; color: #7A86A2; margin-top: 12px; letter-spacing: 1px; }
+  .ready-pill {
+    background: rgba(46,204,143,0.14); border: 2px solid rgba(46,204,143,0.35);
+    border-radius: 100px; padding: 28px 70px;
+    display: flex; align-items: center; gap: 26px;
+  }
+  .ready-dot { width: 36px; height: 36px; background: #2ECC8F; border-radius: 50%; }
+  .ready-text { font-size: 62px; font-weight: 700; color: #2ECC8F; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 44px; font-weight: 700; color: #7A86A2;
+    letter-spacing: 5px; text-transform: uppercase; margin-bottom: 44px;
+  }
+
+  /* 2-column benefit grid for iPad */
+  .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+
+  .benefit-card {
+    background: #131726; border-radius: 64px; padding: 64px;
+  }
+  .benefit-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 40px; }
+  .benefit-icon-wrap {
+    width: 140px; height: 140px; border-radius: 35px;
+    display: flex; align-items: center; justify-content: center; font-size: 58px; flex-shrink: 0;
+  }
+  .benefit-amount { font-size: 86px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+  .benefit-period { font-family: 'Courier New', monospace; font-size: 38px; color: #7A86A2; letter-spacing: 1px; }
+  .benefit-name { font-size: 58px; font-weight: 700; color: #D8DEEF; margin-bottom: 12px; line-height: 1.1; }
+  .benefit-card-name { font-size: 42px; color: #7A86A2; margin-bottom: 36px; }
+  .bar-labels { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 36px; color: #7A86A2; margin-bottom: 18px; }
+  .bar-track { height: 22px; background: #1A2035; border-radius: 11px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 11px; }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">🔔</div>
+  <div class="feature-title">Never Miss a Benefit</div>
+  <div class="subtitle">Track every perk you've earned</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+</div>
+
+<div class="content">
+
+  <div class="summary-card">
+    <div class="summary-top">
+      <div>
+        <div class="summary-label">Annual Fee Total</div>
+        <div class="summary-amount">$895</div>
+      </div>
+      <div class="summary-across">Across 3 cards</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-bottom">
+      <div>
+        <div class="summary-benefits-val">$2,100 in total benefits</div>
+        <div class="summary-benefits-lbl">available to use this year</div>
+      </div>
+      <div class="ready-pill">
+        <div class="ready-dot"></div>
+        <div class="ready-text">7 ready</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Benefits Due</div>
+
+  <div class="benefit-grid">
+
+    <div class="benefit-card">
+      <div class="benefit-card-top">
+        <div class="benefit-icon-wrap" style="background:rgba(46,204,143,0.14)">🍽️</div>
+        <div style="text-align:right">
+          <div class="benefit-amount" style="color:#2ECC8F">$120</div>
+          <div class="benefit-period">per year</div>
+        </div>
+      </div>
+      <div class="benefit-name">Dining Credit</div>
+      <div class="benefit-card-name">Amex Gold Card</div>
+      <div class="bar-labels"><span>$60 used</span><span style="color:#A78BFA">$60 left</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:50%;background:linear-gradient(90deg,#2ECC8F,#10B981)"></div></div>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-card-top">
+        <div class="benefit-icon-wrap" style="background:rgba(56,189,248,0.14)">✈️</div>
+        <div style="text-align:right">
+          <div class="benefit-amount" style="color:#38BDF8">$300</div>
+          <div class="benefit-period">per year</div>
+        </div>
+      </div>
+      <div class="benefit-name">Travel Credit</div>
+      <div class="benefit-card-name">Chase Sapphire Reserve</div>
+      <div class="bar-labels"><span>$0 used</span><span style="color:#A78BFA">$300 left</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#38BDF8,#0EA5E9)"></div></div>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-card-top">
+        <div class="benefit-icon-wrap" style="background:rgba(251,191,36,0.14)">🛋️</div>
+        <div style="text-align:right">
+          <div class="benefit-amount" style="color:#FBBF24">$240</div>
+          <div class="benefit-period">per year</div>
+        </div>
+      </div>
+      <div class="benefit-name">Hotel Credit</div>
+      <div class="benefit-card-name">Chase Sapphire Reserve</div>
+      <div class="bar-labels"><span>$240 used</span><span style="color:#A78BFA">$0 left</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#FBBF24,#F59E0B)"></div></div>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-card-top">
+        <div class="benefit-icon-wrap" style="background:rgba(167,139,250,0.14)">🎵</div>
+        <div style="text-align:right">
+          <div class="benefit-amount" style="color:#A78BFA">$240</div>
+          <div class="benefit-period">per year</div>
+        </div>
+      </div>
+      <div class="benefit-name">Entertainment Credit</div>
+      <div class="benefit-card-name">Amex Gold Card</div>
+      <div class="bar-labels"><span>$0 used</span><span style="color:#A78BFA">$240 left</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#A78BFA,#8B5CF6)"></div></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -4,28 +4,56 @@ import SwiftData
 struct RemindersView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var benefitTracker: BenefitTracker
+    @StateObject private var dataManager: CardDataManager
 
     init(modelContext: ModelContext) {
         self._benefitTracker = StateObject(wrappedValue: BenefitTracker(modelContext: modelContext))
+        self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
+    }
+
+    private var totalAnnualFee: Double {
+        dataManager.cards.reduce(0) { $0 + $1.annualFee }
+    }
+
+    private var totalBenefitsValue: Double {
+        dataManager.cards.reduce(0) { $0 + $1.totalPotentialValue }
+    }
+
+    private var readyToUseCount: Int {
+        dataManager.cards
+            .flatMap { $0.benefits }
+            .filter { $0.isActive && $0.remainingAmount > 0 }
+            .count
     }
 
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVStack(spacing: 14) {
-                    if benefitTracker.upcomingExpirations.isEmpty {
-                        EmptyRemindersView()
-                    } else {
-                        ForEach(benefitTracker.upcomingExpirations) { expiration in
-                            ReminderCardView(
-                                expiration: expiration,
-                                onClaim: {
-                                    benefitTracker.claimPeriod(
-                                        benefit: expiration.benefit,
-                                        periodId: expiration.periodId
-                                    )
-                                }
-                            )
+                VStack(spacing: 16) {
+                    if !dataManager.cards.isEmpty {
+                        RemindersSummaryCard(
+                            cardCount: dataManager.cards.count,
+                            annualFee: totalAnnualFee,
+                            totalBenefits: totalBenefitsValue,
+                            readyCount: readyToUseCount
+                        )
+                    }
+
+                    LazyVStack(spacing: 14) {
+                        if benefitTracker.upcomingExpirations.isEmpty {
+                            EmptyRemindersView()
+                        } else {
+                            ForEach(benefitTracker.upcomingExpirations) { expiration in
+                                ReminderCardView(
+                                    expiration: expiration,
+                                    onClaim: {
+                                        benefitTracker.claimPeriod(
+                                            benefit: expiration.benefit,
+                                            periodId: expiration.periodId
+                                        )
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -44,6 +72,83 @@ struct RemindersView: View {
                 benefitTracker.checkForExpiredBenefits()
             }
         }
+    }
+}
+
+// MARK: - Summary card
+
+struct RemindersSummaryCard: View {
+    let cardCount: Int
+    let annualFee: Double
+    let totalBenefits: Double
+    let readyCount: Int
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Top row: fee + card count
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Annual Fee Total")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.perqSecondaryText)
+                        .textCase(.uppercase)
+                        .tracking(0.8)
+
+                    Text("$\(Int(annualFee))")
+                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .foregroundColor(.perqGhost)
+                }
+
+                Spacer()
+
+                Text("Across \(cardCount) card\(cardCount == 1 ? "" : "s")")
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.perqSecondaryText)
+                    .padding(.top, 4)
+            }
+
+            Divider()
+                .background(Color.perqBorderSubtle)
+
+            // Bottom row: benefits available + ready chip
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("$\(Int(totalBenefits)) in total benefits available")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.perqGhost)
+                }
+
+                Spacer()
+
+                if readyCount > 0 {
+                    HStack(spacing: 5) {
+                        Circle()
+                            .fill(Color.perqMint)
+                            .frame(width: 7, height: 7)
+                        Text("\(readyCount) ready")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.perqMint)
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.perqMint.opacity(0.12))
+                    .clipShape(Capsule())
+                    .overlay(Capsule().stroke(Color.perqMint.opacity(0.3), lineWidth: 1))
+                }
+            }
+        }
+        .padding(18)
+        .background(Color.perqElevated)
+        .cornerRadius(18)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(Color.perqBorderSubtle, lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 4)
     }
 }
 
@@ -68,7 +173,7 @@ struct EmptyRemindersView: View {
                 .padding(.horizontal)
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 100)
+        .padding(.top, 60)
     }
 }
 
@@ -116,7 +221,6 @@ struct ReminderCardView: View {
 
                     Spacer()
 
-                    // Urgency badge
                     VStack(alignment: .trailing, spacing: 4) {
                         Text(expiration.urgencyLevel.label)
                             .font(.caption2)

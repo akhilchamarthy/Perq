@@ -6,14 +6,21 @@ struct CardListView: View {
     @StateObject private var dataManager: CardDataManager
     @State private var showingAddCard = false
 
-    init(modelContext: ModelContext) {
+    let currentPlace: PlaceRecommendation?
+
+    init(modelContext: ModelContext, currentPlace: PlaceRecommendation?) {
         self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
+        self.currentPlace = currentPlace
     }
 
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 16) {
+                    if let place = currentPlace {
+                        LocationHighlightSection(recommendation: place)
+                    }
+
                     if dataManager.cards.isEmpty {
                         EmptyStateView()
                     } else {
@@ -52,6 +59,130 @@ struct CardListView: View {
     }
 }
 
+// MARK: - Location highlight
+
+struct LocationHighlightSection: View {
+    let recommendation: PlaceRecommendation
+
+    private var categoryName: String {
+        switch recommendation.categoryKey {
+        case "dining":         return "Dining"
+        case "groceries":      return "Grocery Store"
+        case "gas":            return "Gas Station"
+        case "travel":         return "Travel"
+        case "travel_portal":  return "Travel Portal"
+        case "ride_share":     return "Ride Share"
+        case "streaming":      return "Streaming"
+        default:               return "Retail"
+        }
+    }
+
+    private var categoryIcon: String {
+        switch recommendation.categoryKey {
+        case "dining":         return "fork.knife"
+        case "groceries":      return "cart.fill"
+        case "gas":            return "fuelpump.fill"
+        case "travel":         return "airplane"
+        case "travel_portal":  return "globe.americas.fill"
+        case "ride_share":     return "car.fill"
+        case "streaming":      return "play.tv.fill"
+        default:               return "bag.fill"
+        }
+    }
+
+    private var rateLabel: String {
+        let r = recommendation.rate
+        let s = r == Double(Int(r)) ? "\(Int(r))" : String(format: "%.1f", r)
+        switch recommendation.unit {
+        case .percentCashback: return "\(s)% back"
+        case .pointsPerDollar: return "\(s)× points"
+        case .milesPerDollar:  return "\(s)× miles"
+        }
+    }
+
+    private var rateColor: Color {
+        switch recommendation.unit {
+        case .percentCashback: return .perqMint
+        case .pointsPerDollar: return .perqSky
+        case .milesPerDollar:  return .perqLavender
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            // "You're at" header
+            HStack(spacing: 5) {
+                Image(systemName: "location.fill")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.perqMint)
+                Text("You're at")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.perqMint)
+                    .textCase(.uppercase)
+                    .tracking(1)
+            }
+
+            // Place name
+            Text(recommendation.placeName)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.perqGhost)
+
+            // Category row
+            HStack(spacing: 6) {
+                Image(systemName: categoryIcon)
+                    .font(.system(size: 13))
+                Text(categoryName)
+                    .font(.subheadline)
+            }
+            .foregroundColor(.perqSecondaryText)
+
+            Divider()
+                .background(Color.perqBorderSubtle)
+
+            // Best card row
+            HStack(spacing: 12) {
+                CardArtView(
+                    imageName: recommendation.card.cardImage,
+                    cardColor: recommendation.card.cardColor,
+                    cornerRadius: 6
+                )
+                .frame(width: 52, height: 33)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
+                )
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(recommendation.card.name)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.perqGhost)
+                    Text(recommendation.card.issuer)
+                        .font(.caption)
+                        .foregroundColor(.perqSecondaryText)
+                }
+
+                Spacer()
+
+                Text(rateLabel)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(rateColor)
+            }
+        }
+        .padding(18)
+        .background(Color.perqElevated)
+        .cornerRadius(18)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(Color.perqMint.opacity(0.25), lineWidth: 1)
+        )
+        .shadow(color: Color.perqMint.opacity(0.08), radius: 12, x: 0, y: 4)
+    }
+}
+
 // MARK: - Swipeable wrapper
 
 struct SwipeableCardRow: View {
@@ -67,12 +198,10 @@ struct SwipeableCardRow: View {
 
     var body: some View {
         ZStack(alignment: .trailing) {
-            // Hidden programmatic navigation link
             NavigationLink(destination: CardDetailView(card: card), isActive: $navigateToDetail) {
                 EmptyView()
             }
 
-            // Delete button — only receives hits when revealed
             Button { showDeleteConfirm = true } label: {
                 VStack(spacing: 5) {
                     Image(systemName: "trash.fill")
@@ -89,14 +218,12 @@ struct SwipeableCardRow: View {
             }
             .opacity(isOpen ? 1 : 0)
             .scaleEffect(isOpen ? 1 : 0.85)
-            .allowsHitTesting(isOpen)  // ← disabled when hidden so it never blocks taps
+            .allowsHitTesting(isOpen)
 
-            // Card — purely visual, all gestures handled by the ZStack below
             CardRowView(card: card)
                 .offset(x: offset)
-                .allowsHitTesting(false) // ← prevents the offset view from blocking the delete button
+                .allowsHitTesting(false)
         }
-        // All interaction lives on the container so hit-testing areas are consistent
         .contentShape(Rectangle())
         .onTapGesture {
             if isOpen {
