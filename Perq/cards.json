@@ -48,7 +48,7 @@
               "type": "credit",
               "total_amount": 100,
               "reset_period": "semi_annual",
-              "description": "$50 Jan–Jun, $50 Jul–Dec. Valid in-store and online at saks.com.",
+              "description": "$50 Jan\u2013Jun, $50 Jul\u2013Dec. Valid in-store and online at saks.com.",
               "category_tag": "shopping"
             },
             {
@@ -152,9 +152,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Flights booked directly or via Amex Travel", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Hotels booked via Amex Travel", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Flights booked directly or via Amex Travel",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Hotels booked via Amex Travel",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -199,15 +214,35 @@
               "type": "credit",
               "total_amount": 100,
               "reset_period": "semi_annual",
-              "description": "$50 Jan–Jun, $50 Jul–Dec on eligible purchases with US Resy restaurants.",
+              "description": "$50 Jan\u2013Jun, $50 Jul\u2013Dec on eligible purchases with US Resy restaurants.",
               "category_tag": "dining"
             }
           ],
           "cashback_categories": [
-            { "category": "Dining at restaurants worldwide", "rate": 4, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "U.S. supermarkets (up to $25k/yr)", "rate": 4, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "Flights booked directly or via Amex Travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Dining at restaurants worldwide",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "U.S. supermarkets (up to $25k/yr)",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Flights booked directly or via Amex Travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -239,9 +274,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel (flights, hotels, transit, rideshare, tours)", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining worldwide", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel (flights, hotels, transit, rideshare, tours)",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining worldwide",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -273,10 +323,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "U.S. supermarkets (up to $6k/yr)", "rate": 6, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "U.S. streaming subscriptions", "rate": 6, "unit": "percent_cashback", "category_key": "streaming" },
-            { "category": "U.S. gas stations and transit", "rate": 3, "unit": "percent_cashback", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "U.S. supermarkets (up to $6k/yr)",
+              "rate": 6,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "U.S. streaming subscriptions",
+              "rate": 6,
+              "unit": "percent_cashback",
+              "category_key": "streaming"
+            },
+            {
+              "category": "U.S. gas stations and transit",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -299,10 +369,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "U.S. supermarkets (up to $6k/yr)", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "U.S. online retail purchases (up to $6k/yr)", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "U.S. gas stations (up to $6k/yr)", "rate": 3, "unit": "percent_cashback", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "U.S. supermarkets (up to $6k/yr)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "U.S. online retail purchases (up to $6k/yr)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "U.S. gas stations (up to $6k/yr)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -315,8 +405,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "U.S. supermarkets (up to $6k/yr)", "rate": 2, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "U.S. supermarkets (up to $6k/yr)",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -375,9 +475,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Marriott Bonvoy hotels", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants worldwide", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Marriott Bonvoy hotels",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants worldwide",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -409,10 +524,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Marriott Bonvoy hotels", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants worldwide (up to $15k/yr)", "rate": 4, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "U.S. supermarkets (up to $15k/yr)", "rate": 4, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Marriott Bonvoy hotels",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants worldwide (up to $15k/yr)",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "U.S. supermarkets (up to $15k/yr)",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -466,16 +601,41 @@
               "type": "status",
               "total_amount": null,
               "reset_period": null,
-              "description": "Complimentary Diamond status — Hilton's highest tier. Includes suite upgrades, executive lounge access, and complimentary breakfast.",
+              "description": "Complimentary Diamond status \u2014 Hilton's highest tier. Includes suite upgrades, executive lounge access, and complimentary breakfast.",
               "category_tag": "travel"
             }
           ],
           "cashback_categories": [
-            { "category": "Hilton hotels and resorts", "rate": 14, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Flights booked direct or via Amex Travel", "rate": 7, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Car rentals booked direct or via Amex Travel", "rate": 7, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at U.S. restaurants", "rate": 7, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Hilton hotels and resorts",
+              "rate": 14,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Flights booked direct or via Amex Travel",
+              "rate": 7,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Car rentals booked direct or via Amex Travel",
+              "rate": 7,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at U.S. restaurants",
+              "rate": 7,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -525,11 +685,36 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hilton hotels and resorts", "rate": 12, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at U.S. restaurants", "rate": 6, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "U.S. supermarkets", "rate": 6, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "U.S. gas stations", "rate": 6, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Hilton hotels and resorts",
+              "rate": 12,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at U.S. restaurants",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "U.S. supermarkets",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "U.S. gas stations",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -552,11 +737,36 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hilton hotels and resorts", "rate": 7, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at U.S. restaurants", "rate": 5, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "U.S. supermarkets", "rate": 5, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "U.S. gas stations", "rate": 5, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Hilton hotels and resorts",
+              "rate": 7,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at U.S. restaurants",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "U.S. supermarkets",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "U.S. gas stations",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -624,8 +834,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Delta purchases", "rate": 3, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Delta purchases",
+              "rate": 3,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -666,10 +886,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Delta purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants worldwide", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "U.S. supermarkets", "rate": 2, "unit": "miles_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Delta purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants worldwide",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "U.S. supermarkets",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -682,9 +922,24 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Delta purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants worldwide", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Delta purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants worldwide",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -785,12 +1040,42 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel via Chase Travel portal", "rate": 10, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Lyft rides", "rate": 10, "unit": "points_per_dollar", "category_key": "ride_share" },
-            { "category": "Hotels and car rentals via Chase Travel", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining worldwide", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel via Chase Travel portal",
+              "rate": 10,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Lyft rides",
+              "rate": 10,
+              "unit": "points_per_dollar",
+              "category_key": "ride_share"
+            },
+            {
+              "category": "Hotels and car rentals via Chase Travel",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining worldwide",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -831,13 +1116,48 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel via Travel portal", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Lyft rides", "rate": 5, "unit": "points_per_dollar", "category_key": "ride_share" },
-            { "category": "Dining", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery", "rate": 3, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "Streaming subscriptions", "rate": 3, "unit": "points_per_dollar", "category_key": "streaming" },
-            { "category": "Travel", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel via Travel portal",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Lyft rides",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "ride_share"
+            },
+            {
+              "category": "Dining",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Streaming subscriptions",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "streaming"
+            },
+            {
+              "category": "Travel",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -850,11 +1170,36 @@
           "card_image": "card_chase_freedom_unlimited",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Travel via Travel portal", "rate": 5, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "Lyft rides", "rate": 5, "unit": "percent_cashback", "category_key": "ride_share" },
-            { "category": "Dining", "rate": 3, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Drugstores", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Travel via Travel portal",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Lyft rides",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "ride_share"
+            },
+            {
+              "category": "Dining",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Drugstores",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -867,11 +1212,36 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Rotating quarterly categories (up to $1,500/quarter, activation required)", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Chase Travel portal purchases", "rate": 5, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Drugstores", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Rotating quarterly categories (up to $1,500/quarter, activation required)",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Chase Travel portal purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Drugstores",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -884,7 +1254,12 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -892,7 +1267,7 @@
           "name": "Slate",
           "network": "visa",
           "annual_fee": 0,
-          "annual_fee_note": "Balance transfer focused — no rewards",
+          "annual_fee_note": "Balance transfer focused \u2014 no rewards",
           "card_color": "#6B8E9F",
           "card_image": null,
           "benefits": [],
@@ -907,15 +1282,59 @@
           "card_color": "#1B3D6F",
           "card_image": null,
           "benefits": [
-            { "id": "chase_ue_free_bag", "name": "First checked bag free", "type": "membership", "total_amount": null, "reset_period": null, "description": "First checked bag free for cardholder and one companion on the same reservation.", "category_tag": "travel" },
-            { "id": "chase_ue_club_passes", "name": "United Club passes", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "2 one-time United Club passes each anniversary year.", "category_tag": "travel" },
-            { "id": "chase_ue_global_entry", "name": "Global Entry / TSA PreCheck credit", "type": "credit", "total_amount": 100, "reset_period": "quadrennial", "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.", "category_tag": "travel" }
+            {
+              "id": "chase_ue_free_bag",
+              "name": "First checked bag free",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "First checked bag free for cardholder and one companion on the same reservation.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_ue_club_passes",
+              "name": "United Club passes",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "2 one-time United Club passes each anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_ue_global_entry",
+              "name": "Global Entry / TSA PreCheck credit",
+              "type": "credit",
+              "total_amount": 100,
+              "reset_period": "quadrennial",
+              "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "United purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "Hotel stays", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "United purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Hotel stays",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -927,17 +1346,74 @@
           "card_color": "#002244",
           "card_image": null,
           "benefits": [
-            { "id": "chase_uq_united_credit", "name": "United travel credit", "type": "credit", "total_amount": 125, "reset_period": "annual", "description": "$125 annual credit for United purchases.", "category_tag": "travel" },
-            { "id": "chase_uq_free_bags", "name": "Two free checked bags", "type": "membership", "total_amount": null, "reset_period": null, "description": "First and second checked bags free for cardholder on United flights.", "category_tag": "travel" },
-            { "id": "chase_uq_anniversary_miles", "name": "Anniversary miles", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "5,000 bonus miles back on United award redemptions each anniversary year.", "category_tag": "travel" },
-            { "id": "chase_uq_global_entry", "name": "Global Entry / TSA PreCheck credit", "type": "credit", "total_amount": 100, "reset_period": "quadrennial", "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.", "category_tag": "travel" }
+            {
+              "id": "chase_uq_united_credit",
+              "name": "United travel credit",
+              "type": "credit",
+              "total_amount": 125,
+              "reset_period": "annual",
+              "description": "$125 annual credit for United purchases.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_uq_free_bags",
+              "name": "Two free checked bags",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "First and second checked bags free for cardholder on United flights.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_uq_anniversary_miles",
+              "name": "Anniversary miles",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "5,000 bonus miles back on United award redemptions each anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_uq_global_entry",
+              "name": "Global Entry / TSA PreCheck credit",
+              "type": "credit",
+              "total_amount": 100,
+              "reset_period": "quadrennial",
+              "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "United purchases", "rate": 3, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "Select streaming services", "rate": 2, "unit": "miles_per_dollar", "category_key": "streaming" },
-            { "category": "Hotel stays", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "United purchases",
+              "rate": 3,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Select streaming services",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "streaming"
+            },
+            {
+              "category": "Hotel stays",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -950,10 +1426,30 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "United purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Gas stations", "rate": 2, "unit": "miles_per_dollar", "category_key": "gas" },
-            { "category": "Local transit and commuting", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "United purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Local transit and commuting",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -965,15 +1461,59 @@
           "card_color": "#003087",
           "card_image": null,
           "benefits": [
-            { "id": "chase_uc_club_membership", "name": "United Club membership", "type": "membership", "total_amount": null, "reset_period": null, "description": "Full United Club membership including access for cardholder and eligible travel companions.", "category_tag": "travel" },
-            { "id": "chase_uc_free_bags", "name": "Two free checked bags", "type": "membership", "total_amount": null, "reset_period": null, "description": "First and second checked bags free for cardholder and one companion.", "category_tag": "travel" },
-            { "id": "chase_uc_global_entry", "name": "Global Entry / TSA PreCheck credit", "type": "credit", "total_amount": 100, "reset_period": "quadrennial", "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.", "category_tag": "travel" }
+            {
+              "id": "chase_uc_club_membership",
+              "name": "United Club membership",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Full United Club membership including access for cardholder and eligible travel companions.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_uc_free_bags",
+              "name": "Two free checked bags",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "First and second checked bags free for cardholder and one companion.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_uc_global_entry",
+              "name": "Global Entry / TSA PreCheck credit",
+              "type": "credit",
+              "total_amount": 100,
+              "reset_period": "quadrennial",
+              "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "United purchases", "rate": 4, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "Hotel stays", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "United purchases",
+              "rate": 4,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Hotel stays",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -985,14 +1525,50 @@
           "card_color": "#304CB2",
           "card_image": null,
           "benefits": [
-            { "id": "chase_sw_plus_anniversary", "name": "Anniversary bonus points", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "3,000 bonus points each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_sw_plus_earlybird", "name": "EarlyBird Check-In", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "2 EarlyBird Check-In passes each year.", "category_tag": "travel" }
+            {
+              "id": "chase_sw_plus_anniversary",
+              "name": "Anniversary bonus points",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "3,000 bonus points each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_sw_plus_earlybird",
+              "name": "EarlyBird Check-In",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "2 EarlyBird Check-In passes each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Southwest purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Rapid Rewards hotel and car partners", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Local transit and commuting", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Southwest purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Rapid Rewards hotel and car partners",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Local transit and commuting",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1004,15 +1580,59 @@
           "card_color": "#E31837",
           "card_image": null,
           "benefits": [
-            { "id": "chase_sw_priority_credit", "name": "Southwest travel credit", "type": "credit", "total_amount": 75, "reset_period": "annual", "description": "$75 annual Southwest travel credit.", "category_tag": "travel" },
-            { "id": "chase_sw_priority_anniversary", "name": "Anniversary bonus points", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "7,500 bonus points each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_sw_priority_boarding", "name": "Upgraded boardings", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "4 Upgraded Boardings per year when available.", "category_tag": "travel" }
+            {
+              "id": "chase_sw_priority_credit",
+              "name": "Southwest travel credit",
+              "type": "credit",
+              "total_amount": 75,
+              "reset_period": "annual",
+              "description": "$75 annual Southwest travel credit.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_sw_priority_anniversary",
+              "name": "Anniversary bonus points",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "7,500 bonus points each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_sw_priority_boarding",
+              "name": "Upgraded boardings",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "4 Upgraded Boardings per year when available.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Southwest purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Rapid Rewards hotel and car partners", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Local transit and commuting", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Southwest purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Rapid Rewards hotel and car partners",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Local transit and commuting",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1024,14 +1644,50 @@
           "card_color": "#C41230",
           "card_image": null,
           "benefits": [
-            { "id": "chase_sw_premier_anniversary", "name": "Anniversary bonus points", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "6,000 bonus points each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_sw_premier_earlybird", "name": "EarlyBird Check-In", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "2 EarlyBird Check-In passes each year.", "category_tag": "travel" }
+            {
+              "id": "chase_sw_premier_anniversary",
+              "name": "Anniversary bonus points",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "6,000 bonus points each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_sw_premier_earlybird",
+              "name": "EarlyBird Check-In",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "2 EarlyBird Check-In passes each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Southwest purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Rapid Rewards hotel and car partners", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Local transit and commuting", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Southwest purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Rapid Rewards hotel and car partners",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Local transit and commuting",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1043,15 +1699,56 @@
           "card_color": "#8B1A1A",
           "card_image": null,
           "benefits": [
-            { "id": "chase_mb_boundless_free_night", "name": "Annual Free Night Award", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "1 Free Night Award (up to 35,000 points) each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_mb_boundless_silver", "name": "Silver Elite status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Silver Elite status with 15 Elite Night credits each year.", "category_tag": "travel" }
+            {
+              "id": "chase_mb_boundless_free_night",
+              "name": "Annual Free Night Award",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "1 Free Night Award (up to 35,000 points) each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_mb_boundless_silver",
+              "name": "Silver Elite status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Silver Elite status with 15 Elite Night credits each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Marriott Bonvoy hotels", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Gas stations", "rate": 3, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "Grocery stores", "rate": 3, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Marriott Bonvoy hotels",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Grocery stores",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1063,14 +1760,50 @@
           "card_color": "#6B1111",
           "card_image": null,
           "benefits": [
-            { "id": "chase_mb_bountiful_free_night", "name": "Annual Free Night Award", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "1 Free Night Award (up to 50,000 points) each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_mb_bountiful_gold", "name": "Gold Elite status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Gold Elite status with room upgrades and late checkout.", "category_tag": "travel" }
+            {
+              "id": "chase_mb_bountiful_free_night",
+              "name": "Annual Free Night Award",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "1 Free Night Award (up to 50,000 points) each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_mb_bountiful_gold",
+              "name": "Gold Elite status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Gold Elite status with room upgrades and late checkout.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Marriott Bonvoy hotels", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants worldwide", "rate": 4, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery stores", "rate": 4, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Marriott Bonvoy hotels",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants worldwide",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1082,12 +1815,35 @@
           "card_color": "#A52A2A",
           "card_image": null,
           "benefits": [
-            { "id": "chase_mb_bold_silver", "name": "Silver Elite status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Silver Elite status with 15 Elite Night credits each year.", "category_tag": "travel" }
+            {
+              "id": "chase_mb_bold_silver",
+              "name": "Silver Elite status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Silver Elite status with 15 Elite Night credits each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Marriott Bonvoy hotels", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Travel", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Marriott Bonvoy hotels",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Travel",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1099,17 +1855,74 @@
           "card_color": "#1B4F8A",
           "card_image": null,
           "benefits": [
-            { "id": "chase_ihg_premier_free_night", "name": "Annual Free Night Award", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "1 Free Night Award (up to 40,000 points) each card anniversary year.", "category_tag": "travel" },
-            { "id": "chase_ihg_premier_4th_night", "name": "4th night free on award stays", "type": "membership", "total_amount": null, "reset_period": null, "description": "Every 4th night is free when redeeming IHG One Rewards points for stays of 4+ nights.", "category_tag": "travel" },
-            { "id": "chase_ihg_premier_global_entry", "name": "Global Entry / TSA PreCheck credit", "type": "credit", "total_amount": 100, "reset_period": "quadrennial", "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.", "category_tag": "travel" },
-            { "id": "chase_ihg_premier_platinum", "name": "Platinum Elite status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Platinum Elite status with bonus points, room upgrades, and late checkout.", "category_tag": "travel" }
+            {
+              "id": "chase_ihg_premier_free_night",
+              "name": "Annual Free Night Award",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "1 Free Night Award (up to 40,000 points) each card anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_ihg_premier_4th_night",
+              "name": "4th night free on award stays",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Every 4th night is free when redeeming IHG One Rewards points for stays of 4+ nights.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_ihg_premier_global_entry",
+              "name": "Global Entry / TSA PreCheck credit",
+              "type": "credit",
+              "total_amount": 100,
+              "reset_period": "quadrennial",
+              "description": "Up to $100 credit for Global Entry or TSA PreCheck every 4 years.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_ihg_premier_platinum",
+              "name": "Platinum Elite status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Platinum Elite status with bonus points, room upgrades, and late checkout.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "IHG hotels", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Gas stations", "rate": 3, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "IHG hotels",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1121,13 +1934,41 @@
           "card_color": "#2E6DB4",
           "card_image": null,
           "benefits": [
-            { "id": "chase_ihg_traveler_silver", "name": "Silver Elite status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Silver Elite status with bonus points.", "category_tag": "travel" }
+            {
+              "id": "chase_ihg_traveler_silver",
+              "name": "Silver Elite status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Silver Elite status with bonus points.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "IHG hotels", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Gas stations", "rate": 2, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "IHG hotels",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1139,15 +1980,56 @@
           "card_color": "#1A3A6A",
           "card_image": null,
           "benefits": [
-            { "id": "chase_hyatt_free_night", "name": "Annual Free Night Award", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "1 Free Night at any Category 1–4 Hyatt property each anniversary year.", "category_tag": "travel" },
-            { "id": "chase_hyatt_discoverist", "name": "Discoverist status", "type": "status", "total_amount": null, "reset_period": null, "description": "Complimentary Discoverist status with 5 qualifying night credits each year.", "category_tag": "travel" }
+            {
+              "id": "chase_hyatt_free_night",
+              "name": "Annual Free Night Award",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "1 Free Night at any Category 1\u20134 Hyatt property each anniversary year.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_hyatt_discoverist",
+              "name": "Discoverist status",
+              "type": "status",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Discoverist status with 5 qualifying night credits each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Hyatt hotels", "rate": 4, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Fitness clubs and gym memberships", "rate": 2, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Local transit and commuting", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Hyatt hotels",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Fitness clubs and gym memberships",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Local transit and commuting",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1159,14 +2041,50 @@
           "card_color": "#1A1A6E",
           "card_image": null,
           "benefits": [
-            { "id": "chase_disney_inspire_credit", "name": "Disney statement credit", "type": "credit", "total_amount": 400, "reset_period": "annual", "description": "$400 annual Disney statement credit for eligible Disney purchases.", "category_tag": "entertainment" },
-            { "id": "chase_disney_inspire_lounge", "name": "Disney Lounge access", "type": "membership", "total_amount": null, "reset_period": null, "description": "Access to exclusive Disney cardholder lounges at Walt Disney World and Disneyland.", "category_tag": "entertainment" }
+            {
+              "id": "chase_disney_inspire_credit",
+              "name": "Disney statement credit",
+              "type": "credit",
+              "total_amount": 400,
+              "reset_period": "annual",
+              "description": "$400 annual Disney statement credit for eligible Disney purchases.",
+              "category_tag": "entertainment"
+            },
+            {
+              "id": "chase_disney_inspire_lounge",
+              "name": "Disney Lounge access",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Access to exclusive Disney cardholder lounges at Walt Disney World and Disneyland.",
+              "category_tag": "entertainment"
+            }
           ],
           "cashback_categories": [
-            { "category": "Disney purchases (parks, resorts, Disney+)", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Grocery stores", "rate": 2, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Disney purchases (parks, resorts, Disney+)",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1178,12 +2096,35 @@
           "card_color": "#1A1A8E",
           "card_image": null,
           "benefits": [
-            { "id": "chase_disney_premier_credit", "name": "Disney statement credit", "type": "credit", "total_amount": 400, "reset_period": "annual", "description": "$400 statement credit on park ticket purchases at Disney, valid when using a 0% promo APR offer.", "category_tag": "entertainment" }
+            {
+              "id": "chase_disney_premier_credit",
+              "name": "Disney statement credit",
+              "type": "credit",
+              "total_amount": 400,
+              "reset_period": "annual",
+              "description": "$400 statement credit on park ticket purchases at Disney, valid when using a 0% promo APR offer.",
+              "category_tag": "entertainment"
+            }
           ],
           "cashback_categories": [
-            { "category": "Disney purchases (parks, resorts, Disney+)", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Dining and grocery stores", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Disney purchases (parks, resorts, Disney+)",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Dining and grocery stores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1196,7 +2137,12 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1208,14 +2154,50 @@
           "card_color": "#CC0000",
           "card_image": null,
           "benefits": [
-            { "id": "chase_aeroplan_free_bag", "name": "Free first checked bag", "type": "membership", "total_amount": null, "reset_period": null, "description": "First checked bag free for cardholder and up to 8 companions on Air Canada flights.", "category_tag": "travel" },
-            { "id": "chase_aeroplan_preferred_pricing", "name": "Preferred pricing on awards", "type": "membership", "total_amount": null, "reset_period": null, "description": "Reduced miles needed for Aeroplan award redemptions.", "category_tag": "travel" }
+            {
+              "id": "chase_aeroplan_free_bag",
+              "name": "Free first checked bag",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "First checked bag free for cardholder and up to 8 companions on Air Canada flights.",
+              "category_tag": "travel"
+            },
+            {
+              "id": "chase_aeroplan_preferred_pricing",
+              "name": "Preferred pricing on awards",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Reduced miles needed for Aeroplan award redemptions.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Air Canada and Aeroplan partners", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery stores", "rate": 2, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Air Canada and Aeroplan partners",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1227,12 +2209,35 @@
           "card_color": "#075AAA",
           "card_image": null,
           "benefits": [
-            { "id": "chase_ba_travel_together", "name": "Travel Together Ticket", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "Companion ticket (Travel Together Ticket) valid in any cabin after spending $30,000 each year.", "category_tag": "travel" }
+            {
+              "id": "chase_ba_travel_together",
+              "name": "Travel Together Ticket",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "Companion ticket (Travel Together Ticket) valid in any cabin after spending $30,000 each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "British Airways, Iberia, Aer Lingus, and LEVEL purchases", "rate": 3, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Hotel purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "British Airways, Iberia, Aer Lingus, and LEVEL purchases",
+              "rate": 3,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Hotel purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1244,12 +2249,35 @@
           "card_color": "#005F46",
           "card_image": null,
           "benefits": [
-            { "id": "chase_al_travel_together", "name": "Travel Together Ticket", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "Companion ticket valid in any cabin after spending $30,000 each year.", "category_tag": "travel" }
+            {
+              "id": "chase_al_travel_together",
+              "name": "Travel Together Ticket",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "Companion ticket valid in any cabin after spending $30,000 each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Aer Lingus, British Airways, Iberia, and LEVEL purchases", "rate": 3, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Hotel purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Aer Lingus, British Airways, Iberia, and LEVEL purchases",
+              "rate": 3,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Hotel purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1261,12 +2289,35 @@
           "card_color": "#C41230",
           "card_image": null,
           "benefits": [
-            { "id": "chase_ib_companion", "name": "Companion voucher", "type": "membership", "total_amount": null, "reset_period": "annual", "description": "Companion voucher valid in any cabin after spending $30,000 each year.", "category_tag": "travel" }
+            {
+              "id": "chase_ib_companion",
+              "name": "Companion voucher",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": "annual",
+              "description": "Companion voucher valid in any cabin after spending $30,000 each year.",
+              "category_tag": "travel"
+            }
           ],
           "cashback_categories": [
-            { "category": "Iberia, British Airways, Aer Lingus, and LEVEL purchases", "rate": 3, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Hotel purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Iberia, British Airways, Aer Lingus, and LEVEL purchases",
+              "rate": 3,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Hotel purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1279,11 +2330,36 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Amazon.com and Whole Foods Market", "rate": 5, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Chase Travel portal", "rate": 5, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Drugstores", "rate": 2, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Amazon.com and Whole Foods Market",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Chase Travel portal",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Drugstores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1296,10 +2372,30 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Amazon.com and Whole Foods Market", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Drugstores", "rate": 2, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Amazon.com and Whole Foods Market",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Drugstores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1311,13 +2407,41 @@
           "card_color": "#FF3008",
           "card_image": null,
           "benefits": [
-            { "id": "chase_dd_dashpass", "name": "DashPass membership", "type": "membership", "total_amount": null, "reset_period": null, "description": "Complimentary DashPass membership with free delivery and reduced service fees on eligible orders.", "category_tag": "dining" }
+            {
+              "id": "chase_dd_dashpass",
+              "name": "DashPass membership",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary DashPass membership with free delivery and reduced service fees on eligible orders.",
+              "category_tag": "dining"
+            }
           ],
           "cashback_categories": [
-            { "category": "DoorDash and Caviar purchases", "rate": 4, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Grocery stores", "rate": 2, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "DoorDash and Caviar purchases",
+              "rate": 4,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1329,15 +2453,56 @@
           "card_color": "#43B02A",
           "card_image": null,
           "benefits": [
-            { "id": "chase_instacart_plus", "name": "Instacart+ membership", "type": "membership", "total_amount": null, "reset_period": null, "description": "Complimentary Instacart+ membership for free delivery on orders over $35.", "category_tag": "groceries" },
-            { "id": "chase_instacart_credit", "name": "Quarterly Instacart credit", "type": "credit", "total_amount": 120, "reset_period": "quarterly", "description": "$30 quarterly statement credit on Instacart purchases.", "category_tag": "groceries" }
+            {
+              "id": "chase_instacart_plus",
+              "name": "Instacart+ membership",
+              "type": "membership",
+              "total_amount": null,
+              "reset_period": null,
+              "description": "Complimentary Instacart+ membership for free delivery on orders over $35.",
+              "category_tag": "groceries"
+            },
+            {
+              "id": "chase_instacart_credit",
+              "name": "Quarterly Instacart credit",
+              "type": "credit",
+              "total_amount": 120,
+              "reset_period": "quarterly",
+              "description": "$30 quarterly statement credit on Instacart purchases.",
+              "category_tag": "groceries"
+            }
           ],
           "cashback_categories": [
-            { "category": "Instacart purchases", "rate": 5, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Travel", "rate": 2, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Gas stations", "rate": 2, "unit": "percent_cashback", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Instacart purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Travel",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -1402,9 +2567,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hotels and rental cars via Capital One Travel", "rate": 10, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Flights via Capital One Travel", "rate": 5, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Hotels and rental cars via Capital One Travel",
+              "rate": 10,
+              "unit": "miles_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Flights via Capital One Travel",
+              "rate": 5,
+              "unit": "miles_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1427,8 +2607,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hotels, vacation rentals, and rental cars via Capital One Travel", "rate": 5, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Hotels, vacation rentals, and rental cars via Capital One Travel",
+              "rate": 5,
+              "unit": "miles_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1441,10 +2631,30 @@
           "card_image": "card_cap1_savor_one",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Dining and entertainment", "rate": 3, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Popular streaming services", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Grocery stores (excl. superstores)", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Dining and entertainment",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Popular streaming services",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Grocery stores (excl. superstores)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1457,11 +2667,36 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Dining at restaurants", "rate": 3, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Grocery stores (excl. superstores)", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Entertainment and popular streaming", "rate": 3, "unit": "percent_cashback", "category_key": "streaming" },
-            { "category": "Capital One Entertainment purchases", "rate": 8, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores (excl. superstores)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Entertainment and popular streaming",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "streaming"
+            },
+            {
+              "category": "Capital One Entertainment purchases",
+              "rate": 8,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1474,8 +2709,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Hotels and rental cars via Capital One Travel", "rate": 5, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Hotels and rental cars via Capital One Travel",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1488,8 +2733,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Hotels and rental cars via Capital One Travel", "rate": 5, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1.25, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Hotels and rental cars via Capital One Travel",
+              "rate": 5,
+              "unit": "miles_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.25,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1513,7 +2768,12 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1526,9 +2786,24 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "T-Mobile purchases", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Dining and entertainment", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "T-Mobile purchases",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Dining and entertainment",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1541,8 +2816,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Kohl's purchases", "rate": 7.5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Kohl's purchases",
+              "rate": 7.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1555,8 +2840,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "REI purchases", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "REI purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1569,8 +2864,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Pottery Barn brands purchases", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Pottery Barn brands purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1583,8 +2888,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Williams Sonoma brands purchases", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Williams Sonoma brands purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1597,8 +2912,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "West Elm purchases", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "West Elm purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1611,8 +2936,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Key brands purchases", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Key brands purchases",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1625,10 +2960,30 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Cabela's and Bass Pro purchases", "rate": 5, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Gas", "rate": 2, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "Dining and groceries", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Cabela's and Bass Pro purchases",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Gas",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Dining and groceries",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1641,10 +2996,30 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Bass Pro and Cabela's purchases", "rate": 5, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Gas", "rate": 2, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "Dining and groceries", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Bass Pro and Cabela's purchases",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Gas",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Dining and groceries",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1657,10 +3032,30 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "BJ's purchases", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Gas", "rate": 10, "unit": "cents_per_gallon", "category_key": "gas" },
-            { "category": "Dining", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "BJ's purchases",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Gas",
+              "rate": 10,
+              "unit": "cents_per_gallon",
+              "category_key": "gas"
+            },
+            {
+              "category": "Dining",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -1689,12 +3084,42 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel via Travel portal", "rate": 10, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery", "rate": 3, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "Gas", "rate": 3, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "Travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel via Travel portal",
+              "rate": 10,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Dining",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Gas",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1707,7 +3132,12 @@
           "card_image": "card_citi_double_cash",
           "benefits": [],
           "cashback_categories": [
-            { "category": "All other purchases", "rate": 2, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1720,8 +3150,18 @@
           "card_image": "card_citi_custom_cash",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Top eligible spend category each billing cycle (up to $500/mo)", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Top eligible spend category each billing cycle (up to $500/mo)",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1773,10 +3213,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "American Airlines purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 2, "unit": "miles_per_dollar", "category_key": "dining" },
-            { "category": "Gas stations", "rate": 2, "unit": "miles_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "American Airlines purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -1823,8 +3283,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel and dining", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel and dining",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1856,8 +3326,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel and dining", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel and dining",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1870,9 +3350,24 @@
           "card_image": "card_boa_customized_cash",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Choice category (gas, online shopping, dining, travel, drugstores, home improvement) up to $2,500/quarter", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Grocery", "rate": 2, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Choice category (gas, online shopping, dining, travel, drugstores, home improvement) up to $2,500/quarter",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Grocery",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1885,7 +3380,12 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1898,7 +3398,12 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1.5, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1.5,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1938,12 +3443,42 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Hotels", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Airlines", "rate": 4, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Other travel (car rentals, cruises, etc.)", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Streaming services", "rate": 1, "unit": "points_per_dollar", "category_key": "streaming" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Hotels",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Airlines",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Other travel (car rentals, cruises, etc.)",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Streaming services",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "streaming"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1956,10 +3491,30 @@
           "card_image": "card_wf_autograph",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Restaurants", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Gas stations and transit", "rate": 3, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Restaurants",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Gas stations and transit",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1982,7 +3537,12 @@
             }
           ],
           "cashback_categories": [
-            { "category": "All other purchases", "rate": 2, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "All other purchases",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -1990,7 +3550,7 @@
           "name": "Reflect",
           "network": "visa",
           "annual_fee": 0,
-          "annual_fee_note": "Balance transfer focused — no rewards",
+          "annual_fee_note": "Balance transfer focused \u2014 no rewards",
           "card_color": "#708090",
           "card_image": null,
           "benefits": [],
@@ -2040,12 +3600,42 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Rent payments (up to $50,000/yr)", "rate": 1, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Dining on Rent Day (1st of month)", "rate": 6, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Travel on Rent Day (1st of month)", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining at restaurants", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Travel", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Rent payments (up to $50,000/yr)",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Dining on Rent Day (1st of month)",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Travel on Rent Day (1st of month)",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining at restaurants",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Travel",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2058,8 +3648,18 @@
           "card_image": "card_bilt_blue",
           "benefits": [],
           "cashback_categories": [
-            { "category": "Rent & mortgage payments", "rate": 1.25, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Everyday spend", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Rent & mortgage payments",
+              "rate": 1.25,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Everyday spend",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2082,11 +3682,36 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Dining", "rate": 3, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery (up to $25K/year)", "rate": 3, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "Travel", "rate": 2, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Rent & mortgage payments", "rate": 1.25, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Everyday spend", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Dining",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery (up to $25K/year)",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Travel",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Rent & mortgage payments",
+              "rate": 1.25,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Everyday spend",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2127,8 +3752,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Rent & mortgage payments", "rate": 1.25, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Everyday spend", "rate": 2, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Rent & mortgage payments",
+              "rate": 1.25,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Everyday spend",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2152,13 +3787,23 @@
               "type": "membership",
               "total_amount": null,
               "reset_period": null,
-              "description": "Discover automatically matches all cash back earned at end of first year — no limit.",
+              "description": "Discover automatically matches all cash back earned at end of first year \u2014 no limit.",
               "category_tag": "other"
             }
           ],
           "cashback_categories": [
-            { "category": "Rotating quarterly categories (activate each quarter, up to $1,500/quarter)", "rate": 5, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Rotating quarterly categories (activate each quarter, up to $1,500/quarter)",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2176,12 +3821,17 @@
               "type": "membership",
               "total_amount": null,
               "reset_period": null,
-              "description": "Discover automatically matches all miles earned in your first year — no limit.",
+              "description": "Discover automatically matches all miles earned in your first year \u2014 no limit.",
               "category_tag": "other"
             }
           ],
           "cashback_categories": [
-            { "category": "All purchases", "rate": 1.5, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "All purchases",
+              "rate": 1.5,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2194,8 +3844,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Gas stations and restaurants (up to $1,000/quarter)", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Gas stations and restaurants (up to $1,000/quarter)",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2242,9 +3902,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Mobile wallet purchases (Apple Pay, Google Pay, Samsung Pay)", "rate": 3, "unit": "points_per_dollar", "category_key": "other" },
-            { "category": "Travel", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Mobile wallet purchases (Apple Pay, Google Pay, Samsung Pay)",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            },
+            {
+              "category": "Travel",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2267,10 +3942,30 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Travel via Rewards Center, hotels and car rentals", "rate": 5, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Gas and EV charging stations", "rate": 4, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "Dining and streaming", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Travel via Rewards Center, hotels and car rentals",
+              "rate": 5,
+              "unit": "points_per_dollar",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Gas and EV charging stations",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "Dining and streaming",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2293,11 +3988,36 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Dining at restaurants", "rate": 4, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "Grocery stores and grocery delivery", "rate": 2, "unit": "points_per_dollar", "category_key": "groceries" },
-            { "category": "Streaming services", "rate": 2, "unit": "points_per_dollar", "category_key": "streaming" },
-            { "category": "Gas stations and EV charging", "rate": 2, "unit": "points_per_dollar", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "Dining at restaurants",
+              "rate": 4,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "Grocery stores and grocery delivery",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Streaming services",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "streaming"
+            },
+            {
+              "category": "Gas stations and EV charging",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2310,9 +4030,24 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Two chosen retailers (e.g., Amazon, Walmart, Target) up to $1,500/quarter", "rate": 6, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "Wholesale clubs up to $1,500/quarter", "rate": 3, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Two chosen retailers (e.g., Amazon, Walmart, Target) up to $1,500/quarter",
+              "rate": 6,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "Wholesale clubs up to $1,500/quarter",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2331,9 +4066,24 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Apple purchases (App Store, Apple.com, Apple Pay at Apple Store)", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All purchases with Apple Pay", "rate": 2, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases (physical card)", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Apple purchases (App Store, Apple.com, Apple Pay at Apple Store)",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All purchases with Apple Pay",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases (physical card)",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2380,9 +4130,24 @@
             }
           ],
           "cashback_categories": [
-            { "category": "JetBlue purchases", "rate": 6, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining and grocery stores", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "JetBlue purchases",
+              "rate": 6,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining and grocery stores",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2395,9 +4160,24 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "JetBlue purchases", "rate": 3, "unit": "points_per_dollar", "category_key": "travel" },
-            { "category": "Dining and grocery stores", "rate": 2, "unit": "points_per_dollar", "category_key": "dining" },
-            { "category": "All other purchases", "rate": 1, "unit": "points_per_dollar", "category_key": "other" }
+            {
+              "category": "JetBlue purchases",
+              "rate": 3,
+              "unit": "points_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "Dining and grocery stores",
+              "rate": 2,
+              "unit": "points_per_dollar",
+              "category_key": "dining"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "points_per_dollar",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2420,8 +4200,18 @@
             }
           ],
           "cashback_categories": [
-            { "category": "Miles & More partner purchases", "rate": 2, "unit": "miles_per_dollar", "category_key": "travel" },
-            { "category": "All other purchases", "rate": 1, "unit": "miles_per_dollar", "category_key": "other" }
+            {
+              "category": "Miles & More partner purchases",
+              "rate": 2,
+              "unit": "miles_per_dollar",
+              "category_key": "travel"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "miles_per_dollar",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2440,11 +4230,36 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "Amazon.com and Whole Foods Market", "rate": 5, "unit": "percent_cashback", "category_key": "groceries" },
-            { "category": "Chase Travel portal", "rate": 5, "unit": "percent_cashback", "category_key": "travel" },
-            { "category": "Restaurants and local transit", "rate": 2, "unit": "percent_cashback", "category_key": "dining" },
-            { "category": "Gas stations and drugstores", "rate": 2, "unit": "percent_cashback", "category_key": "gas" },
-            { "category": "All other purchases", "rate": 1, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "Amazon.com and Whole Foods Market",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "groceries"
+            },
+            {
+              "category": "Chase Travel portal",
+              "rate": 5,
+              "unit": "percent_cashback",
+              "category_key": "travel_portal"
+            },
+            {
+              "category": "Restaurants and local transit",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "dining"
+            },
+            {
+              "category": "Gas stations and drugstores",
+              "rate": 2,
+              "unit": "percent_cashback",
+              "category_key": "gas"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         },
         {
@@ -2457,8 +4272,18 @@
           "card_image": null,
           "benefits": [],
           "cashback_categories": [
-            { "category": "PayPal purchases", "rate": 3, "unit": "percent_cashback", "category_key": "other" },
-            { "category": "All other purchases", "rate": 1.5, "unit": "percent_cashback", "category_key": "other" }
+            {
+              "category": "PayPal purchases",
+              "rate": 3,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            },
+            {
+              "category": "All other purchases",
+              "rate": 1.5,
+              "unit": "percent_cashback",
+              "category_key": "other"
+            }
           ]
         }
       ]
@@ -2470,7 +4295,7 @@
     "semi_annual": "Resets January 1 and July 1",
     "annual": "Resets on your card anniversary date or January 1 depending on issuer",
     "quadrennial": "Resets every 4 years from the date of last use",
-    "one_time": "Does not reset — single use benefit"
+    "one_time": "Does not reset \u2014 single use benefit"
   },
   "benefit_types": {
     "credit": "Statement credit or reimbursement applied to your account",

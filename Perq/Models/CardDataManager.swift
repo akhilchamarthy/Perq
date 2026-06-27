@@ -114,9 +114,11 @@ class CardDataManager: ObservableObject {
         var didChange = false
         for card in cards {
             guard let categoryMap = lookup[card.id] else { continue }
-            for cashback in card.cashbackCategories where cashback.categoryKey == nil {
-                if let key = categoryMap[cashback.category] {
-                    cashback.categoryKey = key
+            for cashback in card.cashbackCategories {
+                guard let newKey = categoryMap[cashback.category] else { continue }
+                // Backfill nil keys, and update any stale "travel" that should now be "travel_portal"
+                if cashback.categoryKey == nil || cashback.categoryKey != newKey {
+                    cashback.categoryKey = newKey
                     didChange = true
                 }
             }

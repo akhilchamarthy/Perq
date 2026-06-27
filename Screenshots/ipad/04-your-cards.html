@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2048">
+<title>Perq — All Your Cards</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 2048px;
+    min-height: 2732px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+  .caption {
+    width: 2048px; height: 480px; background: #090B13;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    border-bottom: 3px solid rgba(46,204,143,0.28);
+  }
+  .caption .emoji { font-size: 128px; line-height: 1; }
+  .caption .feature-title { font-size: 120px; font-weight: 800; color: #FFFFFF; letter-spacing: -2px; }
+  .caption .subtitle { font-family: 'Courier New', monospace; font-size: 54px; color: #2ECC8F; letter-spacing: 6px; text-transform: uppercase; }
+
+  .nav-bar {
+    height: 210px; background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .nav-logo { font-size: 90px; font-weight: 800; color: #2ECC8F; letter-spacing: 18px; }
+  .nav-plus { position: absolute; right: 90px; font-size: 92px; color: #C8D0E7; font-weight: 300; }
+
+  .content { padding: 70px; }
+
+  /* 2-column card grid */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+
+  .card-row {
+    background: #131726; border-radius: 74px;
+    padding: 70px; box-shadow: 0 20px 48px rgba(0,0,0,0.35);
+  }
+  .cr-top { display: flex; align-items: center; gap: 50px; margin-bottom: 56px; }
+  .cr-art { width: 220px; height: 138px; border-radius: 30px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.12); }
+  .cr-meta { flex: 1; min-width: 0; }
+  .cr-name { font-size: 60px; font-weight: 700; color: #D8DEEF; margin-bottom: 12px; line-height: 1.1; }
+  .cr-issuer { font-size: 46px; color: #7A86A2; }
+  .cr-right { text-align: right; flex-shrink: 0; }
+  .cr-fee { font-size: 52px; font-weight: 600; margin-bottom: 10px; }
+  .cr-bene { font-size: 42px; color: #7A86A2; }
+
+  .bar-labels { display: flex; justify-content: space-between; font-family: 'Courier New', monospace; font-size: 38px; color: #7A86A2; margin-bottom: 20px; }
+  .bar-track { height: 24px; background: #1A2035; border-radius: 12px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 12px; background: linear-gradient(90deg, #2ECC8F, #10B981); }
+
+  .stats-strip {
+    background: #131726; border-radius: 74px; padding: 84px;
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid rgba(46,204,143,0.15);
+  }
+  .stat-block { text-align: center; }
+  .stat-num { font-size: 108px; font-weight: 800; color: #2ECC8F; line-height: 1; margin-bottom: 16px; }
+  .stat-lbl { font-family: 'Courier New', monospace; font-size: 38px; color: #7A86A2; letter-spacing: 3px; text-transform: uppercase; }
+  .stat-divider { width: 2px; height: 180px; background: rgba(255,255,255,0.07); }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">💳</div>
+  <div class="feature-title">All Your Cards</div>
+  <div class="subtitle">Organized and always ready</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+  <div class="nav-plus">+</div>
+</div>
+
+<div class="content">
+
+  <div class="card-grid">
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#1a1a2e,#2d2d50)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Sapphire Reserve</div>
+          <div class="cr-issuer">Chase</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#D8DEEF">$550/yr</div>
+          <div class="cr-bene">12 benefits</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$240 / $1,500</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:16%"></div></div>
+    </div>
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#3a2800,#8B6914)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Gold Card</div>
+          <div class="cr-issuer">American Express</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#D8DEEF">$250/yr</div>
+          <div class="cr-bene">8 benefits</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$120 / $480</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+    </div>
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#0d2b44,#1a5278)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Blue Cash Preferred</div>
+          <div class="cr-issuer">American Express</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+          <div class="cr-bene">3 benefits</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$0 / $120</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#1a1030,#3d2874)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Venture X</div>
+          <div class="cr-issuer">Capital One</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#D8DEEF">$395/yr</div>
+          <div class="cr-bene">6 benefits</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$300 / $700</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:43%"></div></div>
+    </div>
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#14291a,#1a6b2e)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Citi Double Cash</div>
+          <div class="cr-issuer">Citi</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+          <div class="cr-bene">1 benefit</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$0 / $0</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="card-row">
+      <div class="cr-top">
+        <div class="cr-art" style="background:linear-gradient(135deg,#2a1010,#7a2020)"></div>
+        <div class="cr-meta">
+          <div class="cr-name">Freedom Unlimited</div>
+          <div class="cr-issuer">Chase</div>
+        </div>
+        <div class="cr-right">
+          <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+          <div class="cr-bene">2 benefits</div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>Benefit Value</span><span style="color:#A78BFA">$0 / $0</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+    </div>
+
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-block">
+      <div class="stat-num">6</div>
+      <div class="stat-lbl">Cards</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">$1,195</div>
+      <div class="stat-lbl">Annual Fees</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">$2,800</div>
+      <div class="stat-lbl">Benefits</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">+$1,605</div>
+      <div class="stat-lbl">Net Value</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -66,25 +66,27 @@ struct LocationHighlightSection: View {
 
     private var categoryName: String {
         switch recommendation.categoryKey {
-        case "dining":      return "Dining"
-        case "groceries":   return "Grocery Store"
-        case "gas":         return "Gas Station"
-        case "travel":      return "Travel"
-        case "ride_share":  return "Ride Share"
-        case "streaming":   return "Streaming"
-        default:            return "Retail"
+        case "dining":         return "Dining"
+        case "groceries":      return "Grocery Store"
+        case "gas":            return "Gas Station"
+        case "travel":         return "Travel"
+        case "travel_portal":  return "Travel Portal"
+        case "ride_share":     return "Ride Share"
+        case "streaming":      return "Streaming"
+        default:               return "Retail"
         }
     }
 
     private var categoryIcon: String {
         switch recommendation.categoryKey {
-        case "dining":      return "fork.knife"
-        case "groceries":   return "cart.fill"
-        case "gas":         return "fuelpump.fill"
-        case "travel":      return "airplane"
-        case "ride_share":  return "car.fill"
-        case "streaming":   return "play.tv.fill"
-        default:            return "bag.fill"
+        case "dining":         return "fork.knife"
+        case "groceries":      return "cart.fill"
+        case "gas":            return "fuelpump.fill"
+        case "travel":         return "airplane"
+        case "travel_portal":  return "globe.americas.fill"
+        case "ride_share":     return "car.fill"
+        case "streaming":      return "play.tv.fill"
+        default:               return "bag.fill"
         }
     }
 

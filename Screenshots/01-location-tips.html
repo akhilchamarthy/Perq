@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1284">
+<title>Perq — Right Card, Right Now</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1284px;
+    min-height: 2778px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  .caption {
+    width: 1284px;
+    height: 300px;
+    background: #090B13;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    border-bottom: 2px solid rgba(46,204,143,0.28);
+  }
+  .caption .emoji { font-size: 80px; line-height: 1; }
+  .caption .feature-title {
+    font-size: 76px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -1px;
+  }
+  .caption .subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 34px;
+    color: #2ECC8F;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .nav-bar {
+    height: 130px;
+    background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .nav-logo { font-size: 56px; font-weight: 800; color: #2ECC8F; letter-spacing: 12px; }
+  .nav-plus { position: absolute; right: 56px; font-size: 58px; color: #C8D0E7; font-weight: 300; }
+
+  .content { padding: 44px; }
+
+  .loc-card {
+    background: #131726;
+    border-radius: 52px;
+    padding: 56px;
+    border: 2px solid rgba(46,204,143,0.22);
+    box-shadow: 0 12px 48px rgba(46,204,143,0.06);
+    margin-bottom: 38px;
+  }
+  .at-row { display: flex; align-items: center; gap: 18px; margin-bottom: 32px; }
+  .at-dot { width: 28px; height: 28px; background: #2ECC8F; border-radius: 50%; }
+  .at-label {
+    font-family: 'Courier New', monospace;
+    font-size: 32px; font-weight: 700; color: #2ECC8F;
+    letter-spacing: 4px; text-transform: uppercase;
+  }
+  .place-name {
+    font-size: 84px; font-weight: 800; color: #D8DEEF;
+    margin-bottom: 26px; line-height: 1.05; letter-spacing: -1.5px;
+  }
+  .place-cat {
+    display: flex; align-items: center; gap: 22px;
+    font-size: 44px; color: #7A86A2; margin-bottom: 48px;
+  }
+  .hdiv { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 48px; }
+  .best-row { display: flex; align-items: center; gap: 40px; }
+  .card-chip {
+    width: 162px; height: 102px; border-radius: 18px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(135deg, #1a2a52, #2650A0);
+  }
+  .chip-meta { flex: 1; }
+  .chip-name { font-size: 46px; font-weight: 700; color: #D8DEEF; margin-bottom: 10px; line-height: 1.1; }
+  .chip-issuer { font-size: 36px; color: #7A86A2; }
+  .chip-rate { font-size: 62px; font-weight: 800; color: #2ECC8F; flex-shrink: 0; }
+
+  .card-row {
+    background: #131726;
+    border-radius: 46px;
+    padding: 48px 52px;
+    margin-bottom: 26px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+  .cr-top { display: flex; align-items: center; gap: 38px; margin-bottom: 40px; }
+  .cr-art { width: 162px; height: 102px; border-radius: 22px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.12); }
+  .cr-meta { flex: 1; }
+  .cr-name { font-size: 46px; font-weight: 700; color: #D8DEEF; margin-bottom: 10px; line-height: 1.1; }
+  .cr-issuer { font-size: 36px; color: #7A86A2; }
+  .cr-right { text-align: right; flex-shrink: 0; }
+  .cr-fee { font-size: 40px; font-weight: 600; margin-bottom: 8px; }
+  .cr-bene { font-size: 32px; color: #7A86A2; }
+
+  .bar-labels {
+    display: flex; justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 28px; color: #7A86A2; margin-bottom: 16px;
+  }
+  .bar-track { height: 18px; background: #1A2035; border-radius: 9px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 9px; background: linear-gradient(90deg, #2ECC8F, #10B981); }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">📍</div>
+  <div class="feature-title">Right Card, Right Now</div>
+  <div class="subtitle">Smart tips based on where you are</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+  <div class="nav-plus">+</div>
+</div>
+
+<div class="content">
+
+  <div class="loc-card">
+    <div class="at-row">
+      <div class="at-dot"></div>
+      <div class="at-label">You're at</div>
+    </div>
+    <div class="place-name">Whole Foods Market</div>
+    <div class="place-cat">
+      <span>🛒</span>
+      Grocery Store
+    </div>
+    <div class="hdiv"></div>
+    <div class="best-row">
+      <div class="card-chip"></div>
+      <div class="chip-meta">
+        <div class="chip-name">Blue Cash Preferred</div>
+        <div class="chip-issuer">American Express</div>
+      </div>
+      <div class="chip-rate">6% back</div>
+    </div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#1a1a2e,#2d2d44)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Sapphire Reserve</div>
+        <div class="cr-issuer">Chase</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#D8DEEF">$550/yr</div>
+        <div class="cr-bene">12 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$240 / $1,500</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:16%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#3a2800,#8B6914)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Gold Card</div>
+        <div class="cr-issuer">American Express</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#D8DEEF">$250/yr</div>
+        <div class="cr-bene">8 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$120 / $480</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#0d2b44,#1a5278)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Blue Cash Preferred</div>
+        <div class="cr-issuer">American Express</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+        <div class="cr-bene">3 benefits</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$0 / $120</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="card-row">
+    <div class="cr-top">
+      <div class="cr-art" style="background:linear-gradient(135deg,#14291a,#1a6b2e)"></div>
+      <div class="cr-meta">
+        <div class="cr-name">Citi Double Cash</div>
+        <div class="cr-issuer">Citi</div>
+      </div>
+      <div class="cr-right">
+        <div class="cr-fee" style="color:#2ECC8F">No Annual Fee</div>
+        <div class="cr-bene">1 benefit</div>
+      </div>
+    </div>
+    <div class="bar-labels">
+      <span>Benefit Value</span>
+      <span style="color:#A78BFA">$0 / $0</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1284">
+<title>Perq — Know Your Best Rate</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1284px;
+    min-height: 2778px;
+    overflow: hidden;
+    background: #0C0E1A;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  .caption {
+    width: 1284px;
+    height: 300px;
+    background: #090B13;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    border-bottom: 2px solid rgba(167,139,250,0.28);
+  }
+  .caption .emoji { font-size: 80px; line-height: 1; }
+  .caption .feature-title { font-size: 76px; font-weight: 800; color: #FFFFFF; letter-spacing: -1px; }
+  .caption .subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 34px; color: #A78BFA; letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  .nav-bar {
+    height: 130px; background: #0C0E1A;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo { font-size: 56px; font-weight: 800; color: #2ECC8F; letter-spacing: 12px; }
+
+  .content { padding: 44px; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 30px; font-weight: 700; color: #7A86A2;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .cat-row {
+    display: flex; align-items: center; gap: 38px;
+    padding: 36px 40px;
+    background: #131726; border-radius: 40px;
+    margin-bottom: 22px;
+  }
+  .icon-bub {
+    width: 130px; height: 130px; border-radius: 32px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 54px;
+  }
+  .cat-text { flex: 1; min-width: 0; }
+  .cat-name { font-size: 46px; font-weight: 700; color: #D8DEEF; margin-bottom: 10px; line-height: 1; }
+  .cat-card { font-size: 34px; color: #7A86A2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rate-right { text-align: right; flex-shrink: 0; }
+  .rate-num { font-size: 64px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .rate-lbl { font-family: 'Courier New', monospace; font-size: 26px; font-weight: 700; letter-spacing: 1px; opacity: 0.75; }
+</style>
+</head>
+<body>
+
+<div class="caption">
+  <div class="emoji">📊</div>
+  <div class="feature-title">Know Your Best Rate</div>
+  <div class="subtitle">Maximized for every purchase</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-logo">PERQ</div>
+</div>
+
+<div class="content">
+  <div class="section-label">Best Rate Per Category</div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(56,189,248,0.14)">🌐</div>
+    <div class="cat-text">
+      <div class="cat-name">Travel via Portal</div>
+      <div class="cat-card">Chase Sapphire Reserve</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#38BDF8">10×</div>
+      <div class="rate-lbl" style="color:#38BDF8">points</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(251,146,60,0.14)">🍴</div>
+    <div class="cat-text">
+      <div class="cat-name">Dining</div>
+      <div class="cat-card">Amex Gold, Chase Sapphire Reserve</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#38BDF8">4×</div>
+      <div class="rate-lbl" style="color:#38BDF8">points</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(46,204,143,0.14)">🛒</div>
+    <div class="cat-text">
+      <div class="cat-name">Groceries</div>
+      <div class="cat-card">Blue Cash Preferred</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#2ECC8F">6%</div>
+      <div class="rate-lbl" style="color:#2ECC8F">back</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(167,139,250,0.14)">✈️</div>
+    <div class="cat-text">
+      <div class="cat-name">Travel</div>
+      <div class="cat-card">Chase Sapphire Reserve</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#A78BFA">3×</div>
+      <div class="rate-lbl" style="color:#A78BFA">points</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(244,114,182,0.14)">📺</div>
+    <div class="cat-text">
+      <div class="cat-name">Streaming</div>
+      <div class="cat-card">Amex Gold</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#F472B6">6×</div>
+      <div class="rate-lbl" style="color:#F472B6">points</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(251,191,36,0.14)">⛽</div>
+    <div class="cat-text">
+      <div class="cat-name">Gas &amp; Transit</div>
+      <div class="cat-card">Blue Cash Preferred</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#FBBF24">3%</div>
+      <div class="rate-lbl" style="color:#FBBF24">back</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(251,146,60,0.14)">🚗</div>
+    <div class="cat-text">
+      <div class="cat-name">Ride Share</div>
+      <div class="cat-card">Chase Sapphire Reserve</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#38BDF8">10×</div>
+      <div class="rate-lbl" style="color:#38BDF8">points</div>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="icon-bub" style="background:rgba(122,134,162,0.14)">💳</div>
+    <div class="cat-text">
+      <div class="cat-name">All Other Purchases</div>
+      <div class="cat-card">Citi Double Cash</div>
+    </div>
+    <div class="rate-right">
+      <div class="rate-num" style="color:#2ECC8F">2%</div>
+      <div class="rate-lbl" style="color:#2ECC8F">back</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
