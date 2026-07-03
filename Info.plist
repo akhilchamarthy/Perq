@@ -25,16 +25,6 @@
     <!-- Location -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Perq detects nearby stores and restaurants to suggest the best credit card for maximum rewards.</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Perq sends you real-time card recommendations even when the app is in the background.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Perq sends you real-time card recommendations even when the app is in the background.</string>
-
-    <!-- Background modes -->
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>location</string>
-    </array>
 
     <!-- Scene manifest (SwiftUI App protocol) -->
     <key>UIApplicationSceneManifest</key>

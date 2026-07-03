@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-import Combine
+import CoreLocation
 
 struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
@@ -12,8 +12,13 @@ struct MainTabView: View {
     @StateObject private var cardDataManager: CardDataManager
 
     init(modelContext: ModelContext) {
-        // We need a CardDataManager at this level so we can pass cards to the recommendation engine
         _cardDataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
+    }
+
+    @MainActor
+    private func loadLocation() async {
+        let loc = await locationManager.fetchCurrentLocation()
+        await recommendationManager.refresh(at: loc, cards: cardDataManager.cards)
     }
 
     var body: some View {
@@ -23,26 +28,20 @@ struct MainTabView: View {
 
                 switch selectedTab {
                 case 0:
-                    CardListView(modelContext: modelContext, currentPlace: recommendationManager.currentPlace)
+                    CardListView(
+                        modelContext: modelContext,
+                        currentPlace: recommendationManager.currentPlace,
+                        onRefresh: {
+                            let loc = await locationManager.fetchCurrentLocation()
+                            await recommendationManager.refresh(at: loc, cards: cardDataManager.cards)
+                        }
+                    )
                 case 1:
                     RemindersView(modelContext: modelContext)
                 case 2:
                     AnalyticsView(modelContext: modelContext)
                 default:
                     SettingsView(modelContext: modelContext, locationManager: locationManager)
-                }
-
-                // Recommendation banner — slides in from the top
-                if let rec = recommendationManager.activeRecommendation {
-                    VStack {
-                        RecommendationBannerView(recommendation: rec) {
-                            recommendationManager.dismiss()
-                        }
-                        .transition(.move(edge: .top).combined(with: .opacity))
-                        Spacer()
-                    }
-                    .zIndex(999)
-                    .padding(.top, 8)
                 }
             }
 
@@ -69,13 +68,14 @@ struct MainTabView: View {
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .onAppear {
             locationManager.requestPermission()
-            locationManager.startMonitoring()
             NotificationManager.shared.requestPermission()
+            Task { await loadLocation() }
         }
-        .onReceive(locationManager.$location.compactMap { $0 }) { location in
-            recommendationManager.processLocation(location, cards: cardDataManager.cards)
+        .onChange(of: locationManager.authorizationStatus) { status in
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                Task { await loadLocation() }
+            }
         }
-        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: recommendationManager.activeRecommendation != nil)
     }
 }
 
