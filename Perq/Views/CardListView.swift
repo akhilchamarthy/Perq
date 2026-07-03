@@ -7,10 +7,12 @@ struct CardListView: View {
     @State private var showingAddCard = false
 
     let currentPlace: PlaceRecommendation?
+    let onRefresh: () async -> Void
 
-    init(modelContext: ModelContext, currentPlace: PlaceRecommendation?) {
+    init(modelContext: ModelContext, currentPlace: PlaceRecommendation?, onRefresh: @escaping () async -> Void) {
         self._dataManager = StateObject(wrappedValue: CardDataManager(modelContext: modelContext))
         self.currentPlace = currentPlace
+        self.onRefresh = onRefresh
     }
 
     var body: some View {
@@ -32,6 +34,9 @@ struct CardListView: View {
                     }
                 }
                 .padding()
+            }
+            .refreshable {
+                await onRefresh()
             }
             .background(Color.perqInk)
             .toolbarBackground(Color.perqInk, for: .navigationBar)

@@ -4,7 +4,6 @@ import CoreLocation
 
 struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = true
-    @AppStorage("smartAlertsEnabled") private var smartAlertsEnabled = true
     @StateObject private var dataManager: CardDataManager
     @State private var showResetAlert = false
 
@@ -35,10 +34,8 @@ struct SettingsView: View {
 
     private var locationStatusSubtitle: String {
         switch locationManager.authorizationStatus {
-        case .authorizedAlways:
-            return "Enables background card tips"
-        case .authorizedWhenInUse:
-            return "Upgrade to Always for background tips"
+        case .authorizedAlways, .authorizedWhenInUse:
+            return "Suggests the best card where you are"
         default:
             return "Enable in Settings for card recommendations"
         }
@@ -64,25 +61,13 @@ struct SettingsView: View {
                         )
                     }
 
-                    SettingsSection(title: "Location & Notifications") {
+                    SettingsSection(title: "Location") {
                         SettingsInfoRow(
                             icon: "location.fill",
                             iconColor: .perqSky,
                             title: "Location Access",
                             value: locationStatusLabel,
                             subtitle: locationStatusSubtitle
-                        )
-
-                        Divider()
-                            .background(Color.perqBorderSubtle)
-                            .padding(.horizontal, 16)
-
-                        SettingsToggleRow(
-                            icon: "bell.badge.fill",
-                            iconColor: .perqLavender,
-                            title: "Smart Card Alerts",
-                            subtitle: "Notify when near a qualifying store",
-                            isOn: $smartAlertsEnabled
                         )
                     }
 
